@@ -1,4 +1,4 @@
-# apolo APP /orientação a objeto
+# A APP / Orientação a Objeto
 
 ##Projeto em flutter 
 Equipe:
