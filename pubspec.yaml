@@ -13,7 +13,9 @@ dependencies:
   flutter_native_splash: 
   
   cupertino_icons: ^1.0.2
-
+  dotted_border: ^2.0.0+2
+  floating_bottom_navigation_bar: ^1.5.2
+  percent_indicator: ^4.0.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
