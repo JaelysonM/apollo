@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(flutter_project LANGUAGES CXX)
+project(apollo LANGUAGES CXX)
 
-set(BINARY_NAME "flutter_project")
+set(BINARY_NAME "apollo")
 
 cmake_policy(SET CMP0063 NEW)
 

@@ -1,6 +1,6 @@
 {
-    "name": "flutter_project",
-    "short_name": "flutter_project",
+    "name": "apollo",
+    "short_name": "apollo",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
