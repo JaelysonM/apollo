@@ -44,7 +44,7 @@ class _RegisterSectionState extends State<RegisterSection> {
   Widget _renderSection() {
     StepFormSection section = widget.stepForm.steps.elementAt(widget.offset);
 
-    return Column(children: [
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       DefaultApproachHeader(
         title: widget.stepForm.title,
         description: widget.stepForm.description,

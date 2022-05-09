@@ -10,7 +10,6 @@ class DynamicBottomModal {
         ),
         isScrollControlled: true,
         isDismissible: true,
-        useRootNavigator: true,
         backgroundColor: kThemeBackground,
         context: context,
         builder: (context) => Padding(
