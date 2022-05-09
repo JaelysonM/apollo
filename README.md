@@ -1,6 +1,6 @@
-# flutter_project
+# Apollo
 
-A new Flutter project.
+Your schedule app.
 
 ## Getting Started
 

@@ -1,4 +1,4 @@
-import 'package:Apollo/models/account.dart';
+import 'package:apollo/models/account.dart';
 
 class UserAccount extends Account {
   String firstName;

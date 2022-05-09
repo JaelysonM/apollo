@@ -1,4 +1,4 @@
-name: Apollo
+name: apollo
 description: Your scheduler app
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -12,7 +12,11 @@ dependencies:
     sdk: flutter
   flutter_native_splash: 
   
+  shared_preferences: ^2.0.6
+  http: ^0.13.3
+  modal_bottom_sheet: ^2.0.0
   cupertino_icons: ^1.0.2
+
 
 dev_dependencies:
   flutter_test:
