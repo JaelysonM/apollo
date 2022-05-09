@@ -1,6 +1,4 @@
-import 'package:apollo/constants/globals.dart';
-import 'package:apollo/constants/messages.dart';
-import 'package:apollo/screens/register_section.dart';
+import 'package:apollo/modals/identify_approach.dart';
 import 'package:apollo/widgets/containers/dynamic_bottom_modal.dart';
 import 'package:flutter/material.dart';
 
@@ -39,6 +37,7 @@ class ScreenHeader extends StatelessWidget {
                       const Icon(Icons.settings, size: 30, color: Colors.white),
                   onPressed: () {
                     print('settings');
+                    DynamicBottomModal.showModal(context, IdentifyApproach());
                   },
                   color: Colors.white,
                   splashRadius: 20,

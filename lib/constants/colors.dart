@@ -10,3 +10,4 @@ const Color kLightBlue = Color(0xFF6AB8FF);
 const Color kInterDarkBlue = Color(0xFF003B80);
 
 const Color kSystemPurple = Color(0xFF3B39AB);
+const Color kSystemLightPurple = Color(0xFF4365DF);
