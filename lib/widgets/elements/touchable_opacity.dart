@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/colors.dart';
-
 class TouchableOpacity extends StatefulWidget {
   final VoidCallback? onTap;
 
