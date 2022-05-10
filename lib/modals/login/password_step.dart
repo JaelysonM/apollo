@@ -45,6 +45,7 @@ class _PasswordStepState extends State<PasswordStep> {
     return Form(
         key: _formKey,
         child: TinyTextField(
+          type: TextInputType.visiblePassword,
           label: label,
           controller: widget.textEditingController,
           onChanged: (text) {
