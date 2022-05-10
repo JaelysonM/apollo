@@ -1,7 +1,8 @@
 import 'package:apollo/constants/colors.dart';
 import 'package:apollo/modals/login/email_step.dart';
+import 'package:apollo/modals/login/password_step.dart';
 import 'package:apollo/widgets/containers/default_approach_header.dart';
-import 'package:apollo/widgets/containers/dynamic_bottom_modal.dart';
+import 'package:apollo/widgets/containers/mutable_modal_content.dart';
 import 'package:apollo/widgets/elements/circle_icon_button.dart';
 import 'package:apollo/widgets/elements/default_button.dart';
 import 'package:apollo/widgets/styles/clickable_text.dart';
@@ -9,7 +10,6 @@ import 'package:apollo/widgets/styles/large_text_header.dart';
 import 'package:apollo/widgets/styles/tiny_text.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class IdentifyApproach extends StatelessWidget {
   const IdentifyApproach({Key? key}) : super(key: key);
@@ -68,9 +68,15 @@ class IdentifyApproach extends StatelessWidget {
         _renderOAuthOptions(context),
         LargeTextHeader(content: 'Ou', fontSize: 12),
         DefaultButton(
-          child: LargeTextHeader(content: "Email", fontSize: 18),
+          child: const LargeTextHeader(content: "Email", fontSize: 18),
           backgroundColor: kSystemLightPurple,
-          onPressed: () {},
+          onPressed: () {
+            MutableModalContent.of(context)?.push(EmailStep(
+              onNext: (context) {
+                MutableModalContent.of(context).push(PasswordStep());
+              },
+            ));
+          },
         )
       ],
     );

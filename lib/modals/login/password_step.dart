@@ -5,18 +5,18 @@ import 'package:apollo/widgets/styles/clickable_text.dart';
 import 'package:apollo/widgets/styles/tiny_text.dart';
 import 'package:flutter/material.dart';
 
-class EmailStep extends StatefulWidget {
+class PasswordStep extends StatefulWidget {
   final TextEditingController textEditingController = TextEditingController();
 
   Function? onNext;
 
-  EmailStep({Key? key, this.onNext}) : super(key: key);
+  PasswordStep({Key? key, this.onNext}) : super(key: key);
 
   @override
-  State<EmailStep> createState() => _EmailStepState();
+  State<PasswordStep> createState() => _PasswordStepState();
 }
 
-class _EmailStepState extends State<EmailStep> {
+class _PasswordStepState extends State<PasswordStep> {
   String _value = '';
 
   final _formKey = GlobalKey<FormState>();
@@ -36,7 +36,7 @@ class _EmailStepState extends State<EmailStep> {
         description: "Apenas dados básicos",
       ),
       const SizedBox(height: 25),
-      _renderTextField('Email'),
+      _renderTextField('Sua senha'),
       _renderBottom()
     ]);
   }
@@ -52,18 +52,12 @@ class _EmailStepState extends State<EmailStep> {
               _value = text;
             });
           },
-          validator: (text) {
-            if (text.isEmpty) {
-              return 'Campo obrigatório';
-            }
-            return null;
-          },
           autoFocus: false,
           child: CircleIconButton(
             icon: Icons.arrow_forward,
             onPressed: () {
               if (widget.onNext != null && _formKey.currentState!.validate()) {
-                widget.onNext!(context);
+                widget.onNext!();
               }
             },
           ),
