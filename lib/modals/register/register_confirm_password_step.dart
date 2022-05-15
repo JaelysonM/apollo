@@ -1,22 +1,27 @@
+import 'package:apollo/modals/login/login_email_step.dart';
+import 'package:apollo/modals/register/register_success_step.dart';
 import 'package:apollo/widgets/containers/default_approach_header.dart';
+import 'package:apollo/widgets/containers/mutable_modal_content.dart';
 import 'package:apollo/widgets/elements/circle_icon_button.dart';
 import 'package:apollo/widgets/elements/tiny_text_field.dart';
 import 'package:apollo/widgets/styles/clickable_text.dart';
 import 'package:apollo/widgets/styles/tiny_text.dart';
 import 'package:flutter/material.dart';
 
-class PasswordStep extends StatefulWidget {
+class RegisterPasswordConfirmStep extends StatefulWidget {
   final TextEditingController textEditingController = TextEditingController();
 
-  Function? onNext;
+  final Function? onNext;
 
-  PasswordStep({Key? key, this.onNext}) : super(key: key);
+  RegisterPasswordConfirmStep({Key? key, this.onNext}) : super(key: key);
 
   @override
-  State<PasswordStep> createState() => _PasswordStepState();
+  State<RegisterPasswordConfirmStep> createState() =>
+      _RegisterPasswordConfirmStepState();
 }
 
-class _PasswordStepState extends State<PasswordStep> {
+class _RegisterPasswordConfirmStepState
+    extends State<RegisterPasswordConfirmStep> {
   String _value = '';
 
   final _formKey = GlobalKey<FormState>();
@@ -32,11 +37,12 @@ class _PasswordStepState extends State<PasswordStep> {
   Widget _renderSection() {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       DefaultApproachHeader(
-        title: "Entre",
-        description: "Apenas dados básicos",
+        title: "Registre-se",
+        description:
+            "Para melhorar a experência precisamos que\n você se registre com algumas informações\nÉ rapidinho, prometo :)",
       ),
       const SizedBox(height: 25),
-      _renderTextField('Sua senha'),
+      _renderTextField('Confirme sua senha'),
       _renderBottom()
     ]);
   }
@@ -45,20 +51,30 @@ class _PasswordStepState extends State<PasswordStep> {
     return Form(
         key: _formKey,
         child: TinyTextField(
-          type: TextInputType.visiblePassword,
           label: label,
+          type: TextInputType.visiblePassword,
           controller: widget.textEditingController,
           onChanged: (text) {
             setState(() {
               _value = text;
             });
           },
+          validator: (text) {
+            if (text.isEmpty) {
+              return 'Campo obrigatório';
+            }
+            return null;
+          },
           autoFocus: false,
           child: CircleIconButton(
             icon: Icons.arrow_forward,
             onPressed: () {
-              if (widget.onNext != null && _formKey.currentState!.validate()) {
-                widget.onNext!();
+              if (_formKey.currentState!.validate()) {
+                if (widget.onNext != null) {
+                  widget.onNext!(context);
+                } else {
+                  MutableModalContent.of(context).push(RegisterSuccessStep());
+                }
               }
             },
           ),
@@ -81,7 +97,7 @@ class _PasswordStepState extends State<PasswordStep> {
               ClickableText(
                   content: 'Logue-se',
                   onTap: () {
-                    print('Ir para tela de login');
+                    MutableModalContent.of(context).push(LoginEmailStep());
                   }),
             ],
           ),

@@ -8,7 +8,6 @@ class UserAccount extends Account {
 
   UserAccount(
       {required String id,
-      required String name,
       required String email,
       required this.firstName,
       required this.lastName,
@@ -19,7 +18,7 @@ class UserAccount extends Account {
       bool isApollo = false})
       : super(
           id: id,
-          name: name,
+          name: firstName + " " + lastName,
           email: email,
           evaluation: evaluation,
           isActive: isActive,

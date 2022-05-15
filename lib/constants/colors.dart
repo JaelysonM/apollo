@@ -6,6 +6,7 @@ const Color kLightGray = Color(0xFF898989);
 const Color kSecondaryLightGray = Color(0xFFE1E1E1);
 
 const Color kLightBlue = Color(0xFF6AB8FF);
+const Color kLightGreen = Color(0xFF7FEE98);
 
 const Color kInterDarkBlue = Color(0xFF003B80);
 

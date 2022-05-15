@@ -1,6 +1,7 @@
 import 'package:apollo/constants/colors.dart';
-import 'package:apollo/modals/login/email_step.dart';
-import 'package:apollo/modals/login/password_step.dart';
+import 'package:apollo/modals/login/login_email_step.dart';
+import 'package:apollo/modals/login/login_password_step.dart';
+import 'package:apollo/modals/register/register_name_step.dart';
 import 'package:apollo/widgets/containers/default_approach_header.dart';
 import 'package:apollo/widgets/containers/mutable_modal_content.dart';
 import 'package:apollo/widgets/elements/circle_icon_button.dart';
@@ -71,11 +72,7 @@ class IdentifyApproach extends StatelessWidget {
           child: const LargeTextHeader(content: "Email", fontSize: 18),
           backgroundColor: kSystemLightPurple,
           onPressed: () {
-            MutableModalContent.of(context)?.push(EmailStep(
-              onNext: (context) {
-                MutableModalContent.of(context).push(PasswordStep());
-              },
-            ));
+            MutableModalContent.of(context)?.push(LoginEmailStep());
           },
         )
       ],
@@ -119,7 +116,7 @@ class IdentifyApproach extends StatelessWidget {
               ClickableText(
                   content: 'Registre-se',
                   onTap: () {
-                    print('Ir para tela de registro');
+                    MutableModalContent.of(context).push(RegisterNameStep());
                   }),
             ],
           ),

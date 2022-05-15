@@ -59,6 +59,12 @@ class _MutableModalContentState extends State<MutableModalContent> {
     });
   }
 
+  void clean() {
+    setState(() {
+      _contentHistory.clear();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
