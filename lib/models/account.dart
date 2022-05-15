@@ -17,4 +17,8 @@ class Account {
     this.isActive = false,
     this.isAdmin = false,
   });
+
+  String getFirstName() {
+    return name.split(' ')[0];
+  }
 }
