@@ -1,3 +1,4 @@
+import 'package:apollo/constants/globals.dart';
 import 'package:apollo/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,10 +16,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Apollo',
+      navigatorKey: GlobalVariable.navState,
       debugShowCheckedModeBanner: false,
-      home: Home(),
+      home: const Home(),
     );
   }
 }
