@@ -4,6 +4,7 @@ import 'package:apollo/widgets/containers/mutable_modal_content.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/colors.dart';
+import '../../modals/payments/payments_methods.dart';
 import '../../models/account.dart';
 import 'current_date_container.dart';
 
@@ -37,7 +38,7 @@ class ScreenHeader extends StatelessWidget {
                   icon:
                       const Icon(Icons.settings, size: 30, color: Colors.white),
                   onPressed: () {
-                    MutableModalContent.showModal(context, IdentifyApproach());
+                    MutableModalContent.showModal(context, PaymentsMethods());
                   },
                   color: Colors.white,
                   splashRadius: 20,
