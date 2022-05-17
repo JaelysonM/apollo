@@ -1,8 +1,7 @@
 import 'package:apollo/constants/colors.dart';
-import 'package:apollo/modals/login/login_email_step.dart';
-import 'package:apollo/modals/login/login_password_step.dart';
-import 'package:apollo/modals/register/register_name_step.dart';
+import 'package:apollo/modals/register/register_form.dart';
 import 'package:apollo/widgets/containers/default_approach_header.dart';
+import 'package:apollo/widgets/containers/default_modal_container.dart';
 import 'package:apollo/widgets/containers/mutable_modal_content.dart';
 import 'package:apollo/widgets/elements/circle_icon_button.dart';
 import 'package:apollo/widgets/elements/default_button.dart';
@@ -17,15 +16,12 @@ class IdentifyApproach extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 21, vertical: 30),
-      child: render(context),
-    );
+    return DefaultModalContainer(child: render(context));
   }
 
   Widget render(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Align(
+      const Align(
         alignment: Alignment.topLeft,
         child: DefaultApproachHeader(
           title: "Entre",
@@ -33,7 +29,7 @@ class IdentifyApproach extends StatelessWidget {
               "Para melhorar sua experiência precisamos\n que você se identifique",
         ),
       ),
-      SizedBox(
+      const SizedBox(
         height: 23,
       ),
       _renderOptionsContainer(context),
@@ -67,12 +63,12 @@ class IdentifyApproach extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         _renderOAuthOptions(context),
-        LargeTextHeader(content: 'Ou', fontSize: 12),
+        const LargeTextHeader(content: 'Ou', fontSize: 12),
         DefaultButton(
           child: const LargeTextHeader(content: "Email", fontSize: 18),
           backgroundColor: kSystemLightPurple,
           onPressed: () {
-            MutableModalContent.of(context)?.push(LoginEmailStep());
+            MutableModalContent.of(context)?.push(const RegisterForm());
           },
         )
       ],
@@ -113,11 +109,7 @@ class IdentifyApproach extends StatelessWidget {
                 fontSize: 14,
               ),
               const SizedBox(width: 7),
-              ClickableText(
-                  content: 'Registre-se',
-                  onTap: () {
-                    MutableModalContent.of(context).push(RegisterNameStep());
-                  }),
+              ClickableText(content: 'Registre-se', onTap: () {}),
             ],
           ),
         ));

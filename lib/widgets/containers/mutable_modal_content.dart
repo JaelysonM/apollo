@@ -91,7 +91,7 @@ class _MutableModalContentState extends State<MutableModalContent> {
                     borderRadius: BorderRadius.circular(10),
                   )),
               AnimatedSwitcher(
-                  duration: Duration(milliseconds: 200),
+                  duration: const Duration(milliseconds: 200),
                   transitionBuilder:
                       (Widget child, Animation<double> animation) {
                     return FadeTransition(

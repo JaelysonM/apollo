@@ -274,120 +274,120 @@ class _HomeState extends State<Home> {
             ],
           ),
         ),
-        Container(
-            height: 600,
-            margin: EdgeInsets.only(top: 10),
-            child: Scrollbar(
-              showTrackOnHover: true,
-              child: ListView.builder(
-                itemCount: 10,
-                itemBuilder: (_, index) {
-                  print(index);
-                  return Container(
-                    margin: EdgeInsets.all(5),
-                    child: Card(
-                        color: kThemeBackground,
-                        child: DottedBorder(
-                          borderType: BorderType.RRect,
-                          color: Colors.white70,
-                          radius: Radius.circular(20),
-                          padding: EdgeInsets.symmetric(vertical: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  CircleAvatar(
-                                    backgroundColor: Colors.grey,
-                                    radius: 15,
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(left: 10),
-                                    child: Text(
-                                      "Barbearia Dom Castro",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w700),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(left: 8),
-                                    child: Row(
-                                      children: [
-                                        Icon(Icons.keyboard_arrow_down,
-                                            color: Colors.red, size: 10),
-                                        Text(
-                                          '10',
-                                          style: TextStyle(
-                                              color: Colors.white, fontSize: 8),
-                                        ),
-                                        Icon(
-                                          Icons.star,
-                                          color: Colors.yellow,
-                                          size: 10,
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(left: 8),
-                                    child: Row(
-                                      children: [
-                                        Icon(Icons.watch_later_outlined,
-                                            color: Colors.white, size: 10),
-                                        Text(
-                                          '10',
-                                          style: TextStyle(
-                                              color: Colors.white, fontSize: 8),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(left: 8),
-                                    child: Row(
-                                      children: [
-                                        Icon(Icons.place,
-                                            color: Colors.white, size: 10),
-                                        Text(
-                                          '10',
-                                          style: TextStyle(
-                                              color: Colors.white, fontSize: 8),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(left: 10, top: 10),
-                                    child: CircleAvatar(
-                                      radius: 20,
-                                      child: Icon(Icons.add_task),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(left: 10, top: 5),
-                                    child: Text(
-                                      "5 horários disponíveis paras as próximas 5 horas",
-                                      style: TextStyle(
-                                          fontSize: 10, color: Colors.white),
-                                    ),
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                        )),
-                  );
-                },
-              ),
-            ))
+        // Container(
+        //     height: 600,
+        //     margin: EdgeInsets.only(top: 10),
+        //     child: Scrollbar(
+        //       showTrackOnHover: true,
+        //       child: ListView.builder(
+        //         itemCount: 10,
+        //         itemBuilder: (_, index) {
+        //           print(index);
+        //           return Container(
+        //             margin: EdgeInsets.all(5),
+        //             child: Card(
+        //                 color: kThemeBackground,
+        //                 child: DottedBorder(
+        //                   borderType: BorderType.RRect,
+        //                   color: Colors.white70,
+        //                   radius: Radius.circular(20),
+        //                   padding: EdgeInsets.symmetric(vertical: 10),
+        //                   child: Column(
+        //                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        //                     children: [
+        //                       Row(
+        //                         mainAxisAlignment: MainAxisAlignment.center,
+        //                         children: [
+        //                           CircleAvatar(
+        //                             backgroundColor: Colors.grey,
+        //                             radius: 15,
+        //                           ),
+        //                           Padding(
+        //                             padding: EdgeInsets.only(left: 10),
+        //                             child: Text(
+        //                               "Barbearia Dom Castro",
+        //                               style: TextStyle(
+        //                                   color: Colors.white,
+        //                                   fontSize: 15,
+        //                                   fontWeight: FontWeight.w700),
+        //                             ),
+        //                           ),
+        //                           Padding(
+        //                             padding: EdgeInsets.only(left: 8),
+        //                             child: Row(
+        //                               children: [
+        //                                 Icon(Icons.keyboard_arrow_down,
+        //                                     color: Colors.red, size: 10),
+        //                                 Text(
+        //                                   '10',
+        //                                   style: TextStyle(
+        //                                       color: Colors.white, fontSize: 8),
+        //                                 ),
+        //                                 Icon(
+        //                                   Icons.star,
+        //                                   color: Colors.yellow,
+        //                                   size: 10,
+        //                                 )
+        //                               ],
+        //                             ),
+        //                           ),
+        //                           Padding(
+        //                             padding: EdgeInsets.only(left: 8),
+        //                             child: Row(
+        //                               children: [
+        //                                 Icon(Icons.watch_later_outlined,
+        //                                     color: Colors.white, size: 10),
+        //                                 Text(
+        //                                   '10',
+        //                                   style: TextStyle(
+        //                                       color: Colors.white, fontSize: 8),
+        //                                 ),
+        //                               ],
+        //                             ),
+        //                           ),
+        //                           Padding(
+        //                             padding: EdgeInsets.only(left: 8),
+        //                             child: Row(
+        //                               children: [
+        //                                 Icon(Icons.place,
+        //                                     color: Colors.white, size: 10),
+        //                                 Text(
+        //                                   '10',
+        //                                   style: TextStyle(
+        //                                       color: Colors.white, fontSize: 8),
+        //                                 ),
+        //                               ],
+        //                             ),
+        //                           ),
+        //                         ],
+        //                       ),
+        //                       Row(
+        //                         mainAxisAlignment: MainAxisAlignment.center,
+        //                         children: [
+        //                           Padding(
+        //                             padding: EdgeInsets.only(left: 10, top: 10),
+        //                             child: CircleAvatar(
+        //                               radius: 20,
+        //                               child: Icon(Icons.add_task),
+        //                             ),
+        //                           ),
+        //                           Padding(
+        //                             padding: EdgeInsets.only(left: 10, top: 5),
+        //                             child: Text(
+        //                               "5 horários disponíveis paras as próximas 5 horas",
+        //                               style: TextStyle(
+        //                                   fontSize: 10, color: Colors.white),
+        //                             ),
+        //                           )
+        //                         ],
+        //                       )
+        //                     ],
+        //                   ),
+        //                 )),
+        //           );
+        //         },
+        //       ),
+        //     ))
       ],
     );
   }

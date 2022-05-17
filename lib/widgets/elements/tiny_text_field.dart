@@ -50,6 +50,7 @@ class TinyTextField extends StatelessWidget {
     return TextFormField(
       obscureText: type == TextInputType.visiblePassword,
       autofocus: autoFocus,
+      controller: controller,
       autocorrect: autoCorrect,
       cursorColor: kLightGray,
       style: const TextStyle(
