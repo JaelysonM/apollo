@@ -8,8 +8,7 @@ class CreditCardList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-        children: cardList.map((card) => _renderCard(card)).toList());
+    return Column(children: cardList.map((card) => _renderCard(card)).toList());
   }
 
   Widget _renderCard(CreditCard card) {

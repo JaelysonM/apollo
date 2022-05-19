@@ -1,7 +1,6 @@
 import 'package:apollo/constants/colors.dart';
 import 'package:apollo/modals/login/login_email_step.dart';
 import 'package:apollo/modals/login/login_password_step.dart';
-import 'package:apollo/modals/payments/payments_methods.dart';
 import 'package:apollo/modals/register/register_name_step.dart';
 import 'package:apollo/widgets/containers/default_approach_header.dart';
 import 'package:apollo/widgets/containers/mutable_modal_content.dart';
@@ -117,7 +116,7 @@ class IdentifyApproach extends StatelessWidget {
               ClickableText(
                   content: 'Registre-se',
                   onTap: () {
-                    MutableModalContent.of(context).push(PaymentsMethods());
+                    MutableModalContent.of(context).push(RegisterNameStep());
                   }),
             ],
           ),
