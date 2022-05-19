@@ -1,6 +1,7 @@
 import 'package:apollo/constants/colors.dart';
 import 'package:apollo/models/account.dart';
 import 'package:apollo/widgets/containers/default_approach_header.dart';
+import 'package:apollo/widgets/containers/default_modal_container.dart';
 import 'package:apollo/widgets/elements/default_button.dart';
 import 'package:apollo/widgets/styles/default_bold_text.dart';
 import 'package:apollo/widgets/styles/default_regular_text.dart';
@@ -14,8 +15,7 @@ class RegisterSuccessStep extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 21, vertical: 30),
+    return DefaultModalContainer(
       child: _renderPresentation(context),
     );
   }

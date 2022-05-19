@@ -6,7 +6,7 @@ class TimeFormatter {
   }
 
   static String findDayOfWeek(DateTime date) {
-    return DAYS_ARRAY.elementAt(date.weekday);
+    return DAYS_ARRAY.elementAt(date.weekday - 1);
   }
 
   static String formatDateWithMonth(DateTime date) {

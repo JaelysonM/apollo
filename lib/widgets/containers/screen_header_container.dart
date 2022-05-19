@@ -1,6 +1,7 @@
 import 'package:apollo/modals/identify_approach.dart';
 import 'package:apollo/modals/payments/spending_history.dart';
 import 'package:apollo/models/spend.dart';
+import 'package:apollo/modals/auth/identify_approach.dart';
 
 import 'package:apollo/widgets/containers/mutable_modal_content.dart';
 import 'package:flutter/material.dart';
