@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../constants/colors.dart';
 
 class RoundedTextField extends StatelessWidget {
-  final Widget? icon;
+  final IconData? icon;
   final String label;
   final TextInputType type;
   final TextEditingController controller;
@@ -50,11 +50,13 @@ class RoundedTextField extends StatelessWidget {
             color: Colors.black45,
             fontWeight: FontWeight.w500,
           ),
-          decoration: const InputDecoration(
-            icon: Icon(
-              Icons.search,
-              color: kLightGray,
-            ),
+          decoration: InputDecoration(
+            icon: icon != null
+                ? Icon(
+                    icon,
+                    color: kLightGray,
+                  )
+                : null,
             hintText: 'Buscar',
             hintStyle: TextStyle(
                 color: kLightGray, fontSize: 18, fontWeight: FontWeight.w800),

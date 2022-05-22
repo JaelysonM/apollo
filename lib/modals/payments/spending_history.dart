@@ -85,34 +85,14 @@ class SpendingHistory extends StatelessWidget {
         titleFontSize: 22,
         description: " ",
       ),
-
       RoundedTextField(
         label: "Buscar",
         controller: TextEditingController(),
+        icon: Icons.search,
         onChanged: (text) {},
         validator: (text) => null,
         margin: const EdgeInsets.only(right: 75),
       ),
-
-      // Container(
-      //   decoration: BoxDecoration(
-      //       color: Colors.white, borderRadius: BorderRadius.circular(90)),
-      //   margin: const EdgeInsets.only(right: 50),
-      //   child: const TextField(
-      //     style: TextStyle(fontSize: 18),
-      //     decoration: InputDecoration(
-      //       border: InputBorder.none,
-      //       floatingLabelBehavior: FloatingLabelBehavior.never,
-      //       prefixIcon: Icon(
-      //         Icons.search,
-      //         color: Color(0xFF898989),
-      //         size: 30,
-      //       ),
-      //       labelText: 'Buscar',
-      //       labelStyle: TextStyle(color: Color(0xFF898989), fontSize: 18),
-      //     ),
-      //   ),
-      // ),
       const SizedBox(height: 25),
       if (spends != null)
         Column(
