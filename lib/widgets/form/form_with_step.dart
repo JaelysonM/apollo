@@ -1,4 +1,5 @@
 import 'package:apollo/constants/globals.dart';
+import 'package:apollo/widgets/containers/mutable_modal_content.dart';
 import 'package:apollo/widgets/form/form.dart';
 import 'package:apollo/widgets/form/form_step.dart';
 import 'package:flutter/material.dart';
@@ -6,11 +7,10 @@ import 'package:flutter/material.dart';
 class FormWithStep extends StatelessWidget {
   final String name;
   final List<FormStep> steps;
-  final Widget successWidget;
-  final Widget? errorWidget;
 
   final Function? onSubmit;
   final Function? onError;
+  final Function? onSuccess;
 
   final bool editable;
 
@@ -18,8 +18,7 @@ class FormWithStep extends StatelessWidget {
     Key? key,
     required this.name,
     required this.steps,
-    required this.successWidget,
-    this.errorWidget,
+    this.onSuccess,
     this.onSubmit,
     this.onError,
     this.editable = true,
@@ -31,6 +30,7 @@ class FormWithStep extends StatelessWidget {
       name: name,
       onSubmit: onSubmit,
       onError: onError,
+      onSuccess: onSuccess,
       editable: editable,
       children: [FormWithStepContent(formWithStep: this)],
     );
@@ -72,8 +72,27 @@ class FormWithStepContentState extends State<FormWithStepContent> {
           _stepHistory.add(_step);
         });
       } else {
-        form.submit();
+        try {
+          form.submit();
+          success();
+        } catch (e) {
+          print(e);
+        }
       }
+    }
+  }
+
+  void clean() {
+    setState(() {
+      _stepHistory.clear();
+    });
+  }
+
+  void success() {
+    CustomFormState? form = CustomForm.useForm(buildContext);
+    clean();
+    if (form != null) {
+      form.success();
     }
   }
 

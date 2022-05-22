@@ -1,5 +1,8 @@
 import 'package:apollo/modals/login/generic_login_step.dart';
+import 'package:apollo/modals/login/login_success_step.dart';
+import 'package:apollo/models/account.dart';
 import 'package:apollo/utils/string_utils.dart';
+import 'package:apollo/widgets/containers/mutable_modal_content.dart';
 import 'package:apollo/widgets/form/form_with_step.dart';
 import 'package:flutter/material.dart';
 
@@ -21,8 +24,7 @@ class LoginForm extends StatelessWidget {
             type: TextInputType.visiblePassword),
       ],
       onSubmit: (values) => {},
-      successWidget: Container(),
-      errorWidget: Container(),
+      onSuccess: (values) {},
     );
   }
 }

@@ -4,6 +4,7 @@ class CustomForm extends StatefulWidget {
   final String name;
   final Function? onSubmit;
   final Function? onError;
+  final Function? onSuccess;
   final List<Widget> children;
   final bool editable;
   const CustomForm(
@@ -11,6 +12,7 @@ class CustomForm extends StatefulWidget {
       required this.name,
       required this.children,
       this.editable = true,
+      this.onSuccess,
       this.onError,
       this.onSubmit})
       : super(key: key);
@@ -61,6 +63,11 @@ class CustomFormState extends State<CustomForm> {
     } else {
       widget.onError?.call();
     }
+  }
+
+  void success() {
+    widget.onSuccess?.call(formValues);
+    Navigator.of(context).pop();
   }
 
   @override

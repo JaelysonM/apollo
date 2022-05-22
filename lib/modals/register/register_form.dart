@@ -25,8 +25,6 @@ class RegisterForm extends StatelessWidget {
             type: TextInputType.visiblePassword),
       ],
       onSubmit: (values) => {},
-      successWidget: Container(),
-      errorWidget: Container(),
     );
   }
 }
