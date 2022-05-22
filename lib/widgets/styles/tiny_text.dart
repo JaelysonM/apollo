@@ -11,11 +11,13 @@ class TinyText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      content,
-      style: TextStyle(
-        fontSize: fontSize,
-        color: kLightGray,
+    return RichText(
+      text: TextSpan(
+        text: content,
+        style: TextStyle(
+          fontSize: fontSize,
+          color: kLightGray,
+        ),
       ),
     );
   }

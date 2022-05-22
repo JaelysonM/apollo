@@ -1,23 +1,22 @@
 import 'package:apollo/models/spend.dart';
 import 'package:apollo/widgets/containers/default_approach_header.dart';
+import 'package:apollo/widgets/containers/default_modal_container.dart';
+import 'package:apollo/widgets/elements/rounded_text_field.dart';
 import 'package:flutter/material.dart';
 
 class SpendingHistory extends StatelessWidget {
-  final List<Spend> spends;
+  final List<Spend>? spends;
 
   const SpendingHistory({Key? key, required this.spends}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 21, vertical: 30),
-      child: _renderSection(),
-    );
+    return DefaultModalContainer(child: _renderSection());
   }
 
   Widget _renderSpend(Spend spend) {
     return Container(
-        padding: EdgeInsets.symmetric(vertical: 10),
+        padding: const EdgeInsets.symmetric(vertical: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -28,30 +27,30 @@ class SpendingHistory extends StatelessWidget {
                   spend.getSpendIcon(),
                   color: Colors.white,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
                 Text(
                   spend.getSpendTypeName(),
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.white),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Text(
                   'R\$${spend.price}',
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 16,
                       color: Color(0xFF898989),
                       fontWeight: FontWeight.bold),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 30,
                 ),
-                Align(
+                const Align(
                     alignment: Alignment.topRight,
                     child: Text(
                       'Ontem',
@@ -59,15 +58,15 @@ class SpendingHistory extends StatelessWidget {
                     ))
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Row(
               children: [
-                SizedBox(width: 28),
+                const SizedBox(width: 28),
                 Text(
                   spend.company,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     color: Color(0xFF898989),
                     fontWeight: FontWeight.bold,
@@ -81,34 +80,44 @@ class SpendingHistory extends StatelessWidget {
 
   Widget _renderSection() {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      DefaultApproachHeader(
+      const DefaultApproachHeader(
         title: "Histórico de Gastos",
         titleFontSize: 22,
         description: " ",
       ),
-      Container(
-        decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(90)),
-        margin: const EdgeInsets.only(right: 50),
-        child: TextField(
-          style: const TextStyle(fontSize: 18),
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            floatingLabelBehavior: FloatingLabelBehavior.never,
-            prefixIcon: Icon(
-              Icons.search,
-              color: Color(0xFF898989),
-              size: 30,
-            ),
-            labelText: 'Buscar',
-            labelStyle: TextStyle(color: Color(0xFF898989), fontSize: 18),
-          ),
-        ),
+
+      RoundedTextField(
+        label: "Buscar",
+        controller: TextEditingController(),
+        onChanged: (text) {},
+        validator: (text) => null,
+        margin: const EdgeInsets.only(right: 75),
       ),
-      SizedBox(height: 25),
-      Column(
-        children: spends.map((spend) => _renderSpend(spend)).toList(),
-      )
+
+      // Container(
+      //   decoration: BoxDecoration(
+      //       color: Colors.white, borderRadius: BorderRadius.circular(90)),
+      //   margin: const EdgeInsets.only(right: 50),
+      //   child: const TextField(
+      //     style: TextStyle(fontSize: 18),
+      //     decoration: InputDecoration(
+      //       border: InputBorder.none,
+      //       floatingLabelBehavior: FloatingLabelBehavior.never,
+      //       prefixIcon: Icon(
+      //         Icons.search,
+      //         color: Color(0xFF898989),
+      //         size: 30,
+      //       ),
+      //       labelText: 'Buscar',
+      //       labelStyle: TextStyle(color: Color(0xFF898989), fontSize: 18),
+      //     ),
+      //   ),
+      // ),
+      const SizedBox(height: 25),
+      if (spends != null)
+        Column(
+          children: spends!.map((spend) => _renderSpend(spend)).toList(),
+        )
     ]);
   }
 }

@@ -17,6 +17,7 @@ dependencies:
   modal_bottom_sheet: ^2.0.0
   dotted_border: ^2.0.0+2
   floating_bottom_navigation_bar: ^1.5.2
+  flutter_markdown: ^0.6.10
   cupertino_icons: ^1.0.2
   font_awesome_flutter: ^10.1.0
 dev_dependencies:

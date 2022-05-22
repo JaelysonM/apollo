@@ -1,3 +1,4 @@
+import 'package:apollo/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 import '../styles/large_text_header.dart';
@@ -5,10 +6,11 @@ import '../styles/tiny_text.dart';
 
 class DefaultApproachHeader extends StatelessWidget {
   final String title;
-  final String description;
+  final dynamic description;
   final double? titleFontSize;
   final double? descriptionFontSize;
   final Widget? child;
+  final double spacer;
 
   const DefaultApproachHeader(
       {Key? key,
@@ -16,7 +18,8 @@ class DefaultApproachHeader extends StatelessWidget {
       required this.description,
       this.titleFontSize,
       this.descriptionFontSize,
-      this.child})
+      this.child,
+      this.spacer = 4})
       : super(key: key);
 
   @override
@@ -29,11 +32,21 @@ class DefaultApproachHeader extends StatelessWidget {
           content: title,
           fontSize: titleFontSize ?? 30,
         ),
-        const SizedBox(height: 4),
-        TinyText(
-          content: description,
-          fontSize: descriptionFontSize ?? 15,
-        ),
+        SizedBox(height: spacer),
+        description is String
+            ? TinyText(
+                content: description,
+                fontSize: descriptionFontSize ?? 15,
+              )
+            : RichText(
+                text: TextSpan(
+                  style: TextStyle(
+                    fontSize: descriptionFontSize ?? 15,
+                    color: kLightGray,
+                  ),
+                  children: description,
+                ),
+              ),
       ],
     );
   }

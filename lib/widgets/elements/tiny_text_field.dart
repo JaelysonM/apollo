@@ -63,9 +63,7 @@ class TinyTextField extends StatelessWidget {
         floatingLabelBehavior: FloatingLabelBehavior.never,
       ),
       onChanged: (text) {
-        if (onChanged != null) {
-          onChanged(text);
-        }
+        onChanged(text);
       },
       validator: (text) => validator!(text),
     );

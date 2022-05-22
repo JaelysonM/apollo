@@ -1,12 +1,11 @@
 import 'package:apollo/utils/image_utils.dart';
-import 'package:flutter/cupertino.dart';
 
 class CreditCard {
-  String id;
+  String? id;
   String lastNumbers;
   CreditCardFlag flag;
 
-  CreditCard({required this.id, required this.lastNumbers, required this.flag});
+  CreditCard({this.id, required this.lastNumbers, required this.flag});
   String getFlagName() {
     switch (flag) {
       case CreditCardFlag.AMEX:
