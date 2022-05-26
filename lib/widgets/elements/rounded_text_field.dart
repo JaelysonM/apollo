@@ -57,7 +57,7 @@ class RoundedTextField extends StatelessWidget {
                     color: kLightGray,
                   )
                 : null,
-            hintText: 'Buscar',
+            hintText: label,
             hintStyle: TextStyle(
                 color: kLightGray, fontSize: 18, fontWeight: FontWeight.w800),
             border: InputBorder.none,

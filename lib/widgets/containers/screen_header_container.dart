@@ -1,9 +1,11 @@
-import 'package:apollo/modals/login/login_form.dart';
-import 'package:apollo/modals/recurrences/about.dart';
+import 'package:apollo/modals/signatures/cancel_service.dart';
+import 'package:apollo/modals/signatures/service_canceled.dart';
+import 'package:apollo/modals/signatures/unsubscribe.dart';
 import 'package:apollo/widgets/containers/mutable_modal_content.dart';
 import 'package:flutter/material.dart';
 import '../../constants/colors.dart';
 
+import '../../modals/schedules/deselect_service.dart';
 import '../../models/account.dart';
 import 'current_date_container.dart';
 
@@ -38,7 +40,7 @@ class ScreenHeader extends StatelessWidget {
                   icon:
                       const Icon(Icons.settings, size: 30, color: Colors.white),
                   onPressed: () {
-                    MutableModalContent.showModal(context, LoginForm());
+                    MutableModalContent.showModal(context, CancelService());
                   },
                   color: Colors.white,
                   splashRadius: 20,
