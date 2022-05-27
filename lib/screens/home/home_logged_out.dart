@@ -1,4 +1,5 @@
 import 'package:apollo/models/mics/navigation_bar_item.dart';
+import 'package:apollo/widgets/containers/catalog.dart';
 import 'package:apollo/widgets/containers/default_info_card.dart';
 import 'package:apollo/widgets/containers/default_screen_with_header.dart';
 import 'package:apollo/widgets/containers/what_you_need.dart';
@@ -32,14 +33,17 @@ class _HomeLoggedOutState extends State<HomeLoggedOut> {
   @override
   Widget build(BuildContext context) {
     return DefaultScreenWithHeader(
-      headerChild:
-          const DefaultInfoCard(savingTime: 50, savingTimePercentage: 99),
+      headerChild: DefaultInfoCard(savingTime: 50, savingTimePercentage: 99),
       navBarItems: _navigationBarItems(),
-      children: const [
+      children: [
         SizedBox(
           height: 10,
         ),
-        WhatYouNeed()
+        WhatYouNeed(),
+        SizedBox(
+          height: 10,
+        ),
+        Catalog(),
       ],
     );
   }

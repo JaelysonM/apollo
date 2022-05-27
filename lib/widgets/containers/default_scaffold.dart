@@ -5,14 +5,17 @@ import 'package:flutter/material.dart';
 
 class DefaultScaffold extends StatelessWidget {
   final Widget child;
+  final PreferredSizeWidget? appBar;
 
   final List<NavigationBarItem>? navBarItems;
-  const DefaultScaffold({Key? key, required this.child, this.navBarItems})
+  const DefaultScaffold(
+      {Key? key, required this.child, this.navBarItems, this.appBar})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: appBar,
         backgroundColor: kThemeBackground,
         body: SafeArea(
             child: child, bottom: false, maintainBottomViewPadding: true),

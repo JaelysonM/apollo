@@ -1,5 +1,4 @@
 import 'package:apollo/constants/globals.dart';
-import 'package:apollo/screens/home.dart';
 import 'package:apollo/screens/home/home_logged_out.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

@@ -2,6 +2,8 @@ import 'package:apollo/models/account.dart';
 import 'package:apollo/models/mics/navigation_bar_item.dart';
 import 'package:apollo/widgets/containers/default_scaffold.dart';
 import 'package:apollo/widgets/containers/screen_header_container.dart';
+import 'package:apollo/widgets/containers/top_header.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class DefaultScreenWithHeader extends StatelessWidget {
@@ -25,14 +27,22 @@ class DefaultScreenWithHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultScaffold(
         navBarItems: navBarItems,
+        appBar: TopHeader(account: account),
         child: Column(
           children: [
-            ScreenHeader(
-              account: account,
-              showDate: showDate,
-              child: headerChild,
-            ),
-            ...?children,
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    ScreenHeader(
+                      showDate: showDate,
+                      child: headerChild,
+                    ),
+                    ...?children
+                  ],
+                ),
+              ),
+            )
           ],
         ));
   }

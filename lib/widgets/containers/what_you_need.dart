@@ -1,5 +1,6 @@
 import 'package:apollo/constants/colors.dart';
-import 'package:apollo/widgets/containers/icon_left_card.dart';
+import 'package:apollo/utils/route_utils.dart';
+import 'package:apollo/widgets/containers/touchable_icon_left_card.dart';
 import 'package:flutter/material.dart';
 
 class WhatYouNeed extends StatelessWidget {
@@ -11,22 +12,25 @@ class WhatYouNeed extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 10),
       child: ListView(
         scrollDirection: Axis.horizontal,
-        children: const [
-          IconLeftCard(
-            child: Text(
+        children: [
+          TouchableIconLeftCard(
+            child: const Text(
               'Marcar um serviço',
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 16,
                   fontWeight: FontWeight.w500),
             ),
-            icon: Icon(
+            onTap: (BuildContext context) {
+              RouteUtils.popupIdentifyModal(context);
+            },
+            icon: const Icon(
               Icons.watch_later_outlined,
               color: Colors.white,
             ),
             backgroundColor: kSystemLightBlue2,
           ),
-          IconLeftCard(
+          TouchableIconLeftCard(
             child: Text(
               'Acelerar meu negócio',
               style: TextStyle(
@@ -40,34 +44,6 @@ class WhatYouNeed extends StatelessWidget {
             ),
             backgroundColor: kSystemDarkBlue2,
           ),
-          IconLeftCard(
-            child: Text(
-              'Acelerar meu negócio',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500),
-            ),
-            icon: Icon(
-              Icons.donut_large,
-              color: Colors.white,
-            ),
-            backgroundColor: kSystemDarkBlue2,
-          ),
-          IconLeftCard(
-            child: Text(
-              'Acelerar meu negócio',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500),
-            ),
-            icon: Icon(
-              Icons.donut_large,
-              color: Colors.white,
-            ),
-            backgroundColor: kSystemDarkBlue2,
-          )
         ],
       ),
     );
@@ -77,7 +53,7 @@ class WhatYouNeed extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Align(
+        const Align(
           alignment: Alignment.topLeft,
           child: Padding(
             padding: EdgeInsets.only(left: 19),
