@@ -18,10 +18,10 @@ class _HomeLoggedOutState extends State<HomeLoggedOut> {
       NavigationBarItem(
         icon: Icons.star_outline,
         title: 'Assinaturas',
-        route: '',
+        route: 'subscription',
       ),
       NavigationBarItem(
-          icon: Icons.storefront, title: 'Início', route: '', isHome: true),
+          icon: Icons.storefront, title: 'Início', route: 'home', isHome: true),
       NavigationBarItem(
         icon: Icons.edit_calendar,
         title: 'Sua agenda',

@@ -1,5 +1,7 @@
 import 'package:apollo/constants/colors.dart';
+import 'package:apollo/constants/globals.dart';
 import 'package:apollo/models/mics/navigation_bar_item.dart';
+import 'package:apollo/utils/route_utils.dart';
 import 'package:flutter/material.dart';
 
 class CustomNavigationBar extends StatefulWidget {
@@ -28,6 +30,10 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
     return widget.items[index].title;
   }
 
+  String getItemRoute(int index) {
+    return widget.items[index].route;
+  }
+
   IconData getItemIcon(int index) {
     return widget.items[index].icon;
   }
@@ -36,13 +42,20 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
     return widget.items[index].iconSize;
   }
 
-  Widget _renderNavigationBarItem(int index) {
+  Widget _renderNavigationBarItem(int index, BuildContext context) {
     return GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: () {
           if (index != _selectedIndex) {
             setState(() {
               _selectedIndex = index;
+              Navigator.of(context).pushReplacement(
+                CustomRouter.generateRoute(
+                  RouteSettings(
+                    name: getItemRoute(index),
+                  ),
+                ),
+              );
             });
           }
         },
@@ -102,7 +115,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: List.generate(widget.items.length, (index) {
-              return _renderNavigationBarItem(index);
+              return _renderNavigationBarItem(index, context);
             }),
           )),
     );

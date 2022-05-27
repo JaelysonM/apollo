@@ -20,7 +20,10 @@ class MyApp extends StatelessWidget {
       title: 'Apollo',
       navigatorKey: GlobalVariable.navState,
       debugShowCheckedModeBanner: false,
-      home: const HomeLoggedOut(),
+      routes: {
+        '/': (context) => HomeLoggedOut(),
+      },
+      initialRoute: '/',
     );
   }
 }
