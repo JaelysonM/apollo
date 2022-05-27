@@ -1,6 +1,5 @@
 import 'package:apollo/constants/colors.dart';
 import 'package:apollo/widgets/containers/screen_header_container.dart';
-import 'package:dotted_border/dotted_border.dart';
 import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
