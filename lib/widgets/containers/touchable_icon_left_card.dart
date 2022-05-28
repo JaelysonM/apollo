@@ -18,7 +18,6 @@ class TouchableIconLeftCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.only(left: 20),
         child: Material(
             color: backgroundColor ?? kSystemLightBlue2,
             shape:

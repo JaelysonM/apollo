@@ -49,13 +49,6 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
           if (index != _selectedIndex) {
             setState(() {
               _selectedIndex = index;
-              Navigator.of(context).pushReplacement(
-                CustomRouter.generateRoute(
-                  RouteSettings(
-                    name: getItemRoute(index),
-                  ),
-                ),
-              );
             });
           }
         },

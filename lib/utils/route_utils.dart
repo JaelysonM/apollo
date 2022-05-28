@@ -1,44 +1,37 @@
-import 'package:apollo/constants/globals.dart';
 import 'package:apollo/modals/auth/identify_approach.dart';
-import 'package:apollo/screens/home/home_logged_out.dart';
+import 'package:apollo/modals/login/login_form.dart';
+import 'package:apollo/modals/register/register_form.dart';
 import 'package:apollo/widgets/containers/mutable_modal_content.dart';
 import 'package:flutter/material.dart';
 
-// Create a Router
-class CustomRouter {
-  static Route<dynamic> generateRoute(RouteSettings settings) {
-    switch (settings.name) {
-      case 'home':
-        return MaterialPageRoute(
-            builder: (_) => Scaffold(
-                  body: HomeLoggedOut(),
-                ));
-      case 'subscription':
-        return MaterialPageRoute(builder: (_) => HomeLoggedOut());
-    }
-    return MaterialPageRoute(
-        builder: (_) => Scaffold(
-              body: Center(
-                child: Text('No route defined for ${settings.name}'),
-              ),
-            ));
-  }
-}
-
 class RouteUtils {
-  static String getRouteName(String route) {
-    if (route.contains('/')) {
-      return route.split('/')[1];
+  static void showModal(BuildContext context,
+      {required String route, bool cleanHistory = false}) {
+    switch (route) {
+      case 'identify_approach':
+        showOrPushModal(context,
+            modalContent: IdentifyApproach(), cleanHistory: cleanHistory);
+        break;
+      case 'login':
+        showOrPushModal(context,
+            modalContent: LoginForm(), cleanHistory: cleanHistory);
+        break;
+      case 'register':
+        showOrPushModal(context,
+            modalContent: RegisterForm(), cleanHistory: cleanHistory);
+        break;
     }
-    return route;
   }
 
-  static void popupIdentifyModal(BuildContext? context) {
-    if (context == null) {
-      MutableModalContent.showModal(
-          GlobalVariable.navState.currentContext!, const IdentifyApproach());
+  static void showOrPushModal(BuildContext context,
+      {bool cleanHistory = false, required Widget modalContent}) {
+    if (MutableModalContent.of(context) != null) {
+      if (cleanHistory) {
+        MutableModalContent.of(context).cleanLastsFromHistory();
+      }
+      MutableModalContent.of(context).push(modalContent);
     } else {
-      MutableModalContent.showModal(context, const IdentifyApproach());
+      MutableModalContent.showModal(context, modalContent);
     }
   }
 }
