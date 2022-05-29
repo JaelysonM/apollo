@@ -35,7 +35,7 @@ class HomeUser extends StatelessWidget {
             showDate: true,
             child: PunctualityCircle(
               punctuality: GLOBAL_ACCOUNT.punctuality,
-              lastPunctuality: GLOBAL_ACCOUNT.punctuality,
+              lastPunctuality: GLOBAL_ACCOUNT.punctuality - 55,
             )),
         _renderStatistics(),
         const SizedBox(

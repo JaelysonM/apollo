@@ -31,15 +31,15 @@ List<CompanyAccount> COMPANIES_MOCK = [
       evaluation: 4.56,
       imageURL: 'https://i.imgur.com/GhY98W6.jpg'),
   CompanyAccount(
-      id: '2',
+      id: '3',
       name: 'Clínica OdontoMais',
       email: 'clinic.odontomais@gmail.com',
       availableSchedules: 0,
-      meanTime: 30,
-      evaluation: 4.56,
+      meanTime: 120,
+      evaluation: 4.99,
       imageURL: 'https://i.imgur.com/GhY98W6.jpg'),
   CompanyAccount(
-      id: '2',
+      id: '4',
       name: 'Clínica OdontoMais',
       email: 'clinic.odontomais@gmail.com',
       availableSchedules: 0,
@@ -47,6 +47,16 @@ List<CompanyAccount> COMPANIES_MOCK = [
       evaluation: 4.56,
       imageURL: 'https://i.imgur.com/GhY98W6.jpg'),
 ];
+
+Account GLOBAL_ACCOUNT = UserAccount(
+  id: '1',
+  firstName: 'Jaelyson',
+  email: 'jaelysonmartins@gmail.com',
+  lastName: 'Martins',
+  evaluation: 4.55,
+  punctuality: 23,
+);
+
 List<String> MONTHS_ARRAY = [
   'janeiro',
   'fevereiro',
@@ -61,14 +71,6 @@ List<String> MONTHS_ARRAY = [
   'novembro',
   'dezembro'
 ];
-
-Account GLOBAL_ACCOUNT = UserAccount(
-    id: '1',
-    firstName: 'Jaelyson',
-    email: 'jaelysonmartins@gmail.com',
-    lastName: 'Martins',
-    evaluation: 4.45,
-    punctuality: 45);
 
 class GlobalVariable {
   static final GlobalKey<NavigatorState> navState = GlobalKey<NavigatorState>();

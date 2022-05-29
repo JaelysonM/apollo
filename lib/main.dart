@@ -1,5 +1,6 @@
 import 'package:apollo/constants/globals.dart';
 import 'package:apollo/screens/logged_out/logged_out_scene.dart';
+import 'package:apollo/screens/user/user_scene.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
