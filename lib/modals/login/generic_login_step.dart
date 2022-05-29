@@ -1,3 +1,4 @@
+import 'package:apollo/utils/route_utils.dart';
 import 'package:apollo/widgets/containers/default_approach_header.dart';
 import 'package:apollo/widgets/containers/default_modal_container.dart';
 import 'package:apollo/widgets/elements/circle_icon_button.dart';
@@ -27,11 +28,12 @@ class GenericLoginStep extends FormStep {
   @override
   Widget build(BuildContext context, FormWithStepContentState? stepForm) {
     return DefaultModalContainer(
-      child: _renderSection(stepForm),
+      child: _renderSection(stepForm, context),
     );
   }
 
-  Widget _renderSection(FormWithStepContentState? stepForm) {
+  Widget _renderSection(
+      FormWithStepContentState? stepForm, BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       const DefaultApproachHeader(
         title: "Entre",
@@ -52,11 +54,11 @@ class GenericLoginStep extends FormStep {
           },
         ),
       ),
-      _renderBottom()
+      _renderBottom(context)
     ]);
   }
 
-  Widget _renderBottom() {
+  Widget _renderBottom(BuildContext context) {
     return Container(
         margin: const EdgeInsets.only(top: 44),
         child: Align(
@@ -69,7 +71,12 @@ class GenericLoginStep extends FormStep {
                 fontSize: 14,
               ),
               const SizedBox(width: 7),
-              ClickableText(content: 'Registre-se', onTap: () {}),
+              ClickableText(
+                  content: 'Registre-se',
+                  onTap: () {
+                    RouteUtils.showModal(context,
+                        route: 'register', cleanHistory: true);
+                  }),
             ],
           ),
         ));

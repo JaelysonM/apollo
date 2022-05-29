@@ -5,6 +5,8 @@ class Account {
 
   double? evaluation;
   double? lastEvaluation;
+
+  double punctuality;
   bool? isActive;
   bool? isAdmin;
 
@@ -14,6 +16,7 @@ class Account {
     required this.email,
     this.evaluation = 5.0,
     this.lastEvaluation = 5.0,
+    this.punctuality = 100,
     this.isActive = false,
     this.isAdmin = false,
   });

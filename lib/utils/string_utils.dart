@@ -11,6 +11,10 @@ class StringUtils {
     return string.split(' ').map((word) => capitalize(word)).join(' ');
   }
 
+  static String formatDouble(double number) {
+    return number.toStringAsFixed(1);
+  }
+
   static bool isEmail(String em) {
     String p =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';

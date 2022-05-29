@@ -1,5 +1,6 @@
 import 'package:apollo/constants/globals.dart';
-import 'package:apollo/screens/home/home_logged_out.dart';
+import 'package:apollo/screens/logged_out/logged_out_scene.dart';
+import 'package:apollo/screens/user/user_scene.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -20,7 +21,11 @@ class MyApp extends StatelessWidget {
       title: 'Apollo',
       navigatorKey: GlobalVariable.navState,
       debugShowCheckedModeBanner: false,
-      home: const HomeLoggedOut(),
+      routes: {
+        '/': (context) => const LoggedOutScene(),
+        // '/': (context) => const UserScene(),
+      },
+      initialRoute: '/',
     );
   }
 }

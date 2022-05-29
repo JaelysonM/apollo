@@ -13,6 +13,7 @@ class UserAccount extends Account {
       required this.lastName,
       this.phone,
       double evaluation = 5.0,
+      double punctuality = 100,
       bool isActive = false,
       bool isAdmin = false,
       bool isApollo = false})
@@ -22,6 +23,7 @@ class UserAccount extends Account {
           email: email,
           evaluation: evaluation,
           isActive: isActive,
+          punctuality: punctuality,
           isAdmin: isAdmin,
         );
 }

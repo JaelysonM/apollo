@@ -2,10 +2,21 @@ import 'package:apollo/constants/colors.dart';
 import 'package:apollo/models/mics/navigation_bar_item.dart';
 import 'package:flutter/material.dart';
 
+enum ChangeTagAction {
+  moveForward,
+  moveBackward,
+  stay,
+}
+
 class CustomNavigationBar extends StatefulWidget {
   final List<NavigationBarItem> items;
+  final Function(ChangeTagAction action, int index)? onChangeTab;
 
-  const CustomNavigationBar({Key? key, required this.items}) : super(key: key);
+  const CustomNavigationBar({
+    Key? key,
+    required this.items,
+    required this.onChangeTab,
+  }) : super(key: key);
 
   @override
   State<CustomNavigationBar> createState() => _CustomNavigationBarState();
@@ -28,6 +39,10 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
     return widget.items[index].title;
   }
 
+  String getItemRoute(int index) {
+    return widget.items[index].route;
+  }
+
   IconData getItemIcon(int index) {
     return widget.items[index].icon;
   }
@@ -36,12 +51,17 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
     return widget.items[index].iconSize;
   }
 
-  Widget _renderNavigationBarItem(int index) {
+  Widget _renderNavigationBarItem(int index, BuildContext context) {
     return GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: () {
           if (index != _selectedIndex) {
             setState(() {
+              widget.onChangeTab!(
+                  index > _selectedIndex
+                      ? ChangeTagAction.moveForward
+                      : ChangeTagAction.moveBackward,
+                  index);
               _selectedIndex = index;
             });
           }
@@ -70,7 +90,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                 )),
             Text(
               getItemTitle(index),
-              style: const TextStyle(fontSize: 10, color: Colors.white),
+              style: const TextStyle(fontSize: 8, color: Colors.white),
             ),
             const SizedBox(
               height: 5,
@@ -97,12 +117,14 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
         borderRadius: BorderRadius.circular(50),
       ),
       child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: displayWidth * .15),
+          padding: EdgeInsets.symmetric(
+            horizontal: (displayWidth * (.3 - .05 * widget.items.length)),
+          ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: List.generate(widget.items.length, (index) {
-              return _renderNavigationBarItem(index);
+              return _renderNavigationBarItem(index, context);
             }),
           )),
     );

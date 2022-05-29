@@ -65,6 +65,14 @@ class _MutableModalContentState extends State<MutableModalContent> {
     });
   }
 
+  void cleanLastsFromHistory() {
+    setState(() {
+      if (_contentHistory.length > 1) {
+        _contentHistory.removeRange(1, _contentHistory.length);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -100,7 +108,8 @@ class _MutableModalContentState extends State<MutableModalContent> {
                       alwaysIncludeSemantics: true,
                     );
                   },
-                  child: Container(
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 400),
                     key: ValueKey(_content),
                     child: _content,
                   )),

@@ -15,7 +15,7 @@ class FormStepState extends State<FormStep> {
 
   @override
   Widget build(BuildContext context) {
-    stepForm = FormWithStepContent.of(context)!;
+    stepForm = FormWithStepContent.useFormWithStep(context);
     return widget.build(context, stepForm);
   }
 }

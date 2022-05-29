@@ -1,8 +1,7 @@
 import 'package:apollo/constants/colors.dart';
-import 'package:apollo/modals/register/register_form.dart';
+import 'package:apollo/utils/route_utils.dart';
 import 'package:apollo/widgets/containers/default_approach_header.dart';
 import 'package:apollo/widgets/containers/default_modal_container.dart';
-import 'package:apollo/widgets/containers/mutable_modal_content.dart';
 import 'package:apollo/widgets/elements/circle_icon_button.dart';
 import 'package:apollo/widgets/elements/default_button.dart';
 import 'package:apollo/widgets/styles/clickable_text.dart';
@@ -42,7 +41,7 @@ class IdentifyApproach extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Entre com sua rede social favorita',
             textAlign: TextAlign.start,
             style: TextStyle(
@@ -51,7 +50,7 @@ class IdentifyApproach extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 19,
           ),
           _renderAuthOptions(context)
@@ -68,7 +67,10 @@ class IdentifyApproach extends StatelessWidget {
           child: const LargeTextHeader(content: "Email", fontSize: 18),
           backgroundColor: kSystemLightPurple,
           onPressed: () {
-            MutableModalContent.of(context)?.push(const RegisterForm());
+            RouteUtils.showModal(
+              context,
+              route: 'login',
+            );
           },
         )
       ],
@@ -81,7 +83,7 @@ class IdentifyApproach extends StatelessWidget {
         children: const [
           CircleIconButton(
             buttonColor: Colors.white,
-            imagePath: 'assets/images/google_icon.png',
+            imagePath: 'assets/images/google.png',
           ),
           CircleIconButton(
             iconColor: Colors.white,
@@ -109,7 +111,14 @@ class IdentifyApproach extends StatelessWidget {
                 fontSize: 14,
               ),
               const SizedBox(width: 7),
-              ClickableText(content: 'Registre-se', onTap: () {}),
+              ClickableText(
+                  content: 'Registre-se',
+                  onTap: () {
+                    RouteUtils.showModal(
+                      context,
+                      route: 'register',
+                    );
+                  }),
             ],
           ),
         ));

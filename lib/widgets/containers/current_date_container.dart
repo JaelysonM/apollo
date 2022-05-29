@@ -12,7 +12,7 @@ class CurrentDateContainer extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          StringUtils.capitalize(TimeFormatter.formatDateWithMonth(now)),
+          StringUtils.capitalize(TimeFormatter.formatDateWithMonth(now)) + ',',
           style: const TextStyle(fontSize: 25, color: Colors.white),
           textAlign: TextAlign.left,
         ),
