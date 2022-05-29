@@ -3,8 +3,8 @@ import 'package:apollo/widgets/containers/default_modal_container.dart';
 
 import 'package:flutter/material.dart';
 
-class About extends StatelessWidget {
-  const About({Key? key}) : super(key: key);
+class SubscriptionAbout extends StatelessWidget {
+  const SubscriptionAbout({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

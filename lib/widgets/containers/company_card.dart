@@ -53,7 +53,7 @@ class CompanyCard extends StatelessWidget {
               text: (company.availableSchedules == 1)
                   ? ' disponível'
                   : ' disponíveis',
-              style: TextStyle(fontWeight: FontWeight.bold)),
+              style: const TextStyle(fontWeight: FontWeight.bold)),
           const TextSpan(text: ' para hoje'),
         ],
         size: 12,

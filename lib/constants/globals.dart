@@ -1,5 +1,6 @@
 import 'package:apollo/models/account.dart';
 import 'package:apollo/models/company_account.dart';
+import 'package:apollo/models/subscription_plan.dart';
 import 'package:apollo/models/user_account.dart';
 import 'package:flutter/material.dart';
 
@@ -46,6 +47,37 @@ List<CompanyAccount> COMPANIES_MOCK = [
       meanTime: 30,
       evaluation: 4.56,
       imageURL: 'https://i.imgur.com/GhY98W6.jpg'),
+];
+
+List<SubscriptionPlan> SUBSCRIPTION_PLANS_MOCK = [
+  SubscriptionPlan(
+    name: 'Mensal',
+    price: 99.99,
+    interval: 1,
+    recurrenceRule: RecurrenceRule.monthly,
+    company: COMPANIES_MOCK[3],
+  ),
+  SubscriptionPlan(
+    name: 'Trimestral',
+    price: 199.99,
+    interval: 3,
+    recurrenceRule: RecurrenceRule.monthly,
+    company: COMPANIES_MOCK[0],
+  ),
+  SubscriptionPlan(
+    name: 'Semestral',
+    price: 299.99,
+    interval: 6,
+    recurrenceRule: RecurrenceRule.monthly,
+    company: COMPANIES_MOCK[0],
+  ),
+  SubscriptionPlan(
+    name: 'Anual',
+    price: 399.99,
+    interval: 12,
+    recurrenceRule: RecurrenceRule.monthly,
+    company: COMPANIES_MOCK[0],
+  ),
 ];
 
 Account GLOBAL_ACCOUNT = UserAccount(

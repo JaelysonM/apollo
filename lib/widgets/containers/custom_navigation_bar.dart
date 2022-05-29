@@ -52,51 +52,53 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
   }
 
   Widget _renderNavigationBarItem(int index, BuildContext context) {
-    return GestureDetector(
-        behavior: HitTestBehavior.translucent,
-        onTap: () {
-          if (index != _selectedIndex) {
-            setState(() {
-              widget.onChangeTab!(
-                  index > _selectedIndex
-                      ? ChangeTagAction.moveForward
-                      : ChangeTagAction.moveBackward,
-                  index);
-              _selectedIndex = index;
-            });
-          }
-        },
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Transform.translate(
-                offset: Offset(0, _selectedIndex == index ? -10 : 0),
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  width: 45,
-                  height: 45,
-                  decoration: BoxDecoration(
-                    color: _selectedIndex == index
-                        ? kNavSeparatorBackground
-                        : null,
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                  child: Icon(
-                    getItemIcon(index),
-                    size: getItemIconSize(index),
-                    color: Colors.white,
-                  ),
-                )),
-            Text(
-              getItemTitle(index),
-              style: const TextStyle(fontSize: 8, color: Colors.white),
-            ),
-            const SizedBox(
-              height: 5,
-            )
-          ],
-        ));
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Material(
+            color: Colors.transparent,
+            child: InkWell(
+              borderRadius: BorderRadius.circular(50),
+              splashColor: kNavSeparatorBackground.withOpacity(0.5),
+              onTap: () {
+                if (index != _selectedIndex) {
+                  setState(() {
+                    widget.onChangeTab!(
+                        index > _selectedIndex
+                            ? ChangeTagAction.moveForward
+                            : ChangeTagAction.moveBackward,
+                        index);
+                    _selectedIndex = index;
+                  });
+                }
+              },
+              child: Transform.translate(
+                  offset: Offset(0, _selectedIndex == index ? -10 : 0),
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    width: 45,
+                    height: 45,
+                    decoration: BoxDecoration(
+                      color: _selectedIndex == index
+                          ? kNavSeparatorBackground
+                          : null,
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    child: Icon(
+                      getItemIcon(index),
+                      size: getItemIconSize(index),
+                      color: Colors.white,
+                    ),
+                  )),
+            )),
+        Text(
+          getItemTitle(index),
+          style: const TextStyle(fontSize: 8, color: Colors.white),
+        ),
+        const SizedBox(height: 5),
+      ],
+    );
   }
 
   @override

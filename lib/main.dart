@@ -19,6 +19,10 @@ class MyApp extends StatelessWidget {
         const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
     return MaterialApp(
       title: 'Apollo',
+      theme: ThemeData(
+        fontFamily: 'Roboto',
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
       navigatorKey: GlobalVariable.navState,
       debugShowCheckedModeBanner: false,
       routes: {

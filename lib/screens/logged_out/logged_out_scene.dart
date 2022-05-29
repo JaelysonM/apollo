@@ -19,7 +19,7 @@ class _LoggedOutSceneState extends State<LoggedOutScene> {
       NavigationBarItem(
         icon: Icons.star_outline,
         title: 'Assinaturas',
-        route: '',
+        route: 'subscriptions_logged_out',
       ),
       NavigationBarItem(
           icon: Icons.storefront,

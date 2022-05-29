@@ -1,8 +1,10 @@
 import 'package:apollo/modals/auth/identify_approach.dart';
 import 'package:apollo/modals/login/login_form.dart';
 import 'package:apollo/modals/register/register_form.dart';
+import 'package:apollo/modals/subscriptions/subscription_about.dart';
 
 import 'package:apollo/screens/logged_out/home_logged_out.dart';
+import 'package:apollo/screens/logged_out/subscriptions_logged_out.dart';
 import 'package:apollo/screens/user/home_user.dart';
 import 'package:apollo/widgets/containers/mutable_modal_content.dart';
 import 'package:apollo/widgets/containers/page_not_found.dart';
@@ -13,6 +15,8 @@ class RouteUtils {
     switch (route) {
       case 'home_logged_out':
         return const HomeLoggedOut();
+      case 'subscriptions_logged_out':
+        return const SubscriptionsLoggedOut();
       case 'home_user':
         return const HomeUser();
       default:
@@ -37,6 +41,11 @@ class RouteUtils {
       case 'register':
         showOrPushModal(context,
             modalContent: const RegisterForm(), cleanHistory: cleanHistory);
+        break;
+      case 'about_subscription':
+        showOrPushModal(context,
+            modalContent: const SubscriptionAbout(),
+            cleanHistory: cleanHistory);
         break;
     }
   }
