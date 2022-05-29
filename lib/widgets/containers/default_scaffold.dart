@@ -6,10 +6,15 @@ import 'package:flutter/material.dart';
 class DefaultScaffold extends StatelessWidget {
   final Widget child;
   final PreferredSizeWidget? appBar;
+  final Function(ChangeTagAction action, int index)? onChangeTab;
 
   final List<NavigationBarItem>? navBarItems;
   const DefaultScaffold(
-      {Key? key, required this.child, this.navBarItems, this.appBar})
+      {Key? key,
+      required this.child,
+      this.navBarItems,
+      this.appBar,
+      required this.onChangeTab})
       : super(key: key);
 
   @override
@@ -21,7 +26,10 @@ class DefaultScaffold extends StatelessWidget {
             child: child, bottom: false, maintainBottomViewPadding: true),
         extendBody: true,
         bottomNavigationBar: navBarItems != null
-            ? CustomNavigationBar(items: navBarItems ?? [])
+            ? CustomNavigationBar(
+                items: navBarItems ?? [],
+                onChangeTab: onChangeTab,
+              )
             : null);
   }
 }

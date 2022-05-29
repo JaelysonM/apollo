@@ -20,4 +20,19 @@ class TimeFormatter {
   static String formatCompleteDate(DateTime date) {
     return '${findDayOfWeek(date)},${formatDateWithMonthAndYear(date)}';
   }
+
+  static String formatMinutes(int minutes) {
+    int hours = (minutes / 60).floor();
+
+    return hours > 0
+        ? '$hours ${hours > 1 ? 'horas' : 'hora'}'
+        : '$minutes min';
+  }
+
+  static String formatMinutesToHhMm(int minutes) {
+    int hours = (minutes / 60).floor();
+    int minutesLeft = minutes % 60;
+
+    return hours > 0 ? '${hours}h ${minutesLeft}m' : '${minutesLeft}m';
+  }
 }

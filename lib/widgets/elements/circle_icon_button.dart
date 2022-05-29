@@ -1,6 +1,5 @@
 import 'package:apollo/utils/image_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../constants/colors.dart';
 
@@ -9,6 +8,7 @@ class CircleIconButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final Color? iconColor;
   final Color buttonColor;
+  final double? padding;
   final double size;
 
   final String? imagePath;
@@ -21,6 +21,7 @@ class CircleIconButton extends StatelessWidget {
       this.iconColor = Colors.white,
       this.buttonColor = kSystemPurple,
       this.size = 30,
+      this.padding,
       this.imagePath,
       this.imageType})
       : super(key: key);
@@ -39,6 +40,6 @@ class CircleIconButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
             primary: buttonColor,
             shape: const CircleBorder(),
-            padding: EdgeInsets.all(size * 0.25)));
+            padding: EdgeInsets.all(padding ?? size * 0.25)));
   }
 }

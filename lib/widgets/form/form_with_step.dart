@@ -9,8 +9,6 @@ class FormWithStep extends StatelessWidget {
   final List<FormStep> steps;
 
   final Function? onSubmit;
-  final Function? onError;
-  final Function? onSuccess;
 
   final bool editable;
 
@@ -18,9 +16,7 @@ class FormWithStep extends StatelessWidget {
     Key? key,
     required this.name,
     required this.steps,
-    this.onSuccess,
     this.onSubmit,
-    this.onError,
     this.editable = true,
   }) : super(key: key);
 
@@ -29,8 +25,6 @@ class FormWithStep extends StatelessWidget {
     return CustomForm(
       name: name,
       onSubmit: onSubmit,
-      onError: onError,
-      onSuccess: onSuccess,
       editable: editable,
       children: [FormWithStepContent(formWithStep: this)],
     );
@@ -44,7 +38,7 @@ class FormWithStepContent extends StatefulWidget {
 
   List<FormStep> getSteps() => formWithStep.steps;
 
-  static FormWithStepContentState? of(BuildContext context,
+  static FormWithStepContentState? useFormWithStep(BuildContext context,
           {bool root = false}) =>
       root
           ? context.findRootAncestorStateOfType<FormWithStepContentState>()
@@ -72,12 +66,7 @@ class FormWithStepContentState extends State<FormWithStepContent> {
           _stepHistory.add(_step);
         });
       } else {
-        try {
-          form.submit();
-          success();
-        } catch (e) {
-          print(e);
-        }
+        form.submit();
       }
     }
   }
@@ -86,14 +75,6 @@ class FormWithStepContentState extends State<FormWithStepContent> {
     setState(() {
       _stepHistory.clear();
     });
-  }
-
-  void success() {
-    CustomFormState? form = CustomForm.useForm(buildContext);
-    clean();
-    if (form != null) {
-      form.success();
-    }
   }
 
   void pop() {

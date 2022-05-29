@@ -1,7 +1,8 @@
 import 'package:apollo/constants/colors.dart';
 import 'package:apollo/utils/route_utils.dart';
-import 'package:apollo/widgets/containers/dotted_card.dart';
+import 'package:apollo/widgets/containers/dotted_card_tiny.dart';
 import 'package:apollo/widgets/containers/touchable_icon_left_card.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 
 class WhatYouNeed extends StatelessWidget {
@@ -60,12 +61,22 @@ class WhatYouNeed extends StatelessWidget {
             backgroundColor: kSystemDarkBlue2,
           ),
           _renderOrSeparator(),
-          const DottedCard(
-              child: Text('Tô so dando uma olhadinha',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 11,
-                  ))),
+          Container(
+              margin: const EdgeInsets.symmetric(vertical: 5),
+              constraints: BoxConstraints(maxWidth: 100),
+              child: DottedBorder(
+                child: Container(
+                    child: const Text('Tô so dando uma olhadinha',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 11,
+                        )),
+                    padding: const EdgeInsets.all(8)),
+                strokeWidth: 0.5,
+                borderType: BorderType.RRect,
+                color: Colors.white,
+                radius: const Radius.circular(20),
+              )),
           _renderCardSeparator(),
         ],
       ),

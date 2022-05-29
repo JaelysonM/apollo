@@ -108,7 +108,8 @@ class _MutableModalContentState extends State<MutableModalContent> {
                       alwaysIncludeSemantics: true,
                     );
                   },
-                  child: Container(
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 400),
                     key: ValueKey(_content),
                     child: _content,
                   )),

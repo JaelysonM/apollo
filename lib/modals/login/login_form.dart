@@ -1,4 +1,7 @@
+import 'package:apollo/dtos/login_dto.dart';
 import 'package:apollo/modals/login/generic_login_step.dart';
+import 'package:apollo/modals/login/login_processing.dart';
+import 'package:apollo/utils/route_utils.dart';
 import 'package:apollo/utils/string_utils.dart';
 import 'package:apollo/widgets/form/form_with_step.dart';
 import 'package:flutter/material.dart';
@@ -20,8 +23,11 @@ class LoginForm extends StatelessWidget {
         const GenericLoginStep('Sua senha', 'password',
             type: TextInputType.visiblePassword),
       ],
-      onSubmit: (values) => {},
-      onSuccess: (values) {},
+      onSubmit: (values) {
+        RouteUtils.showOrPushModal(context,
+            cleanAll: true,
+            modalContent: LoginProcessing(loginDto: LoginDto.fromJson(values)));
+      },
     );
   }
 }

@@ -20,7 +20,7 @@ class ScreenHeader extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const CurrentDateContainer(),
-                      child!,
+                      if (child != null) ...[child!]
                     ],
                   ))
             ]

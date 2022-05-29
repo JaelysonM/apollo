@@ -3,7 +3,21 @@ import 'package:flutter/material.dart';
 const Color kThemeBackground = Color(0xFF343434);
 
 const Color kLightGray = Color(0xFF898989);
+
+const Color kErrorRed = Color(0xFFEC5C2E);
+
 const Color kSecondaryLightGray = Color(0xFFE1E1E1);
+
+const Color kNotFoundTextGray = Color(0xFF736E6E);
+
+const Color kSystemBlue2 = Color(0xFF005DB2);
+
+const Color kFastScheduleColor = Color(0xFF6272FF);
+
+const Color kEvaluationColor = Color(0xFFF4F5AA);
+
+const Color kTagUnselectedColor = Color(0xFF007EF2);
+const Color kThumbColor = Color(0xFF7573F5);
 
 const Color kLightBlue = Color(0xFF6AB8FF);
 const Color kLightGreen = Color(0xFF7FEE98);
