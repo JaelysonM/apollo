@@ -47,14 +47,16 @@ class TopHeader extends StatelessWidget with PreferredSizeWidget {
     }
   }
 
-  List<Widget> _renderAccountInfo() {
-    return [
-      _renderEvaluation(),
-      const SizedBox(
-        width: 10,
-      ),
-      _renderApolloSeal()
-    ];
+  Widget _renderAccountInfo() {
+    return Row(
+      children: [
+        _renderEvaluation(),
+        const SizedBox(
+          width: 10,
+        ),
+        _renderApolloSeal()
+      ],
+    );
   }
 
   @override
@@ -71,23 +73,18 @@ class TopHeader extends StatelessWidget with PreferredSizeWidget {
           bottomRight: Radius.circular(20),
         ),
       ),
-      title: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-        Text('Olá, ${presentationName}',
-            style: const TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
-                color: kSecondaryLightGray),
-            textAlign: TextAlign.left),
-        if (account != null) ..._renderAccountInfo()
-      ]),
-      actions: [
-        IconButton(
-          icon: const Icon(Icons.settings, size: 30, color: Colors.white),
-          onPressed: () {},
-          color: Colors.white,
-          splashRadius: 20,
-        )
-      ],
+      title: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text('Olá, ${presentationName}',
+                style: const TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: kSecondaryLightGray),
+                textAlign: TextAlign.left),
+            if (account != null) _renderAccountInfo()
+          ]),
     );
   }
 }

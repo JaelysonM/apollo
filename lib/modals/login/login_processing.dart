@@ -1,14 +1,14 @@
 import 'package:apollo/constants/colors.dart';
+import 'package:apollo/constants/globals.dart';
 import 'package:apollo/dtos/login_dto.dart';
-import 'package:apollo/modals/login/login_succes.dart';
+import 'package:apollo/modals/login/login_success.dart';
 import 'package:apollo/models/account.dart';
-import 'package:apollo/models/user_account.dart';
+import 'package:apollo/services/auth_service.dart';
 import 'package:apollo/widgets/containers/default_modal_container.dart';
-import 'package:apollo/widgets/containers/mutable_modal_content.dart';
-import 'package:apollo/widgets/form/form.dart';
 import 'package:apollo/widgets/form/form_with_step.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:provider/provider.dart';
 
 class LoginProcessing extends StatefulWidget {
   final LoginDto loginDto;
@@ -26,17 +26,7 @@ class _LoginProcessingState extends State<LoginProcessing> {
   @override
   void initState() {
     super.initState();
-
-    Future.delayed(const Duration(seconds: 3), () {
-      setState(() {
-        loading = false;
-        account = UserAccount(
-            id: '1',
-            email: 'jaelysonmartins@gmail.com',
-            firstName: 'Jaelyson',
-            lastName: 'Martins');
-      });
-    });
+    error = null;
   }
 
   void _cleanFormHistory(BuildContext context) {
@@ -58,13 +48,42 @@ class _LoginProcessingState extends State<LoginProcessing> {
             ),
           ));
     } else {
-      return LoginSuccess(account: account!);
+      if (error == null) {
+        return LoginSuccess(account: account!);
+      } else {
+        return Align(
+          alignment: Alignment.center,
+          child: Text(error!),
+        );
+      }
+    }
+  }
+
+  login() async {
+    AuthService auth = Provider.of<AuthService>(context);
+    try {
+      var userAccount = await auth.login(widget.loginDto);
+      setState(() {
+        loading = false;
+        account = GLOBAL_ACCOUNT;
+      });
+    } on AuthException catch (ex) {
+      setState(() {
+        loading = false;
+        error = ex.message;
+      });
     }
   }
 
   @override
   Widget build(BuildContext context) {
     _cleanFormHistory(context);
+    login();
     return DefaultModalContainer(child: _renderResult());
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

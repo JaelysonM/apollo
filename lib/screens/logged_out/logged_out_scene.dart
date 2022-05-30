@@ -1,3 +1,4 @@
+import 'package:apollo/constants/colors.dart';
 import 'package:apollo/models/mics/navigation_bar_item.dart';
 import 'package:apollo/utils/route_utils.dart';
 import 'package:apollo/widgets/containers/custom_navigation_bar.dart';

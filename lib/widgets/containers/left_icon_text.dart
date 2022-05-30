@@ -25,7 +25,7 @@ class LeftIconText extends StatelessWidget {
         child: Row(
           children: [
             Icon(icon, size: fontSize, color: Colors.white),
-            const SizedBox(width: 20),
+            const SizedBox(width: 12),
             Text(text,
                 style: TextStyle(
                         fontSize: fontSize,

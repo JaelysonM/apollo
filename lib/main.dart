@@ -1,35 +1,20 @@
-import 'package:apollo/constants/globals.dart';
-import 'package:apollo/screens/logged_out/logged_out_scene.dart';
-import 'package:apollo/screens/user/user_scene.dart';
+import 'package:apollo/apollo.dart';
+import 'package:apollo/firebase_options.dart';
+import 'package:apollo/services/auth_service.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
-Future main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
-}
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-        const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
-    return MaterialApp(
-      title: 'Apollo',
-      theme: ThemeData(
-        fontFamily: 'Roboto',
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      navigatorKey: GlobalVariable.navState,
-      debugShowCheckedModeBanner: false,
-      routes: {
-        // '/': (context) => const LoggedOutScene(),
-        '/': (context) => const UserScene(),
-      },
-      initialRoute: '/',
-    );
-  }
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) => AuthService()),
+    ],
+    child: const ApolloApp(),
+  ));
 }

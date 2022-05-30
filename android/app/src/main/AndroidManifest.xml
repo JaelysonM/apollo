@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="br.com.apollo">
+    package="com.apolloinc.apollo">
    <application
         android:label="apollo"
         android:name="${applicationName}"

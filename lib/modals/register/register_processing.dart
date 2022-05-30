@@ -3,10 +3,12 @@ import 'package:apollo/dtos/register_dto.dart';
 import 'package:apollo/modals/register/register_success.dart';
 import 'package:apollo/models/account.dart';
 import 'package:apollo/models/user_account.dart';
+import 'package:apollo/services/auth_service.dart';
 import 'package:apollo/widgets/containers/default_modal_container.dart';
 import 'package:apollo/widgets/form/form_with_step.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:provider/provider.dart';
 
 class RegisterProcessing extends StatefulWidget {
   final RegisterDto registerDto;
@@ -22,23 +24,7 @@ class _RegisterProcessingState extends State<RegisterProcessing> {
   late String? error;
   late Account? account;
 
-  @override
-  void initState() {
-    super.initState();
-
-    Future.delayed(const Duration(seconds: 7), () {
-      setState(() {
-        loading = false;
-        account = UserAccount(
-            id: '1',
-            email: 'jaelysonmartins@gmail.com',
-            firstName: 'Jaelyson',
-            lastName: 'Martins');
-      });
-    });
-  }
-
-  void _cleanFormHistory(BuildContext context) {
+  void _cleanFormHistory() {
     FormWithStepContentState? formWithStepContentState =
         FormWithStepContent.useFormWithStep(context);
     if (formWithStepContentState != null) {
@@ -61,9 +47,26 @@ class _RegisterProcessingState extends State<RegisterProcessing> {
     }
   }
 
+  register() async {
+    AuthService auth = Provider.of<AuthService>(context);
+    try {
+      var userAccount = await auth.register(widget.registerDto);
+      setState(() {
+        loading = false;
+        account = userAccount.account;
+      });
+    } catch (e) {
+      setState(() {
+        loading = false;
+        error = e.toString();
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    _cleanFormHistory(context);
+    _cleanFormHistory();
+    register();
     return DefaultModalContainer(child: _renderResult());
   }
 }

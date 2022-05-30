@@ -106,7 +106,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
     double displayWidth = MediaQuery.of(context).size.width;
     return Container(
       margin: EdgeInsets.all(displayWidth * .05),
-      height: displayWidth * .155,
+      height: 60,
       decoration: BoxDecoration(
         color: kNavBarBackground,
         boxShadow: [
