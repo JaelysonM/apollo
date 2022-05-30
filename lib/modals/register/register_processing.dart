@@ -2,7 +2,6 @@ import 'package:apollo/constants/colors.dart';
 import 'package:apollo/dtos/register_dto.dart';
 import 'package:apollo/modals/register/register_success.dart';
 import 'package:apollo/models/account.dart';
-import 'package:apollo/models/user_account.dart';
 import 'package:apollo/services/auth_service.dart';
 import 'package:apollo/widgets/containers/default_modal_container.dart';
 import 'package:apollo/widgets/form/form_with_step.dart';
@@ -64,9 +63,14 @@ class _RegisterProcessingState extends State<RegisterProcessing> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    register();
+  }
+
+  @override
   Widget build(BuildContext context) {
     _cleanFormHistory();
-    register();
     return DefaultModalContainer(child: _renderResult());
   }
 }

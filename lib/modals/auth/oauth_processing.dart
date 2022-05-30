@@ -33,6 +33,12 @@ class _LoginProcessingState extends State<OAuthProcessing> {
     error = null;
   }
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    login();
+  }
+
   void _cleanFormHistory(BuildContext context) {
     FormWithStepContentState? formWithStepContentState =
         FormWithStepContent.useFormWithStep(context);
@@ -65,16 +71,20 @@ class _LoginProcessingState extends State<OAuthProcessing> {
 
   login() async {
     AuthService auth = Provider.of<AuthService>(context);
-    await auth.loginWithProvider(widget.authProvider);
-    setState(() {
-      loading = false;
-    });
+    try {
+      await auth.loginWithProvider(widget.authProvider);
+    } catch (e) {
+      setState(() {
+        loading = false;
+        error = e.toString();
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     _cleanFormHistory(context);
-    login();
+
     return DefaultModalContainer(child: _renderResult());
   }
 

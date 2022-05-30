@@ -76,9 +76,14 @@ class _LoginProcessingState extends State<LoginProcessing> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    login();
+  }
+
+  @override
   Widget build(BuildContext context) {
     _cleanFormHistory(context);
-    login();
     return DefaultModalContainer(child: _renderResult());
   }
 
