@@ -1,4 +1,3 @@
-import 'package:apollo/modals/payments/spending_history.dart';
 import 'package:apollo/models/account.dart';
 import 'package:apollo/models/company_account.dart';
 import 'package:apollo/models/product.dart';
@@ -16,6 +15,21 @@ List<String> DAYS_ARRAY = [
   'sexta-feira',
   'sábado',
   'domingo',
+];
+
+List<String> MONTHS_ARRAY = [
+  'janeiro',
+  'fevereiro',
+  'março',
+  'abril',
+  'maio',
+  'junho',
+  'julho',
+  'agosto',
+  'setembro',
+  'outubro',
+  'novembro',
+  'dezembro'
 ];
 
 List<String> COMPANY_TAGS = ['Barbearias', 'Estética', 'Serviços', 'Consultas'];
@@ -183,21 +197,6 @@ List<Schedule> SCHEDULES_MOCK = [
     createdAt: DateTime.now().subtract(Duration(days: 5)),
     status: ScheduleStatus.created,
   )
-];
-
-List<String> MONTHS_ARRAY = [
-  'janeiro',
-  'fevereiro',
-  'março',
-  'abril',
-  'maio',
-  'junho',
-  'julho',
-  'agosto',
-  'setembro',
-  'outubro',
-  'novembro',
-  'dezembro'
 ];
 
 class GlobalVariable {
