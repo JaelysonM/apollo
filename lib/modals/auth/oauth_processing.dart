@@ -1,8 +1,10 @@
 import 'package:apollo/constants/colors.dart';
+import 'package:apollo/constants/globals.dart';
 import 'package:apollo/modals/login/login_success.dart';
 import 'package:apollo/models/account.dart';
 import 'package:apollo/services/auth_service.dart';
 import 'package:apollo/widgets/containers/default_modal_container.dart';
+import 'package:apollo/widgets/containers/mutable_modal_content.dart';
 import 'package:apollo/widgets/form/form_with_step.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -24,6 +26,7 @@ class OAuthProcessing extends StatefulWidget {
 
 class _LoginProcessingState extends State<OAuthProcessing> {
   late bool loading = true;
+  late bool loaded = false;
   late String? error;
   late Account? account;
 
@@ -36,14 +39,8 @@ class _LoginProcessingState extends State<OAuthProcessing> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    login();
-  }
-
-  void _cleanFormHistory(BuildContext context) {
-    FormWithStepContentState? formWithStepContentState =
-        FormWithStepContent.useFormWithStep(context);
-    if (formWithStepContentState != null) {
-      formWithStepContentState.clean();
+    if (!loaded) {
+      login();
     }
   }
 
@@ -73,8 +70,14 @@ class _LoginProcessingState extends State<OAuthProcessing> {
     AuthService auth = Provider.of<AuthService>(context);
     try {
       await auth.loginWithProvider(widget.authProvider);
+      setState(() {
+        loaded = true;
+        loading = false;
+        account = GLOBAL_ACCOUNT;
+      });
     } catch (e) {
       setState(() {
+        loaded = true;
         loading = false;
         error = e.toString();
       });
@@ -83,8 +86,6 @@ class _LoginProcessingState extends State<OAuthProcessing> {
 
   @override
   Widget build(BuildContext context) {
-    _cleanFormHistory(context);
-
     return DefaultModalContainer(child: _renderResult());
   }
 

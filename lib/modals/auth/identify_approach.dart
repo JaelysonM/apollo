@@ -93,8 +93,9 @@ class _IdentifyApproachState extends State<IdentifyApproach> {
         onPressed: () {
           RouteUtils.showOrPushModal(
             context,
+            cleanAll: true,
             modalContent:
-                OAuthProcessing(authProvider: OAuthProviderType.google),
+                const OAuthProcessing(authProvider: OAuthProviderType.google),
           );
         },
       ),

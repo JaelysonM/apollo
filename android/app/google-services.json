@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "98145424886",
+    "project_id": "project-apollo-ff7d3",
+    "storage_bucket": "project-apollo-ff7d3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:98145424886:android:d5aa19b152be9d5d8be3d7",
+        "android_client_info": {
+          "package_name": "com.apolloinc.apollo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "98145424886-ldjmcittab8a36jl1ej2dkrd49053ser.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqoF7ON1aE9Kk9D1R0OuK2JcemNDfI9V8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "98145424886-ldjmcittab8a36jl1ej2dkrd49053ser.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "98145424886-g5fl2mfqlvrmj7fok8qu234u3lc7uc7g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "br.com.apollo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
