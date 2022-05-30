@@ -1,5 +1,9 @@
+import 'package:apollo/modals/payments/spending_history.dart';
 import 'package:apollo/models/account.dart';
 import 'package:apollo/models/company_account.dart';
+import 'package:apollo/models/product.dart';
+import 'package:apollo/models/schedule.dart';
+import 'package:apollo/models/spend.dart';
 import 'package:apollo/models/subscription_plan.dart';
 import 'package:apollo/models/user_account.dart';
 import 'package:flutter/material.dart';
@@ -80,14 +84,106 @@ List<SubscriptionPlan> SUBSCRIPTION_PLANS_MOCK = [
   ),
 ];
 
+List<Spend> SPENDING_HISTORY_MOCK = [
+  Spend(
+    id: '1',
+    price: 99.99,
+    createdAt: DateTime.now(),
+    company: COMPANIES_MOCK[0],
+    type: SpendType.PAYMENT,
+    owner: GLOBAL_ACCOUNT,
+  ),
+  Spend(
+    id: '1',
+    price: 99.99,
+    createdAt: DateTime.now(),
+    company: COMPANIES_MOCK[0],
+    type: SpendType.PAYMENT,
+    owner: GLOBAL_ACCOUNT,
+  ),
+  Spend(
+    id: '1',
+    price: 99.99,
+    createdAt: DateTime.now(),
+    company: COMPANIES_MOCK[0],
+    type: SpendType.REVOKE,
+    owner: GLOBAL_ACCOUNT,
+  ),
+  Spend(
+    id: '1',
+    price: 99.99,
+    createdAt: DateTime.now(),
+    company: COMPANIES_MOCK[0],
+    type: SpendType.PAYMENT,
+    owner: GLOBAL_ACCOUNT,
+  ),
+];
+
 Account GLOBAL_ACCOUNT = UserAccount(
-  id: '1',
-  firstName: 'Jaelyson',
-  email: 'jaelysonmartins@gmail.com',
-  lastName: 'Martins',
-  evaluation: 4.55,
-  punctuality: 23,
-);
+    id: '1',
+    firstName: 'Jaelyson',
+    email: 'jaelysonmartins@gmail.com',
+    lastName: 'Martins',
+    evaluation: 4.55,
+    punctuality: 23,
+    isApollo: true);
+
+List<Product> PRODUCTS_MOCK = [
+  Product(
+    id: '1',
+    name: 'Corte de cabelo',
+    description: 'Corte de cabelo com barba e bigode',
+    price: 50.0,
+    duration: 30,
+    company: COMPANIES_MOCK[0],
+  ),
+  Product(
+    id: '2',
+    name: 'Corte de cabelo',
+    description: 'Corte de cabelo com barba e bigode',
+    price: 50.0,
+    duration: 30,
+    company: COMPANIES_MOCK[0],
+  )
+];
+
+List<Schedule> SCHEDULES_MOCK = [
+  Schedule(
+    id: '1',
+    product: PRODUCTS_MOCK[0],
+    client: GLOBAL_ACCOUNT,
+    createdAt: DateTime.now().subtract(Duration(days: 1)),
+    status: ScheduleStatus.created,
+  ),
+  Schedule(
+    id: '2',
+    product: PRODUCTS_MOCK[1],
+    client: GLOBAL_ACCOUNT,
+    createdAt: DateTime.now().subtract(Duration(days: 2)),
+    status: ScheduleStatus.created,
+  ),
+  Schedule(
+    id: '3',
+    product: PRODUCTS_MOCK[0],
+    client: GLOBAL_ACCOUNT,
+    createdAt: DateTime.now().subtract(Duration(days: 3)),
+    status: ScheduleStatus.created,
+  ),
+  Schedule(
+    id: '4',
+    product: PRODUCTS_MOCK[1],
+    client: GLOBAL_ACCOUNT,
+    createdAt: DateTime.now().subtract(Duration(days: 4)),
+    status: ScheduleStatus.created,
+  ),
+  Schedule(
+    id: '5',
+    product: PRODUCTS_MOCK[0],
+    client: GLOBAL_ACCOUNT,
+    createdAt: DateTime.now().subtract(Duration(days: 5)),
+    status: ScheduleStatus.created,
+  )
+];
 
 List<String> MONTHS_ARRAY = [
   'janeiro',

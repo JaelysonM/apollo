@@ -33,7 +33,7 @@ class SpendingHistory extends StatelessWidget {
                 Text(
                   spend.getSpendTypeName(),
                   style: const TextStyle(
-                      fontSize: 20,
+                      fontSize: 16,
                       fontWeight: FontWeight.bold,
                       color: Colors.white),
                 ),
@@ -43,7 +43,7 @@ class SpendingHistory extends StatelessWidget {
                 Text(
                   'R\$${spend.price}',
                   style: const TextStyle(
-                      fontSize: 16,
+                      fontSize: 14,
                       color: Color(0xFF898989),
                       fontWeight: FontWeight.bold),
                 ),
@@ -65,7 +65,7 @@ class SpendingHistory extends StatelessWidget {
               children: [
                 const SizedBox(width: 28),
                 Text(
-                  spend.company,
+                  spend.company.name,
                   style: const TextStyle(
                     fontSize: 16,
                     color: Color(0xFF898989),

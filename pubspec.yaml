@@ -53,6 +53,8 @@ flutter:
     - family: Red Hat Text
       fonts:
         - asset: assets/fonts/RedHatText-Regular.ttf
+        - asset: assets/fonts/RedHatText-Bold.ttf
+  
     - family: Roboto
       fonts:
         - asset: assets/fonts/Roboto-Regular.ttf

@@ -1,11 +1,16 @@
+import 'package:apollo/constants/globals.dart';
 import 'package:apollo/modals/auth/identify_approach.dart';
 import 'package:apollo/modals/login/login_form.dart';
+import 'package:apollo/modals/payments/payments_methods.dart';
+import 'package:apollo/modals/payments/spending_history.dart';
 import 'package:apollo/modals/register/register_form.dart';
 import 'package:apollo/modals/subscriptions/subscription_about.dart';
+import 'package:apollo/models/user_account.dart';
 
 import 'package:apollo/screens/logged_out/home_logged_out.dart';
 import 'package:apollo/screens/logged_out/subscriptions_logged_out.dart';
 import 'package:apollo/screens/user/home_user.dart';
+import 'package:apollo/screens/user/profile_user.dart';
 import 'package:apollo/widgets/containers/mutable_modal_content.dart';
 import 'package:apollo/widgets/containers/page_not_found.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +24,8 @@ class RouteUtils {
         return const SubscriptionsLoggedOut();
       case 'home_user':
         return const HomeUser();
+      case 'profile_user':
+        return const ProfileUser();
       default:
         return const Align(
           alignment: Alignment.center,
@@ -46,6 +53,16 @@ class RouteUtils {
         showOrPushModal(context,
             modalContent: const SubscriptionAbout(),
             cleanHistory: cleanHistory);
+        break;
+      case 'spending_history':
+        showOrPushModal(context,
+            modalContent: SpendingHistory(
+                spends: (GLOBAL_ACCOUNT as UserAccount).getSpends()),
+            cleanHistory: cleanHistory);
+        break;
+      case 'payment_methods':
+        showOrPushModal(context,
+            modalContent: PaymentsMethods(), cleanHistory: cleanHistory);
         break;
     }
   }

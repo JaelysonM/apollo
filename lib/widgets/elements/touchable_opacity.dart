@@ -27,6 +27,21 @@ class _TouchableOpacityState extends State<TouchableOpacity> {
           isTappedDown = false;
         });
       },
+      onLongPressDown: (details) {
+        setState(() {
+          isTappedDown = true;
+        });
+      },
+      onLongPressUp: () {
+        setState(() {
+          isTappedDown = false;
+        });
+      },
+      onTapCancel: () {
+        setState(() {
+          isTappedDown = false;
+        });
+      },
       onTap: () => widget.onTap?.call(),
       // Decrease the opacity of child with delay when the user is not touching the button
       child: AnimatedOpacity(

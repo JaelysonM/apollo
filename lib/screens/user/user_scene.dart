@@ -25,7 +25,7 @@ class _UserSceneState extends State<UserScene> {
       NavigationBarItem(
         icon: Icons.star_outline,
         title: 'Assinaturas',
-        route: '',
+        route: 'subscriptions_logged_out',
       ),
       NavigationBarItem(
           icon: Icons.storefront,
@@ -40,7 +40,7 @@ class _UserSceneState extends State<UserScene> {
       NavigationBarItem(
         icon: Icons.face,
         title: 'Você',
-        route: '',
+        route: 'profile_user',
       )
     ];
   }

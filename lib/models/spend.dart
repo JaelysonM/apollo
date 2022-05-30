@@ -1,13 +1,19 @@
+import 'package:apollo/models/account.dart';
+import 'package:apollo/models/company_account.dart';
 import 'package:flutter/material.dart';
 
 class Spend {
-  final String company;
+  final String id;
+  final CompanyAccount company;
   final SpendType type;
+  final Account owner;
   final double price;
   final DateTime createdAt;
 
   const Spend(
-      {required this.company,
+      {required this.id,
+      required this.owner,
+      required this.company,
       required this.type,
       required this.price,
       required this.createdAt});

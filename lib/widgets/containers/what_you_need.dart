@@ -1,7 +1,6 @@
 import 'package:apollo/constants/colors.dart';
 import 'package:apollo/utils/route_utils.dart';
-import 'package:apollo/widgets/containers/dotted_card_tiny.dart';
-import 'package:apollo/widgets/containers/touchable_icon_left_card.dart';
+import 'package:apollo/widgets/containers/icon_left_card.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 

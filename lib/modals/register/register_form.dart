@@ -27,7 +27,6 @@ class RegisterForm extends StatelessWidget {
             type: TextInputType.visiblePassword),
       ],
       onSubmit: (values) {
-        print(values);
         RouteUtils.showOrPushModal(context,
             cleanAll: true,
             modalContent:

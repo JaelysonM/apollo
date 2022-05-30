@@ -24,4 +24,6 @@ class Account {
   String getFirstName() {
     return name.split(' ')[0];
   }
+
+  getSpends() {}
 }

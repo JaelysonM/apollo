@@ -26,8 +26,8 @@ class MyApp extends StatelessWidget {
       navigatorKey: GlobalVariable.navState,
       debugShowCheckedModeBanner: false,
       routes: {
-        '/': (context) => const LoggedOutScene(),
-        // '/': (context) => const UserScene(),
+        // '/': (context) => const LoggedOutScene(),
+        '/': (context) => const UserScene(),
       },
       initialRoute: '/',
     );
