@@ -5,8 +5,7 @@ import 'package:apollo/modals/payments/payments_methods.dart';
 import 'package:apollo/modals/payments/spending_history.dart';
 import 'package:apollo/modals/register/register_form.dart';
 import 'package:apollo/modals/subscriptions/subscription_about.dart';
-import 'package:apollo/models/user_account.dart';
-
+import 'package:apollo/models/user.dart';
 import 'package:apollo/screens/logged_out/home_logged_out.dart';
 import 'package:apollo/screens/logged_out/subscriptions_logged_out.dart';
 import 'package:apollo/screens/user/home_user.dart';
@@ -56,8 +55,8 @@ class RouteUtils {
         break;
       case 'spending_history':
         showOrPushModal(context,
-            modalContent: SpendingHistory(
-                spends: (GLOBAL_ACCOUNT as UserAccount).getSpends()),
+            modalContent:
+                SpendingHistory(spends: (GLOBAL_ACCOUNT as User).getSpends()),
             cleanHistory: cleanHistory);
         break;
       case 'payment_methods':

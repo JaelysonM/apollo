@@ -1,26 +1,28 @@
 import 'package:apollo/models/account.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CompanyAccount extends Account {
-  int availableSchedules;
-  int meanTime;
-  String imageURL;
+  late String name;
+  late int availableSchedules;
+  late int meanTime;
+  late String imageURL;
+  CompanyAccount.fromMap(DocumentSnapshot document) : super.fromMap(document) {
+    name = document.get('name') as String;
+    availableSchedules = document.get('available_schedules') as int;
+    meanTime = document.get('mean_time') as int;
+    imageURL = document.get('image_url') as String;
 
-  CompanyAccount({
-    required String id,
-    required String name,
-    required String email,
-    required this.imageURL,
-    double evaluation = 5.0,
-    bool isActive = false,
-    this.availableSchedules = 0,
-    this.meanTime = 65,
-    bool isAdmin = false,
-  }) : super(
-          id: id,
-          name: name,
-          email: email,
-          evaluation: evaluation,
-          isActive: isActive,
-          isAdmin: isAdmin,
-        );
+    setIdentifier(name);
+  }
+
+  @override
+  toMap() {
+    var map = super.toMap();
+    map['name'] = name;
+    map['available_schedules'] = availableSchedules;
+    map['mean_time'] = meanTime;
+    map['image_url'] = imageURL;
+
+    return map;
+  }
 }

@@ -4,6 +4,7 @@ import 'package:apollo/models/product.dart';
 import 'package:apollo/models/schedule.dart';
 import 'package:apollo/models/spend.dart';
 import 'package:apollo/models/subscription_plan.dart';
+import 'package:apollo/models/user.dart';
 import 'package:apollo/models/user_account.dart';
 import 'package:flutter/material.dart';
 
@@ -133,14 +134,7 @@ List<Spend> SPENDING_HISTORY_MOCK = [
   ),
 ];
 
-Account GLOBAL_ACCOUNT = UserAccount(
-    id: '1',
-    firstName: 'Jaelyson',
-    email: 'jaelysonmartins@gmail.com',
-    lastName: 'Martins',
-    evaluation: 4.55,
-    punctuality: 23,
-    isApollo: true);
+Account GLOBAL_ACCOUNT = User.fromMap();
 
 List<Product> PRODUCTS_MOCK = [
   Product(

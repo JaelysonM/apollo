@@ -32,7 +32,7 @@ class LoginSuccess extends StatelessWidget {
   Widget _renderWelcome() {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       const DefaultRegularText(content: 'Bem vindo de volta,'),
-      DefaultBoldText(content: account.getFirstName()),
+      DefaultBoldText(content: account.getIdentifier()),
     ]);
   }
 
