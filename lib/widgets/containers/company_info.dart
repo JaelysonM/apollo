@@ -15,7 +15,7 @@ class CompanyInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Evaluation(evaluation: company.evaluation!, fontSize: fontSize),
+        Evaluation(evaluation: company.evaluation, fontSize: fontSize),
         SizedBox(
           width: fontSize,
         ),

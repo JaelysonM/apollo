@@ -1,4 +1,4 @@
-import 'package:apollo/constants/colors.dart';
+import 'package:apollo/shared/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class TouchableIconLeftCard extends StatelessWidget {

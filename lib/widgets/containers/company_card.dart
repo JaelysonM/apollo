@@ -1,5 +1,5 @@
-import 'package:apollo/constants/colors.dart';
 import 'package:apollo/models/company_account.dart';
+import 'package:apollo/shared/constants/colors.dart';
 import 'package:apollo/widgets/containers/company_info.dart';
 import 'package:apollo/widgets/elements/circle_icon_button.dart';
 import 'package:apollo/widgets/elements/mixed_text.dart';

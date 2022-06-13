@@ -1,8 +1,9 @@
-import 'package:apollo/constants/colors.dart';
 import 'package:apollo/dtos/register_dto.dart';
+import 'package:apollo/modals/register/register_error.dart';
 import 'package:apollo/modals/register/register_success.dart';
 import 'package:apollo/models/account.dart';
 import 'package:apollo/services/auth_service.dart';
+import 'package:apollo/shared/constants/colors.dart';
 import 'package:apollo/widgets/containers/default_modal_container.dart';
 import 'package:apollo/widgets/form/form_with_step.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,12 @@ class _RegisterProcessingState extends State<RegisterProcessing> {
   late bool loading = true;
   late String? error;
   late Account? account;
+  @override
+  void initState() {
+    super.initState();
+    error = null;
+    account = null;
+  }
 
   void _cleanFormHistory() {
     FormWithStepContentState? formWithStepContentState =
@@ -42,17 +49,21 @@ class _RegisterProcessingState extends State<RegisterProcessing> {
             ),
           ));
     } else {
-      return RegisterSuccess();
+      if (error == null) {
+        return const RegisterSuccess();
+      } else {
+        return RegisterError(error: error!);
+      }
     }
   }
 
   register() async {
     AuthService auth = Provider.of<AuthService>(context);
     try {
-      var userAccount = await auth.register(widget.registerDto);
+      await auth.register(widget.registerDto);
       setState(() {
         loading = false;
-        account = userAccount.account;
+        account = auth.account;
       });
     } catch (e) {
       setState(() {
@@ -65,7 +76,9 @@ class _RegisterProcessingState extends State<RegisterProcessing> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    register();
+    if (loading) {
+      register();
+    }
   }
 
   @override

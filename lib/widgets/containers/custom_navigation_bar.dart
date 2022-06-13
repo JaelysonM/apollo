@@ -1,5 +1,5 @@
-import 'package:apollo/constants/colors.dart';
 import 'package:apollo/models/mics/navigation_bar_item.dart';
+import 'package:apollo/shared/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 enum ChangeTagAction {

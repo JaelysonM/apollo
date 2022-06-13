@@ -1,9 +1,9 @@
-import 'package:apollo/constants/colors.dart';
-import 'package:apollo/constants/globals.dart';
 import 'package:apollo/dtos/login_dto.dart';
+import 'package:apollo/modals/login/login_error.dart';
 import 'package:apollo/modals/login/login_success.dart';
 import 'package:apollo/models/account.dart';
 import 'package:apollo/services/auth_service.dart';
+import 'package:apollo/shared/constants/colors.dart';
 import 'package:apollo/widgets/containers/default_modal_container.dart';
 import 'package:apollo/widgets/form/form_with_step.dart';
 import 'package:flutter/material.dart';
@@ -48,13 +48,10 @@ class _LoginProcessingState extends State<LoginProcessing> {
             ),
           ));
     } else {
-      if (error == null) {
+      if (error == null && account != null) {
         return LoginSuccess(account: account!);
       } else {
-        return Align(
-          alignment: Alignment.center,
-          child: Text(error!),
-        );
+        return LoginError(error: error ?? 'Erro inesperado');
       }
     }
   }
@@ -62,10 +59,10 @@ class _LoginProcessingState extends State<LoginProcessing> {
   login() async {
     AuthService auth = Provider.of<AuthService>(context);
     try {
-      var userAccount = await auth.login(widget.loginDto);
+      await auth.login(widget.loginDto);
       setState(() {
         loading = false;
-        account = GLOBAL_ACCOUNT;
+        account = auth.account;
       });
     } on AuthException catch (ex) {
       setState(() {
@@ -78,7 +75,9 @@ class _LoginProcessingState extends State<LoginProcessing> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    login();
+    if (loading) {
+      login();
+    }
   }
 
   @override

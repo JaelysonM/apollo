@@ -1,11 +1,8 @@
-import 'package:apollo/constants/colors.dart';
-import 'package:apollo/constants/globals.dart';
 import 'package:apollo/modals/login/login_success.dart';
 import 'package:apollo/models/account.dart';
 import 'package:apollo/services/auth_service.dart';
+import 'package:apollo/shared/constants/colors.dart';
 import 'package:apollo/widgets/containers/default_modal_container.dart';
-import 'package:apollo/widgets/containers/mutable_modal_content.dart';
-import 'package:apollo/widgets/form/form_with_step.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
@@ -73,7 +70,7 @@ class _LoginProcessingState extends State<OAuthProcessing> {
       setState(() {
         loaded = true;
         loading = false;
-        account = GLOBAL_ACCOUNT;
+        account = auth.account;
       });
     } catch (e) {
       setState(() {

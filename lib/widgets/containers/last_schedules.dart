@@ -1,4 +1,3 @@
-import 'package:apollo/constants/globals.dart';
 import 'package:apollo/models/schedule.dart';
 import 'package:apollo/models/user.dart';
 import 'package:apollo/widgets/containers/schedule_card.dart';
@@ -26,8 +25,7 @@ class LastSchedules extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Schedule> lastSchedules =
-        (GLOBAL_ACCOUNT as User).getLastSchedules(limit: 10);
+    List<Schedule> lastSchedules = [];
     return lastSchedules.isEmpty
         ? Container()
         : Column(

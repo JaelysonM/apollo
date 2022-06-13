@@ -2,9 +2,12 @@ import 'package:apollo/dtos/login_dto.dart';
 import 'package:apollo/dtos/register_dto.dart';
 import 'package:apollo/modals/auth/oauth_processing.dart';
 import 'package:apollo/models/account.dart';
+import 'package:apollo/repositories/user_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+
+import 'package:apollo/models/user.dart' as userModel;
 
 class AuthException implements Exception {
   final String message;
@@ -14,7 +17,9 @@ class AuthException implements Exception {
 
 class AuthService extends ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final UserRepository userRepository = UserRepository();
   User? user;
+  Account? account;
   bool isLoading = true;
 
   AuthService() {
@@ -22,15 +27,25 @@ class AuthService extends ChangeNotifier {
   }
 
   _authCheck() {
-    _auth.authStateChanges().listen((User? user) {
+    _auth.authStateChanges().listen((User? user) async {
       this.user = user;
+      if (this.user != null) {
+        account = await userRepository.findByEmail(this.user!.email!);
+      } else {
+        account = null;
+      }
       isLoading = false;
       notifyListeners();
     });
   }
 
-  _getUser() {
+  _getUser() async {
     user = _auth.currentUser;
+    if (user != null) {
+      account = await userRepository.findByEmail(user!.email!);
+    } else {
+      account = null;
+    }
     notifyListeners();
   }
 
@@ -41,14 +56,14 @@ class AuthService extends ChangeNotifier {
 
   register(RegisterDto registerDto) async {
     try {
+      account = await userRepository.create(userModel.User.create({
+        'email': registerDto.email,
+        'first_name': registerDto.first_name,
+        'last_name': registerDto.last_name,
+      }));
       await _auth.createUserWithEmailAndPassword(
           email: registerDto.email, password: registerDto.password);
       _getUser();
-      return Account(
-        email: registerDto.email,
-        id: '1',
-        name: registerDto.first_name + ' ' + registerDto.last_name,
-      );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         throw AuthException('A senha criada é muito fraca');
@@ -84,11 +99,6 @@ class AuthService extends ChangeNotifier {
       await _auth.signInWithEmailAndPassword(
           email: loginDto.email, password: loginDto.password);
       _getUser();
-      return Account(
-        email: loginDto.email,
-        id: '1',
-        name: 'Jaelyson Martins',
-      );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         throw AuthException('A senha criada é muito fraca');

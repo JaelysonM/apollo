@@ -1,4 +1,3 @@
-import 'package:apollo/constants/globals.dart';
 import 'package:apollo/widgets/containers/all_subscriptions.dart';
 import 'package:apollo/widgets/containers/screen_header_container.dart';
 import 'package:apollo/widgets/elements/mixed_text.dart';
@@ -24,7 +23,7 @@ class SubscriptionsLoggedOut extends StatelessWidget {
               ], size: 16, weight: FontWeight.w300),
             )),
         AllSubscriptions(
-          subscriptionPlans: SUBSCRIPTION_PLANS_MOCK,
+          subscriptionPlans: [],
         )
       ],
     );

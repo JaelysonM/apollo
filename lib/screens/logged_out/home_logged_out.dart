@@ -1,4 +1,4 @@
-import 'package:apollo/constants/globals.dart';
+import 'package:apollo/shared/constants/globals.dart';
 import 'package:apollo/widgets/containers/catalog.dart';
 import 'package:apollo/widgets/containers/global_time_saved.dart';
 import 'package:apollo/widgets/containers/screen_header_container.dart';
@@ -25,7 +25,7 @@ class HomeLoggedOut extends StatelessWidget {
         ),
         Catalog(
           tags: COMPANY_TAGS,
-          companies: COMPANIES_MOCK,
+          companies: const [],
         ),
       ],
     );

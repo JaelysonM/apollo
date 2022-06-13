@@ -1,7 +1,6 @@
+import 'package:apollo/shared/constants/colors.dart';
 import 'package:apollo/widgets/elements/touchable_opacity.dart';
 import 'package:flutter/material.dart';
-
-import '../../constants/colors.dart';
 
 class ClickableText extends StatelessWidget {
   final String content;

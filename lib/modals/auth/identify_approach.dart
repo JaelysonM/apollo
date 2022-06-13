@@ -1,7 +1,7 @@
-import 'package:apollo/constants/colors.dart';
 import 'package:apollo/modals/auth/oauth_processing.dart';
-import 'package:apollo/services/auth_service.dart';
-import 'package:apollo/utils/route_utils.dart';
+import 'package:apollo/shared/constants/colors.dart';
+import 'package:apollo/shared/utils/route_utils.dart';
+
 import 'package:apollo/widgets/containers/default_approach_header.dart';
 import 'package:apollo/widgets/containers/default_modal_container.dart';
 import 'package:apollo/widgets/elements/circle_icon_button.dart';
@@ -11,7 +11,6 @@ import 'package:apollo/widgets/styles/large_text_header.dart';
 import 'package:apollo/widgets/styles/tiny_text.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class IdentifyApproach extends StatefulWidget {
   const IdentifyApproach({Key? key}) : super(key: key);

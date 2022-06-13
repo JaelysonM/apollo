@@ -1,7 +1,7 @@
-import 'package:apollo/constants/colors.dart';
 import 'package:apollo/screens/logged_out/logged_out_scene.dart';
 import 'package:apollo/screens/user/user_scene.dart';
 import 'package:apollo/services/auth_service.dart';
+import 'package:apollo/shared/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';

@@ -1,5 +1,5 @@
-import 'package:apollo/constants/colors.dart';
-import 'package:apollo/utils/route_utils.dart';
+import 'package:apollo/shared/constants/colors.dart';
+import 'package:apollo/shared/utils/route_utils.dart';
 import 'package:apollo/widgets/containers/icon_left_card.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';

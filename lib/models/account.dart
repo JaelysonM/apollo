@@ -1,4 +1,4 @@
-import 'package:apollo/models/base_model.dart';
+import 'package:apollo/shared/base_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 abstract class Account extends BaseModel {
@@ -15,7 +15,7 @@ abstract class Account extends BaseModel {
   late bool isActive = false;
   late bool isAdmin = false;
 
-  DateTime createdAt = DateTime.now();
+  Timestamp createdAt = Timestamp.now();
 
   Account.fromMap(DocumentSnapshot document) : super.fromMap(document) {
     setDocumentId(document.id);
@@ -26,12 +26,16 @@ abstract class Account extends BaseModel {
     punctuality = document.get('punctuality') as double;
     isActive = document.get('is_active') as bool;
     isAdmin = document.get('is_admin') as bool;
-    createdAt = document.get('created_at') as DateTime;
+    createdAt = document.get('created_at') as Timestamp;
+  }
+
+  Account.create(Map<String, dynamic> map) : super.create(map) {
+    email = map['email'] as String;
   }
 
   @override
-  toMap() {
-    var map = {};
+  Map<String, dynamic> toMap() {
+    var map = <String, dynamic>{};
     map['email'] = email;
     map['evaluation'] = evaluation;
     map['last_evaluation'] = lastEvaluation;
@@ -49,6 +53,10 @@ abstract class Account extends BaseModel {
 
   String getIdentifier() {
     return _name;
+  }
+
+  String getPresentation() {
+    return _name.split(' ').length > 1 ? _name.split(' ').first : _name;
   }
 
   String setDocumentId(String id) {

@@ -1,4 +1,4 @@
-import 'package:apollo/constants/colors.dart';
+import 'package:apollo/shared/constants/colors.dart';
 import 'package:apollo/widgets/containers/default_info_card.dart';
 import 'package:apollo/widgets/elements/mixed_text.dart';
 import 'package:flutter/material.dart';

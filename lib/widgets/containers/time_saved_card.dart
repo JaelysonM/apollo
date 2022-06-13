@@ -1,5 +1,5 @@
-import 'package:apollo/constants/colors.dart';
-import 'package:apollo/utils/time_formatter.dart';
+import 'package:apollo/shared/constants/colors.dart';
+import 'package:apollo/shared/utils/time_formatter.dart';
 import 'package:apollo/widgets/containers/default_info_card.dart';
 import 'package:flutter/material.dart';
 

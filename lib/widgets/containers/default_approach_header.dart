@@ -1,4 +1,4 @@
-import 'package:apollo/constants/colors.dart';
+import 'package:apollo/shared/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 import '../styles/large_text_header.dart';
@@ -15,7 +15,7 @@ class DefaultApproachHeader extends StatelessWidget {
   const DefaultApproachHeader(
       {Key? key,
       required this.title,
-      required this.description,
+      this.description,
       this.titleFontSize,
       this.descriptionFontSize,
       this.child,

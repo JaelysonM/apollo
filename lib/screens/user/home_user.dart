@@ -1,4 +1,4 @@
-import 'package:apollo/constants/globals.dart';
+import 'package:apollo/shared/constants/globals.dart';
 import 'package:apollo/widgets/containers/catalog.dart';
 import 'package:apollo/widgets/containers/punctuality_circle.dart';
 import 'package:apollo/widgets/containers/schedules_card.dart';
@@ -34,8 +34,8 @@ class HomeUser extends StatelessWidget {
         ScreenHeader(
             showDate: true,
             child: PunctualityCircle(
-              punctuality: GLOBAL_ACCOUNT.punctuality,
-              lastPunctuality: GLOBAL_ACCOUNT.punctuality - 55,
+              punctuality: 100,
+              lastPunctuality: 100,
             )),
         _renderStatistics(),
         const SizedBox(
@@ -43,7 +43,7 @@ class HomeUser extends StatelessWidget {
         ),
         Catalog(
           tags: COMPANY_TAGS,
-          companies: COMPANIES_MOCK,
+          companies: [],
         ),
       ],
     );

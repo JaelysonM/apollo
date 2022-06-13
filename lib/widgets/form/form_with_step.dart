@@ -1,5 +1,3 @@
-import 'package:apollo/constants/globals.dart';
-import 'package:apollo/widgets/containers/mutable_modal_content.dart';
 import 'package:apollo/widgets/form/form.dart';
 import 'package:apollo/widgets/form/form_step.dart';
 import 'package:flutter/material.dart';

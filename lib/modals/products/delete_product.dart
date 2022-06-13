@@ -1,5 +1,5 @@
-import 'package:apollo/constants/colors.dart';
 import 'package:apollo/models/product.dart';
+import 'package:apollo/shared/constants/colors.dart';
 import 'package:apollo/widgets/containers/default_approach_header.dart';
 import 'package:apollo/widgets/containers/default_modal_container.dart';
 import 'package:apollo/widgets/elements/default_button.dart';

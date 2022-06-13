@@ -1,7 +1,6 @@
-import 'package:apollo/utils/image_utils.dart';
+import 'package:apollo/shared/constants/colors.dart';
+import 'package:apollo/shared/utils/image_utils.dart';
 import 'package:flutter/material.dart';
-
-import '../../constants/colors.dart';
 
 class CircleIconButton extends StatelessWidget {
   final dynamic icon;

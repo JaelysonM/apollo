@@ -1,5 +1,5 @@
-import 'package:apollo/constants/colors.dart';
 import 'package:apollo/models/account.dart';
+import 'package:apollo/shared/constants/colors.dart';
 import 'package:apollo/widgets/styles/default_bold_text.dart';
 import 'package:apollo/widgets/styles/default_regular_text.dart';
 import 'package:apollo/widgets/styles/tiny_text.dart';

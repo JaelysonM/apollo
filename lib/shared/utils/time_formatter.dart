@@ -1,4 +1,4 @@
-import '../constants/globals.dart';
+import 'package:apollo/shared/constants/globals.dart';
 
 class TimeFormatter {
   static String findMonth(DateTime date) {
