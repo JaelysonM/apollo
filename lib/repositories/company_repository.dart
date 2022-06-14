@@ -1,13 +1,13 @@
 import 'dart:async';
 
-import 'package:apollo/models/user.dart';
+import 'package:apollo/models/company_account.dart';
 import 'package:apollo/shared/base_repository.dart';
 
-class UserRepository extends BaseRepository<User> {
-  UserRepository() : super('users');
+class CompanyRepository extends BaseRepository<CompanyAccount> {
+  CompanyRepository() : super('companies');
 
   @override
-  Future<User> create(User model) async {
+  Future<CompanyAccount> create(CompanyAccount model) async {
     var document = await reference.add(model.toMap());
     model.setDocumentId(document.id);
     return model;
@@ -18,8 +18,15 @@ class UserRepository extends BaseRepository<User> {
       if (query.docs.isEmpty) {
         return null;
       }
-      return User.fromMap(query.docs.first);
+      return CompanyAccount.fromMap(query.docs.first);
     });
+  }
+
+  Future<bool> isCompany(String uid) {
+    return reference
+        .where('uid', isEqualTo: uid)
+        .get()
+        .then((query) => query.docs.isNotEmpty);
   }
 
   Future<dynamic> findByUid(String uid) {
@@ -27,7 +34,7 @@ class UserRepository extends BaseRepository<User> {
       if (query.docs.isEmpty) {
         return null;
       }
-      return User.fromMap(query.docs.first);
+      return CompanyAccount.fromMap(query.docs.first);
     });
   }
 
@@ -37,23 +44,23 @@ class UserRepository extends BaseRepository<User> {
   }
 
   @override
-  Future<User> get(String id) {
+  Future<CompanyAccount> get(String id) {
     return reference.doc(id).get().then((document) {
-      return User.fromMap(document);
+      return CompanyAccount.fromMap(document);
     });
   }
 
   @override
-  Future<List<User>> getAll() {
+  Future<List<CompanyAccount>> getAll() {
     return reference.get().then((query) {
       return query.docs.map((document) {
-        return User.fromMap(document);
+        return CompanyAccount.fromMap(document);
       }).toList();
     });
   }
 
   @override
-  Future<User> update(User model) {
+  Future<CompanyAccount> update(CompanyAccount model) {
     return reference.doc(model.documentId()).update(model.toMap()).then((_) {
       return model;
     });

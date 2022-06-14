@@ -45,15 +45,19 @@ class WhatYouNeed extends StatelessWidget {
             backgroundColor: kSystemLightBlue2,
           ),
           _renderCardSeparator(),
-          const TouchableIconLeftCard(
-            child: Text(
+          TouchableIconLeftCard(
+            child: const Text(
               'Acelerar meu negócio',
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 16,
                   fontWeight: FontWeight.w500),
             ),
-            icon: Icon(
+            onTap: (BuildContext context) {
+              RouteUtils.showModal(context,
+                  route: 'identify_approach', company: true);
+            },
+            icon: const Icon(
               Icons.donut_large,
               color: Colors.white,
             ),

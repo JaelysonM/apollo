@@ -9,20 +9,22 @@ import 'package:apollo/widgets/styles/clickable_text.dart';
 import 'package:apollo/widgets/styles/tiny_text.dart';
 import 'package:flutter/material.dart';
 
-class GenericLoginStep extends FormStep {
+class GenericRegisterStep extends FormStep {
   final String label;
   final String name;
-  final TextInputType type;
   final String? equalTo;
   final String? equalToLabel;
+  final TextInputType type;
   final Function? validator;
+  final bool company;
 
-  const GenericLoginStep(this.label, this.name,
+  const GenericRegisterStep(this.label, this.name,
       {Key? key,
       this.type = TextInputType.text,
       this.validator,
       this.equalTo,
-      this.equalToLabel})
+      this.equalToLabel,
+      this.company = false})
       : super(key: key);
 
   @override
@@ -35,9 +37,10 @@ class GenericLoginStep extends FormStep {
   Widget _renderSection(
       FormWithStepContentState? stepForm, BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      const DefaultApproachHeader(
-        title: "Entre",
-        description: "Apenas dados básicos",
+      DefaultApproachHeader(
+        title: company ? "Cadastre sua empresa" : "Cadastre-se",
+        description:
+            "Para melhorar a experiência precisamos que\n você se registre com algumas informações\nÉ rapidinho, prometo :)",
       ),
       const SizedBox(height: 25),
       TextInput(
@@ -67,15 +70,15 @@ class GenericLoginStep extends FormStep {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const TinyText(
-                content: 'Não tem uma conta?',
+                content: 'Já tem uma conta?',
                 fontSize: 14,
               ),
               const SizedBox(width: 7),
               ClickableText(
-                  content: 'Registre-se',
+                  content: 'Logue-se',
                   onTap: () {
                     RouteUtils.showModal(context,
-                        route: 'register', cleanHistory: true);
+                        route: 'login', cleanHistory: true, company: company);
                   }),
             ],
           ),

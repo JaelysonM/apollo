@@ -19,7 +19,7 @@ class CompanyInfo extends StatelessWidget {
         SizedBox(
           width: fontSize,
         ),
-        MeanTime(meanTime: company.meanTime, fontSize: fontSize),
+        MeanTime(meanTime: company.meanTime!, fontSize: fontSize),
         SizedBox(
           width: fontSize,
         ),

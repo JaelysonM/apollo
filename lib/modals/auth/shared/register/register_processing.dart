@@ -1,6 +1,6 @@
 import 'package:apollo/dtos/register_dto.dart';
-import 'package:apollo/modals/register/register_error.dart';
-import 'package:apollo/modals/register/register_success.dart';
+import 'package:apollo/modals/auth/shared/register/register_error.dart';
+import 'package:apollo/modals/auth/shared/register/register_success.dart';
 import 'package:apollo/models/account.dart';
 import 'package:apollo/services/auth_service.dart';
 import 'package:apollo/shared/constants/colors.dart';
@@ -20,6 +20,7 @@ class RegisterProcessing extends StatefulWidget {
 }
 
 class _RegisterProcessingState extends State<RegisterProcessing> {
+  late bool _first_render = true;
   late bool loading = true;
   late String? error;
   late Account? account;
@@ -65,10 +66,10 @@ class _RegisterProcessingState extends State<RegisterProcessing> {
         loading = false;
         account = auth.account;
       });
-    } catch (e) {
+    } on AuthException catch (e) {
       setState(() {
         loading = false;
-        error = e.toString();
+        error = e.message;
       });
     }
   }
@@ -76,7 +77,8 @@ class _RegisterProcessingState extends State<RegisterProcessing> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    if (loading) {
+    if (_first_render) {
+      _first_render = false;
       register();
     }
   }

@@ -15,10 +15,12 @@ class User extends Account {
     setIdentifier(firstName + ' ' + lastName);
   }
 
-  User.create(Map<String, dynamic> map) : super.create(map) {
+  User.create(String uid, Map<String, dynamic> map) : super.create(uid, map) {
     firstName = map['first_name'] as String;
     lastName = map['last_name'] as String;
     phone = null;
+
+    setIdentifier(firstName + ' ' + lastName);
   }
 
   @override

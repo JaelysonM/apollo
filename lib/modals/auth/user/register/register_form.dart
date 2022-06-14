@@ -1,6 +1,6 @@
 import 'package:apollo/dtos/register_dto.dart';
-import 'package:apollo/modals/register/generic_register_step.dart';
-import 'package:apollo/modals/register/register_processing.dart';
+import 'package:apollo/modals/auth/shared/register/generic_register_step.dart';
+import 'package:apollo/modals/auth/shared/register/register_processing.dart';
 import 'package:apollo/shared/utils/route_utils.dart';
 import 'package:apollo/widgets/form/form_with_step.dart';
 import 'package:flutter/material.dart';
@@ -34,8 +34,8 @@ class RegisterForm extends StatelessWidget {
       onSubmit: (values) {
         RouteUtils.showOrPushModal(context,
             cleanAll: true,
-            modalContent:
-                RegisterProcessing(registerDto: RegisterDto.fromJson(values)));
+            modalContent: RegisterProcessing(
+                registerDto: RegisterDto.fromJson(values, false)));
       },
     );
   }

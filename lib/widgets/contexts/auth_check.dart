@@ -1,3 +1,4 @@
+import 'package:apollo/screens/company/company_scene.dart';
 import 'package:apollo/screens/logged_out/logged_out_scene.dart';
 import 'package:apollo/screens/user/user_scene.dart';
 import 'package:apollo/services/auth_service.dart';
@@ -19,19 +20,23 @@ class _AuthCheckState extends State<AuthCheck> {
         backgroundColor: kThemeBackground,
         body: Center(
             child: LoadingAnimationWidget.waveDots(
-                color: kSystemPurple, size: 50)));
+                color: kSystemPurple, size: 25)));
   }
 
   @override
   Widget build(BuildContext context) {
     AuthService auth = Provider.of<AuthService>(context);
     if (auth.isLoading) {
-      return LoadingAnimationWidget.waveDots(color: kSystemPurple, size: 50);
+      return loading();
     }
     if (auth.user == null) {
       return const LoggedOutScene();
     } else {
-      return const UserScene();
+      if (auth.isCompany) {
+        return const CompanyScene();
+      } else {
+        return const UserScene();
+      }
     }
   }
 }

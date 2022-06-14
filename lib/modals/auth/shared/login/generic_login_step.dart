@@ -9,20 +9,22 @@ import 'package:apollo/widgets/styles/clickable_text.dart';
 import 'package:apollo/widgets/styles/tiny_text.dart';
 import 'package:flutter/material.dart';
 
-class GenericRegisterStep extends FormStep {
+class GenericLoginStep extends FormStep {
   final String label;
   final String name;
+  final TextInputType type;
   final String? equalTo;
   final String? equalToLabel;
-  final TextInputType type;
   final Function? validator;
+  final bool company;
 
-  const GenericRegisterStep(this.label, this.name,
+  const GenericLoginStep(this.label, this.name,
       {Key? key,
       this.type = TextInputType.text,
       this.validator,
       this.equalTo,
-      this.equalToLabel})
+      this.equalToLabel,
+      this.company = false})
       : super(key: key);
 
   @override
@@ -36,9 +38,8 @@ class GenericRegisterStep extends FormStep {
       FormWithStepContentState? stepForm, BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       const DefaultApproachHeader(
-        title: "Registre-se",
-        description:
-            "Para melhorar a experiência precisamos que\n você se registre com algumas informações\nÉ rapidinho, prometo :)",
+        title: "Entre",
+        description: "Apenas dados básicos",
       ),
       const SizedBox(height: 25),
       TextInput(
@@ -68,15 +69,17 @@ class GenericRegisterStep extends FormStep {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const TinyText(
-                content: 'Já tem uma conta?',
+                content: 'Não tem uma conta?',
                 fontSize: 14,
               ),
               const SizedBox(width: 7),
               ClickableText(
-                  content: 'Logue-se',
+                  content: 'Registre-se',
                   onTap: () {
                     RouteUtils.showModal(context,
-                        route: 'login', cleanHistory: true);
+                        route: 'register',
+                        cleanHistory: true,
+                        company: company);
                   }),
             ],
           ),

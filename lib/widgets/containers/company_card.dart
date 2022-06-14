@@ -21,7 +21,7 @@ class CompanyCard extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 16,
-              backgroundImage: NetworkImage(company.imageURL),
+              backgroundImage: NetworkImage(company.imageURL!),
             ),
             const SizedBox(
               width: 8,
@@ -43,7 +43,7 @@ class CompanyCard extends StatelessWidget {
   }
 
   Widget _renderAvailableSchedules() {
-    if (company.availableSchedules >= 1) {
+    if (company.availableSchedules! >= 1) {
       return MixedText(
         [
           TextSpan(

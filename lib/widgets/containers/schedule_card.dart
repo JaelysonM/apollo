@@ -60,7 +60,7 @@ class ScheduleCard extends StatelessWidget {
             ),
             CircleAvatar(
               radius: 16,
-              backgroundImage: NetworkImage(schedule.product.company.imageURL),
+              backgroundImage: NetworkImage(schedule.product.company.imageURL!),
             ),
           ],
         ));

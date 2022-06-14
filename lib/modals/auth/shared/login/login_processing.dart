@@ -1,29 +1,26 @@
-import 'package:apollo/modals/login/login_success.dart';
+import 'package:apollo/dtos/login_dto.dart';
+import 'package:apollo/modals/auth/shared/login/login_error.dart';
+import 'package:apollo/modals/auth/shared/login/login_success.dart';
 import 'package:apollo/models/account.dart';
 import 'package:apollo/services/auth_service.dart';
 import 'package:apollo/shared/constants/colors.dart';
 import 'package:apollo/widgets/containers/default_modal_container.dart';
+import 'package:apollo/widgets/form/form_with_step.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 
-enum OAuthProviderType {
-  google,
-  facebook,
-}
-
-class OAuthProcessing extends StatefulWidget {
-  final OAuthProviderType authProvider;
-  const OAuthProcessing({Key? key, required this.authProvider})
-      : super(key: key);
+class LoginProcessing extends StatefulWidget {
+  final LoginDto loginDto;
+  const LoginProcessing({Key? key, required this.loginDto}) : super(key: key);
 
   @override
-  State<OAuthProcessing> createState() => _LoginProcessingState();
+  State<LoginProcessing> createState() => _LoginProcessingState();
 }
 
-class _LoginProcessingState extends State<OAuthProcessing> {
+class _LoginProcessingState extends State<LoginProcessing> {
+  late bool _first_render = true;
   late bool loading = true;
-  late bool loaded = false;
   late String? error;
   late Account? account;
 
@@ -33,11 +30,11 @@ class _LoginProcessingState extends State<OAuthProcessing> {
     error = null;
   }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (!loaded) {
-      login();
+  void _cleanFormHistory(BuildContext context) {
+    FormWithStepContentState? formWithStepContentState =
+        FormWithStepContent.useFormWithStep(context);
+    if (formWithStepContentState != null) {
+      formWithStepContentState.clean();
     }
   }
 
@@ -52,13 +49,10 @@ class _LoginProcessingState extends State<OAuthProcessing> {
             ),
           ));
     } else {
-      if (error == null) {
+      if (error == null && account != null) {
         return LoginSuccess(account: account!);
       } else {
-        return Align(
-          alignment: Alignment.center,
-          child: Text(error!),
-        );
+        return LoginError(error: error ?? 'Erro inesperado');
       }
     }
   }
@@ -66,23 +60,31 @@ class _LoginProcessingState extends State<OAuthProcessing> {
   login() async {
     AuthService auth = Provider.of<AuthService>(context);
     try {
-      await auth.loginWithProvider(widget.authProvider);
+      await auth.login(widget.loginDto);
       setState(() {
-        loaded = true;
         loading = false;
         account = auth.account;
       });
-    } catch (e) {
+    } on AuthException catch (ex) {
       setState(() {
-        loaded = true;
         loading = false;
-        error = e.toString();
+        error = ex.message;
       });
     }
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_first_render) {
+      _first_render = false;
+      login();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    _cleanFormHistory(context);
     return DefaultModalContainer(child: _renderResult());
   }
 
