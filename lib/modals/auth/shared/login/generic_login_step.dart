@@ -37,8 +37,8 @@ class GenericLoginStep extends FormStep {
   Widget _renderSection(
       FormWithStepContentState? stepForm, BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      const DefaultApproachHeader(
-        title: "Entre",
+      DefaultApproachHeader(
+        title: company ? 'Entre como empresa' : 'Entre',
         description: "Apenas dados básicos",
       ),
       const SizedBox(height: 25),

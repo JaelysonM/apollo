@@ -41,7 +41,7 @@ class _CompanySceneState extends State<CompanyScene> {
       NavigationBarItem(
         icon: Icons.face,
         title: 'Sua empresa',
-        route: 'profile_company',
+        route: 'profile_user',
       )
     ];
   }

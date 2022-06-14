@@ -8,18 +8,25 @@ import 'package:flutter/material.dart';
 class EditProduct extends StatefulWidget {
   final TextEditingController textEditingController = TextEditingController();
 
-  Function? onNext;
-
-  EditProduct({Key? key, this.onNext}) : super(key: key);
+  EditProduct({Key? key}) : super(key: key);
 
   @override
-  State<EditProduct> createState() => _EditProductState();
+  State<EditProduct> createState() => _EditProduct();
 }
 
-class _EditProductState extends State<EditProduct> {
+class _EditProduct extends State<EditProduct> {
   String _value = '';
-
-  final _formKey = GlobalKey<FormState>();
+  late double _price;
+  late double _minTime;
+  late double _maxTime;
+  @override
+  initState() {
+    super.initState();
+    _price = 0.0;
+    _minTime = 0.0;
+    _maxTime = 12.0;
+    _value = widget.textEditingController.text;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,60 +36,64 @@ class _EditProductState extends State<EditProduct> {
     );
   }
 
-  double _currentValue = 0;
-  double _startValue = 0.0;
-  double _endValue = 12.0;
   Widget _renderSection() {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      DefaultApproachHeader(
+      const DefaultApproachHeader(
         title: "Editar produto",
         titleFontSize: 30,
         description:
             "É rápido e fácil! Coloque um nome para um produto, o tempo de demanda e o seu preço.",
       ),
-      SizedBox(height: 15),
-      RoundedTextField(
-        label: 'Nome do produto',
-        controller: widget.textEditingController,
-        onChanged: () {},
-      ),
-      //SizedBox(height: 12),
+      const SizedBox(height: 20),
+      ConstrainedBox(
+          constraints: const BoxConstraints(maxHeight: 60),
+          child: RoundedTextField(
+            labelFontSize: 16,
+            label: 'Nome do produto',
+            controller: widget.textEditingController,
+            onChanged: (String text) {
+              setState(() {
+                _value = text;
+              });
+            },
+          )),
+      const SizedBox(height: 10),
       Slider(
         min: 0.0,
         max: 200.0,
-        value: _currentValue,
-        divisions: 99999,
-        //label: '${_currentValue.round()}',
+        value: _price,
+        divisions: 200,
         onChanged: (value) {
           setState(() {
-            _currentValue = value;
+            _price = value;
           });
         },
       ),
       Text(
-        'Preço: ${_currentValue.toStringAsFixed(2).toString()}                                                               R\$',
-        style: TextStyle(
+        'Preço: R\$${_price.toStringAsFixed(2).toString()}                                                               R\$',
+        style: const TextStyle(
             color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15),
       ),
       RangeSlider(
         min: 0.0,
         max: 24.0,
-        values: RangeValues(_startValue, _endValue),
+        divisions: 24,
+        values: RangeValues(_minTime, _maxTime),
         onChanged: (values) {
           setState(() {
-            _startValue = values.start;
-            _endValue = values.end;
+            _minTime = values.start;
+            _maxTime = values.end;
           });
         },
       ),
       Text(
-        'De ${_startValue.toStringAsFixed(0).toString()} à(s) ${_endValue.toStringAsFixed(0).toString()} hora(s)',
-        style: TextStyle(
+        'De ${_minTime.toStringAsFixed(0).toString()}h à ${_maxTime.toStringAsFixed(0).toString()}h',
+        style: const TextStyle(
             color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15),
       ),
-      SizedBox(height: 9),
+      const SizedBox(height: 9),
       DefaultButton(
-        child: const LargeTextHeader(content: "Salvar", fontSize: 18),
+        child: const LargeTextHeader(content: "Deploy!", fontSize: 18),
         backgroundColor: kSystemPurple,
         onPressed: () {},
       )

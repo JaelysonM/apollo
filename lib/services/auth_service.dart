@@ -117,11 +117,12 @@ class AuthService extends ChangeNotifier {
 
   login(LoginDto loginDto) async {
     try {
+      await verifyAccountType(loginDto);
       await _auth.signInWithEmailAndPassword(
           email: loginDto.email, password: loginDto.password);
       isCompany = loginDto.company;
-      _getUser();
-      _getAccount();
+      await _getUser();
+      await _getAccount();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         throw AuthException('A senha criada é muito fraca');
@@ -129,6 +130,18 @@ class AuthService extends ChangeNotifier {
         throw AuthException('Este email já está cadastrado');
       } else if (e.code == 'user-not-found' || e.code == 'wrong-password') {
         throw AuthException('Usuário ou senha incorretos');
+      }
+    }
+  }
+
+  verifyAccountType(LoginDto loginDto) async {
+    if (loginDto.company) {
+      if ((await userRepository.findByEmail(loginDto.email)) != null) {
+        throw AuthException('Este email está cadastrado como usuário.');
+      }
+    } else {
+      if (await companyRepository.findByEmail(loginDto.email) != null) {
+        throw AuthException('Este email está cadastrado como empresa.');
       }
     }
   }

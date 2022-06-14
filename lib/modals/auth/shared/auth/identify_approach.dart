@@ -32,7 +32,7 @@ class _IdentifyApproachState extends State<IdentifyApproach> {
         child: DefaultApproachHeader(
           title: widget.company ? "Entre como empresa" : "Entre",
           description:
-              "Para melhorar sua experiência precisamos\n que você se identifique",
+              "Para melhorar sua experiência precisamos\nque você se identifique",
         ),
       ),
       const SizedBox(

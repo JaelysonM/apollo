@@ -20,7 +20,7 @@ class LoginSuccess extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Icon(
-          account is User ? Icons.person : Icons.group,
+          account is User ? Icons.face_outlined : Icons.store_outlined,
           color: kLightGreen,
           size: 54,
         ),

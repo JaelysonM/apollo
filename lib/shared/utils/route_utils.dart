@@ -2,7 +2,10 @@ import 'package:apollo/modals/auth/shared/auth/identify_approach.dart';
 import 'package:apollo/modals/auth/shared/login/login_form.dart';
 import 'package:apollo/modals/payments/payments_methods.dart';
 import 'package:apollo/modals/payments/spending_history.dart';
+import 'package:apollo/modals/products/create_product.dart';
+import 'package:apollo/modals/products/delete_product.dart';
 import 'package:apollo/modals/subscriptions/subscription_about.dart';
+import 'package:apollo/screens/company/home_company.dart';
 import 'package:apollo/screens/logged_out/home_logged_out.dart';
 import 'package:apollo/screens/logged_out/subscriptions_logged_out.dart';
 import 'package:apollo/screens/user/home_user.dart';
@@ -26,6 +29,8 @@ class RouteUtils {
         return const HomeUser();
       case 'profile_user':
         return const ProfileUser();
+      case 'home_company':
+        return const HomeCompany();
       default:
         return const Align(
           alignment: Alignment.center,
@@ -73,6 +78,11 @@ class RouteUtils {
       case 'payment_methods':
         showOrPushModal(context,
             modalContent: PaymentsMethods(), cleanHistory: cleanHistory);
+        break;
+
+      case 'create_product':
+        showOrPushModal(context,
+            modalContent: CreateProduct(), cleanHistory: cleanHistory);
         break;
     }
   }

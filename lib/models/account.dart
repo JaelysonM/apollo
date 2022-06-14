@@ -24,10 +24,10 @@ abstract class Account extends BaseModel {
 
     email = document.get('email');
     uid = document.get('uid');
-    evaluation = document.get('evaluation');
-    lastEvaluation = document.get('last_evaluation');
-    punctuality = document.get('punctuality');
-    lastPunctuality = document.get('last_punctuality');
+    evaluation = document.get('evaluation') + .0;
+    lastEvaluation = document.get('last_evaluation') + .0;
+    punctuality = document.get('punctuality') + .0;
+    lastPunctuality = document.get('last_punctuality') + .0;
     isActive = document.get('is_active');
     isAdmin = document.get('is_admin');
     createdAt = document.get('created_at');
