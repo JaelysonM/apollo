@@ -1,5 +1,6 @@
-import 'package:apollo/constants/colors.dart';
 import 'package:apollo/models/account.dart';
+import 'package:apollo/models/user.dart';
+import 'package:apollo/shared/constants/colors.dart';
 import 'package:apollo/widgets/styles/default_bold_text.dart';
 import 'package:apollo/widgets/styles/default_regular_text.dart';
 import 'package:apollo/widgets/styles/tiny_text.dart';
@@ -18,8 +19,8 @@ class LoginSuccess extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Icon(
-          Icons.face_outlined,
+        Icon(
+          account is User ? Icons.person : Icons.group,
           color: kLightGreen,
           size: 54,
         ),
@@ -32,7 +33,7 @@ class LoginSuccess extends StatelessWidget {
   Widget _renderWelcome() {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       const DefaultRegularText(content: 'Bem vindo de volta,'),
-      DefaultBoldText(content: account.getFirstName()),
+      DefaultBoldText(content: account.getIdentifier()),
     ]);
   }
 

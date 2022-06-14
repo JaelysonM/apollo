@@ -1,6 +1,6 @@
-import 'package:apollo/constants/colors.dart';
 import 'package:apollo/models/account.dart';
 import 'package:apollo/models/mics/navigation_bar_item.dart';
+import 'package:apollo/shared/constants/colors.dart';
 import 'package:apollo/widgets/containers/custom_navigation_bar.dart';
 import 'package:apollo/widgets/containers/default_scaffold.dart';
 import 'package:apollo/widgets/containers/top_header.dart';

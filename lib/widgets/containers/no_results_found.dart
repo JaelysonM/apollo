@@ -1,4 +1,4 @@
-import 'package:apollo/constants/colors.dart';
+import 'package:apollo/shared/constants/colors.dart';
 import 'package:apollo/widgets/containers/icon_dotted_card.dart';
 import 'package:flutter/material.dart';
 

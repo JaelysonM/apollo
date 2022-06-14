@@ -1,4 +1,4 @@
-import 'package:apollo/utils/route_utils.dart';
+import 'package:apollo/shared/utils/route_utils.dart';
 import 'package:apollo/widgets/containers/default_approach_header.dart';
 import 'package:apollo/widgets/containers/default_modal_container.dart';
 import 'package:apollo/widgets/elements/circle_icon_button.dart';
@@ -16,13 +16,15 @@ class GenericRegisterStep extends FormStep {
   final String? equalToLabel;
   final TextInputType type;
   final Function? validator;
+  final bool company;
 
   const GenericRegisterStep(this.label, this.name,
       {Key? key,
       this.type = TextInputType.text,
       this.validator,
       this.equalTo,
-      this.equalToLabel})
+      this.equalToLabel,
+      this.company = false})
       : super(key: key);
 
   @override
@@ -35,8 +37,8 @@ class GenericRegisterStep extends FormStep {
   Widget _renderSection(
       FormWithStepContentState? stepForm, BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      const DefaultApproachHeader(
-        title: "Registre-se",
+      DefaultApproachHeader(
+        title: company ? "Cadastre sua empresa" : "Cadastre-se",
         description:
             "Para melhorar a experiência precisamos que\n você se registre com algumas informações\nÉ rapidinho, prometo :)",
       ),
@@ -76,7 +78,7 @@ class GenericRegisterStep extends FormStep {
                   content: 'Logue-se',
                   onTap: () {
                     RouteUtils.showModal(context,
-                        route: 'login', cleanHistory: true);
+                        route: 'login', cleanHistory: true, company: company);
                   }),
             ],
           ),

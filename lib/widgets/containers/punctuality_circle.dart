@@ -1,5 +1,4 @@
-import 'package:apollo/constants/colors.dart';
-import 'package:apollo/constants/globals.dart';
+import 'package:apollo/shared/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
@@ -18,7 +17,7 @@ class PunctualityCircle extends StatelessWidget {
         CircularPercentIndicator(
           radius: 60.0,
           lineWidth: 8.0,
-          percent: GLOBAL_ACCOUNT.punctuality / 100,
+          percent: punctuality / 100,
           center: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -27,7 +26,7 @@ class PunctualityCircle extends StatelessWidget {
                 (punctuality >= lastPunctuality
                     ? const Icon(Icons.keyboard_arrow_up, color: kLightGreen)
                     : const Icon(Icons.keyboard_arrow_down, color: kErrorRed)),
-              Text('${GLOBAL_ACCOUNT.punctuality.toInt()}%',
+              Text('${punctuality.toInt()}%',
                   style: const TextStyle(fontSize: 25, color: Colors.white))
             ],
           ),

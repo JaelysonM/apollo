@@ -1,6 +1,6 @@
-import 'package:apollo/constants/colors.dart';
 import 'package:apollo/models/subscription_plan.dart';
-import 'package:apollo/utils/route_utils.dart';
+import 'package:apollo/shared/constants/colors.dart';
+import 'package:apollo/shared/utils/route_utils.dart';
 import 'package:apollo/widgets/containers/no_results_found.dart';
 import 'package:apollo/widgets/containers/subscription_plan_card.dart';
 import 'package:apollo/widgets/styles/clickable_text.dart';

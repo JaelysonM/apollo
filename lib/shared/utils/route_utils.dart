@@ -1,12 +1,8 @@
-import 'package:apollo/constants/globals.dart';
-import 'package:apollo/modals/auth/identify_approach.dart';
-import 'package:apollo/modals/login/login_form.dart';
+import 'package:apollo/modals/auth/shared/auth/identify_approach.dart';
+import 'package:apollo/modals/auth/shared/login/login_form.dart';
 import 'package:apollo/modals/payments/payments_methods.dart';
 import 'package:apollo/modals/payments/spending_history.dart';
-import 'package:apollo/modals/register/register_form.dart';
 import 'package:apollo/modals/subscriptions/subscription_about.dart';
-import 'package:apollo/models/user_account.dart';
-
 import 'package:apollo/screens/logged_out/home_logged_out.dart';
 import 'package:apollo/screens/logged_out/subscriptions_logged_out.dart';
 import 'package:apollo/screens/user/home_user.dart';
@@ -14,6 +10,10 @@ import 'package:apollo/screens/user/profile_user.dart';
 import 'package:apollo/widgets/containers/mutable_modal_content.dart';
 import 'package:apollo/widgets/containers/page_not_found.dart';
 import 'package:flutter/material.dart';
+import 'package:apollo/modals/auth/user/register/register_form.dart'
+    as userRegisterForm;
+import 'package:apollo/modals/auth/company/register/register_form.dart'
+    as companyRegisterForm;
 
 class RouteUtils {
   static Widget renderPage(String route) {
@@ -35,19 +35,30 @@ class RouteUtils {
   }
 
   static void showModal(BuildContext context,
-      {required String route, bool cleanHistory = false}) {
+      {required String route,
+      bool cleanHistory = false,
+      bool company = false}) {
     switch (route) {
       case 'identify_approach':
         showOrPushModal(context,
-            modalContent: const IdentifyApproach(), cleanHistory: cleanHistory);
+            modalContent: IdentifyApproach(
+              company: company,
+            ),
+            cleanHistory: cleanHistory);
         break;
       case 'login':
         showOrPushModal(context,
-            modalContent: const LoginForm(), cleanHistory: cleanHistory);
+            modalContent: LoginForm(
+              company: company,
+            ),
+            cleanHistory: cleanHistory);
         break;
       case 'register':
         showOrPushModal(context,
-            modalContent: const RegisterForm(), cleanHistory: cleanHistory);
+            modalContent: company
+                ? const companyRegisterForm.RegisterForm()
+                : const userRegisterForm.RegisterForm(),
+            cleanHistory: cleanHistory);
         break;
       case 'about_subscription':
         showOrPushModal(context,
@@ -56,8 +67,7 @@ class RouteUtils {
         break;
       case 'spending_history':
         showOrPushModal(context,
-            modalContent: SpendingHistory(
-                spends: (GLOBAL_ACCOUNT as UserAccount).getSpends()),
+            modalContent: const SpendingHistory(spends: []),
             cleanHistory: cleanHistory);
         break;
       case 'payment_methods':

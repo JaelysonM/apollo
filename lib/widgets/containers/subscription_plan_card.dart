@@ -21,7 +21,7 @@ class SubscriptionPlanCard extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 16,
-              backgroundImage: NetworkImage(subscriptionPlan.company.imageURL),
+              backgroundImage: NetworkImage(subscriptionPlan.company.imageURL!),
             ),
             const SizedBox(
               width: 8,

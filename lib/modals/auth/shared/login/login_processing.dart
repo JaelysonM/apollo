@@ -1,29 +1,36 @@
-import 'package:apollo/constants/colors.dart';
-import 'package:apollo/dtos/register_dto.dart';
-import 'package:apollo/modals/register/register_success.dart';
+import 'package:apollo/dtos/login_dto.dart';
+import 'package:apollo/modals/auth/shared/login/login_error.dart';
+import 'package:apollo/modals/auth/shared/login/login_success.dart';
 import 'package:apollo/models/account.dart';
 import 'package:apollo/services/auth_service.dart';
+import 'package:apollo/shared/constants/colors.dart';
 import 'package:apollo/widgets/containers/default_modal_container.dart';
 import 'package:apollo/widgets/form/form_with_step.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 
-class RegisterProcessing extends StatefulWidget {
-  final RegisterDto registerDto;
-  const RegisterProcessing({Key? key, required this.registerDto})
-      : super(key: key);
+class LoginProcessing extends StatefulWidget {
+  final LoginDto loginDto;
+  const LoginProcessing({Key? key, required this.loginDto}) : super(key: key);
 
   @override
-  State<RegisterProcessing> createState() => _RegisterProcessingState();
+  State<LoginProcessing> createState() => _LoginProcessingState();
 }
 
-class _RegisterProcessingState extends State<RegisterProcessing> {
+class _LoginProcessingState extends State<LoginProcessing> {
+  late bool _first_render = true;
   late bool loading = true;
   late String? error;
   late Account? account;
 
-  void _cleanFormHistory() {
+  @override
+  void initState() {
+    super.initState();
+    error = null;
+  }
+
+  void _cleanFormHistory(BuildContext context) {
     FormWithStepContentState? formWithStepContentState =
         FormWithStepContent.useFormWithStep(context);
     if (formWithStepContentState != null) {
@@ -42,22 +49,26 @@ class _RegisterProcessingState extends State<RegisterProcessing> {
             ),
           ));
     } else {
-      return RegisterSuccess();
+      if (error == null && account != null) {
+        return LoginSuccess(account: account!);
+      } else {
+        return LoginError(error: error ?? 'Erro inesperado');
+      }
     }
   }
 
-  register() async {
+  login() async {
     AuthService auth = Provider.of<AuthService>(context);
     try {
-      var userAccount = await auth.register(widget.registerDto);
+      await auth.login(widget.loginDto);
       setState(() {
         loading = false;
-        account = userAccount.account;
+        account = auth.account;
       });
-    } catch (e) {
+    } on AuthException catch (ex) {
       setState(() {
         loading = false;
-        error = e.toString();
+        error = ex.message;
       });
     }
   }
@@ -65,12 +76,20 @@ class _RegisterProcessingState extends State<RegisterProcessing> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    register();
+    if (_first_render) {
+      _first_render = false;
+      login();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    _cleanFormHistory();
+    _cleanFormHistory(context);
     return DefaultModalContainer(child: _renderResult());
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

@@ -1,6 +1,5 @@
+import 'package:apollo/shared/constants/colors.dart';
 import 'package:flutter/material.dart';
-
-import '../../constants/colors.dart';
 
 class RoundedTextField extends StatelessWidget {
   final IconData? icon;

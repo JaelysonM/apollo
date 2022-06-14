@@ -1,5 +1,5 @@
-import 'package:apollo/constants/colors.dart';
-import 'package:apollo/utils/route_utils.dart';
+import 'package:apollo/shared/constants/colors.dart';
+import 'package:apollo/shared/utils/route_utils.dart';
 import 'package:apollo/widgets/containers/icon_left_card.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -45,15 +45,19 @@ class WhatYouNeed extends StatelessWidget {
             backgroundColor: kSystemLightBlue2,
           ),
           _renderCardSeparator(),
-          const TouchableIconLeftCard(
-            child: Text(
+          TouchableIconLeftCard(
+            child: const Text(
               'Acelerar meu negócio',
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 16,
                   fontWeight: FontWeight.w500),
             ),
-            icon: Icon(
+            onTap: (BuildContext context) {
+              RouteUtils.showModal(context,
+                  route: 'identify_approach', company: true);
+            },
+            icon: const Icon(
               Icons.donut_large,
               color: Colors.white,
             ),

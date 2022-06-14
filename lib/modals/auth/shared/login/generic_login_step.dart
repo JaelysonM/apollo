@@ -1,4 +1,4 @@
-import 'package:apollo/utils/route_utils.dart';
+import 'package:apollo/shared/utils/route_utils.dart';
 import 'package:apollo/widgets/containers/default_approach_header.dart';
 import 'package:apollo/widgets/containers/default_modal_container.dart';
 import 'package:apollo/widgets/elements/circle_icon_button.dart';
@@ -16,13 +16,15 @@ class GenericLoginStep extends FormStep {
   final String? equalTo;
   final String? equalToLabel;
   final Function? validator;
+  final bool company;
 
   const GenericLoginStep(this.label, this.name,
       {Key? key,
       this.type = TextInputType.text,
       this.validator,
       this.equalTo,
-      this.equalToLabel})
+      this.equalToLabel,
+      this.company = false})
       : super(key: key);
 
   @override
@@ -75,7 +77,9 @@ class GenericLoginStep extends FormStep {
                   content: 'Registre-se',
                   onTap: () {
                     RouteUtils.showModal(context,
-                        route: 'register', cleanHistory: true);
+                        route: 'register',
+                        cleanHistory: true,
+                        company: company);
                   }),
             ],
           ),

@@ -1,5 +1,5 @@
-import 'package:apollo/constants/colors.dart';
 import 'package:apollo/models/company_account.dart';
+import 'package:apollo/shared/constants/colors.dart';
 import 'package:apollo/widgets/containers/company_info.dart';
 import 'package:apollo/widgets/elements/circle_icon_button.dart';
 import 'package:apollo/widgets/elements/mixed_text.dart';
@@ -21,7 +21,7 @@ class CompanyCard extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 16,
-              backgroundImage: NetworkImage(company.imageURL),
+              backgroundImage: NetworkImage(company.imageURL!),
             ),
             const SizedBox(
               width: 8,
@@ -43,7 +43,7 @@ class CompanyCard extends StatelessWidget {
   }
 
   Widget _renderAvailableSchedules() {
-    if (company.availableSchedules >= 1) {
+    if (company.availableSchedules! >= 1) {
       return MixedText(
         [
           TextSpan(

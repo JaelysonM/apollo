@@ -1,6 +1,6 @@
-import 'package:apollo/constants/colors.dart';
 import 'package:apollo/services/auth_service.dart';
-import 'package:apollo/utils/route_utils.dart';
+import 'package:apollo/shared/constants/colors.dart';
+import 'package:apollo/shared/utils/route_utils.dart';
 import 'package:apollo/widgets/containers/left_icon_text.dart';
 import 'package:apollo/widgets/elements/separator.dart';
 import 'package:apollo/widgets/styles/clickable_text.dart';

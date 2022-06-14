@@ -1,4 +1,4 @@
-import 'package:apollo/utils/string_utils.dart';
+import 'package:apollo/shared/utils/string_utils.dart';
 import 'package:flutter/material.dart';
 
 class MeanDistance extends StatelessWidget {

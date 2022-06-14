@@ -1,4 +1,4 @@
-import 'package:apollo/constants/globals.dart';
+import 'package:apollo/shared/constants/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

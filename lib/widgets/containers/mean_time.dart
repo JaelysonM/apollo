@@ -1,4 +1,4 @@
-import 'package:apollo/utils/time_formatter.dart';
+import 'package:apollo/shared/utils/time_formatter.dart';
 import 'package:flutter/material.dart';
 
 class MeanTime extends StatelessWidget {

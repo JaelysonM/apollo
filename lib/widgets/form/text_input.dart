@@ -1,4 +1,4 @@
-import 'package:apollo/utils/string_utils.dart';
+import 'package:apollo/shared/utils/string_utils.dart';
 import 'package:apollo/widgets/elements/tiny_text_field.dart';
 import 'package:apollo/widgets/form/form.dart';
 import 'package:flutter/material.dart';

@@ -1,6 +1,6 @@
-import 'package:apollo/constants/colors.dart';
 import 'package:apollo/models/account.dart';
-import 'package:apollo/models/user_account.dart';
+import 'package:apollo/models/user.dart';
+import 'package:apollo/shared/constants/colors.dart';
 import 'package:apollo/widgets/containers/evaluation.dart';
 import 'package:apollo/widgets/elements/apollo_seal.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +22,7 @@ class TopHeader extends StatelessWidget with PreferredSizeWidget {
       children: [
         if (account!.evaluation != account!.lastEvaluation) ...[
           const SizedBox(width: 10),
-          (account!.evaluation! >= account!.lastEvaluation!
+          (account!.evaluation >= account!.lastEvaluation
               ? const Icon(
                   Icons.keyboard_arrow_up,
                   color: kLightGreen,
@@ -34,13 +34,13 @@ class TopHeader extends StatelessWidget with PreferredSizeWidget {
                   size: 14,
                 )),
         ],
-        Evaluation(fontSize: 15, evaluation: account!.evaluation!)
+        Evaluation(fontSize: 15, evaluation: account!.evaluation)
       ],
     );
   }
 
   Widget _renderApolloSeal() {
-    if (account is UserAccount && (account as UserAccount).isApollo == true) {
+    if (account is User && (account as User).isApollo == true) {
       return const ApolloSeal();
     } else {
       return Container();
@@ -62,7 +62,7 @@ class TopHeader extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     String presentationName =
-        account != null ? account!.getFirstName() : 'Visitante';
+        account != null ? account!.getPresentation() : 'Visitante';
     return AppBar(
       backgroundColor: kThemeBackground,
       elevation: 0,
@@ -77,7 +77,7 @@ class TopHeader extends StatelessWidget with PreferredSizeWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Olá, ${presentationName}',
+            Text('Olá, $presentationName',
                 style: const TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,

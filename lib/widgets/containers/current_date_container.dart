@@ -1,5 +1,5 @@
-import 'package:apollo/utils/string_utils.dart';
-import 'package:apollo/utils/time_formatter.dart';
+import 'package:apollo/shared/utils/string_utils.dart';
+import 'package:apollo/shared/utils/time_formatter.dart';
 import 'package:flutter/material.dart';
 
 class CurrentDateContainer extends StatelessWidget {

@@ -1,22 +1,20 @@
+import 'package:apollo/shared/constants/colors.dart';
 import 'package:apollo/widgets/containers/default_approach_header.dart';
 import 'package:apollo/widgets/elements/default_button.dart';
 import 'package:apollo/widgets/elements/rounded_text_field.dart';
+import 'package:apollo/widgets/styles/large_text_header.dart';
 import 'package:flutter/material.dart';
-import '../../constants/colors.dart';
-import '../../widgets/styles/large_text_header.dart';
 
-class TouchAndDeployPlan extends StatefulWidget {
+class CreatePlan extends StatefulWidget {
   final TextEditingController textEditingController = TextEditingController();
 
-  Function? onNext;
-
-  TouchAndDeployPlan({Key? key, this.onNext}) : super(key: key);
+  CreatePlan({Key? key}) : super(key: key);
 
   @override
-  State<TouchAndDeployPlan> createState() => _TouchAndDeployPlan();
+  State<CreatePlan> createState() => _CreatePlanState();
 }
 
-class _TouchAndDeployPlan extends State<TouchAndDeployPlan> {
+class _CreatePlanState extends State<CreatePlan> {
   //String _value = '';
 
   final _formKey = GlobalKey<FormState>();

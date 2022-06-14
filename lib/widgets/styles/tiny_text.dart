@@ -1,6 +1,5 @@
+import 'package:apollo/shared/constants/colors.dart';
 import 'package:flutter/material.dart';
-
-import '../../constants/colors.dart';
 
 class TinyText extends StatelessWidget {
   final String content;

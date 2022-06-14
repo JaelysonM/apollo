@@ -1,4 +1,4 @@
-import 'package:apollo/utils/image_utils.dart';
+import 'package:apollo/shared/utils/image_utils.dart';
 
 class CreditCard {
   String? id;
