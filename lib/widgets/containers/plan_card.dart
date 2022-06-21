@@ -1,20 +1,18 @@
-import 'package:apollo/modals/products/delete_product.dart';
-import 'package:apollo/modals/products/edit_product.dart';
-import 'package:apollo/models/product.dart';
+import 'package:apollo/modals/plans/delete_plan.dart';
+import 'package:apollo/modals/plans/edit_plan.dart';
+import 'package:apollo/models/subscription_plan.dart';
 import 'package:apollo/shared/constants/colors.dart';
 import 'package:apollo/shared/utils/route_utils.dart';
-import 'package:apollo/widgets/containers/mean_time.dart';
 import 'package:apollo/widgets/elements/mixed_text.dart';
 import 'package:apollo/widgets/elements/touchable_opacity.dart';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 
-class ProductCard extends StatelessWidget {
-  final Product product;
+class PlanCard extends StatelessWidget {
+  final SubscriptionPlan plan;
   final Function? onTap;
-  const ProductCard({Key? key, required this.product, this.onTap})
-      : super(key: key);
+  const PlanCard({Key? key, required this.plan, this.onTap}) : super(key: key);
 
   Widget _renderCardHeader(BuildContext context) {
     return Row(
@@ -23,18 +21,13 @@ class ProductCard extends StatelessWidget {
       children: [
         Row(children: [
           Text(
-            product.name,
+            plan.name,
             style: const TextStyle(
-                fontSize: 18,
-                fontFamily: 'Roboto Condensed',
+                fontSize: 20,
+                fontFamily: 'Roboto',
                 fontWeight: FontWeight.w600,
                 color: Colors.white),
           ),
-          const SizedBox(width: 5),
-          MeanTime(
-            meanTime: product.duration,
-            fontSize: 12,
-          )
         ]),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -42,8 +35,8 @@ class ProductCard extends StatelessWidget {
             TouchableOpacity(
               onTap: () {
                 RouteUtils.showOrPushModal(context,
-                    modalContent: DeleteProduct(
-                      product: product,
+                    modalContent: DeletePlan(
+                      plan: plan,
                     ));
               },
               child: const Icon(
@@ -55,8 +48,7 @@ class ProductCard extends StatelessWidget {
             const SizedBox(width: 5),
             TouchableOpacity(
               onTap: () {
-                RouteUtils.showOrPushModal(context,
-                    modalContent: EditProduct());
+                RouteUtils.showOrPushModal(context, modalContent: EditPlan());
               },
               child: const Icon(
                 Icons.edit,
@@ -76,29 +68,31 @@ class ProductCard extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const MixedText([
-            TextSpan(text: '6 agendamentos'),
-            TextSpan(
-                text: ' feitos ',
-                style: TextStyle(fontWeight: FontWeight.bold)),
-            TextSpan(text: 'para esse produto'),
-          ], size: 12, color: Colors.white),
-          Container(
-            margin: const EdgeInsets.only(right: 20),
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 220),
             child: MixedText([
+              const TextSpan(text: 'Pode ser utilizada'),
               TextSpan(
-                text: product.price.toStringAsFixed(2).split('.')[0],
-                style: const TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.w600,
+                  text:
+                      ' ${plan.interval.toString()} ${plan.interval > 1 ? 'vezes' : 'vez'} por ${plan.getRecurrenceRuleLabel()}',
+                  style: const TextStyle(fontWeight: FontWeight.bold))
+            ], size: 14, color: Color(0xFF9F9F9F)),
+          ),
+          Container(
+              margin: EdgeInsets.only(right: 20),
+              child: MixedText([
+                TextSpan(
+                  text: "${plan.price.toStringAsFixed(2).split('.')[0]}",
+                  style: const TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-              ),
-              TextSpan(
-                text: ".${product.price.toStringAsFixed(2).split('.')[1]}",
-                style: const TextStyle(),
-              ),
-            ], size: 12),
-          )
+                TextSpan(
+                  text: ".${plan.price.toStringAsFixed(2).split('.')[1]}",
+                  style: const TextStyle(),
+                ),
+              ], size: 12))
         ],
       ),
     );

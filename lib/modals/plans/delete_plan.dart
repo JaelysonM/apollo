@@ -1,4 +1,4 @@
-import 'package:apollo/models/plan.dart';
+import 'package:apollo/models/subscription_plan.dart';
 import 'package:apollo/shared/constants/colors.dart';
 import 'package:apollo/widgets/containers/default_approach_header.dart';
 import 'package:apollo/widgets/containers/default_modal_container.dart';
@@ -7,7 +7,7 @@ import 'package:apollo/widgets/styles/large_text_header.dart';
 import 'package:flutter/material.dart';
 
 class DeletePlan extends StatelessWidget {
-  final Plan plan;
+  final SubscriptionPlan plan;
   const DeletePlan({Key? key, required this.plan}) : super(key: key);
 
   @override

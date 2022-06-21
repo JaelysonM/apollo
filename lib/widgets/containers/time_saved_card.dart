@@ -28,7 +28,7 @@ class TimeSavedCard extends StatelessWidget {
           children: [
             Text('${TimeFormatter.formatMinutesToHhMm(savingTime)}',
                 style: const TextStyle(
-                    fontSize: 20,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: Colors.white)),
             const SizedBox(width: 5),

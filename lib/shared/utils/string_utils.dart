@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class StringUtils {
   static String zeroLeft(int number) {
     return number < 10 ? '0$number' : number.toString();
@@ -13,6 +15,11 @@ class StringUtils {
 
   static String formatDouble(double number) {
     return number.toStringAsFixed(1);
+  }
+
+  static String formatToNumber(double number) {
+    final oCcy = new NumberFormat("#,##0.00", "en_US");
+    return oCcy.format(number);
   }
 
   static bool isEmail(String em) {

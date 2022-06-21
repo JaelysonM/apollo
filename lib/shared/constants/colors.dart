@@ -22,6 +22,8 @@ const Color kThumbColor = Color(0xFF7573F5);
 const Color kLightBlue = Color(0xFF6AB8FF);
 const Color kLightGreen = Color(0xFF7FEE98);
 
+const Color kLightBlue2 = Color(0xFF2287E4);
+
 const Color kNavBarBackground = Color(0xFF6171FF);
 const Color kNavSeparatorBackground = Color(0xFF8FA7FF);
 

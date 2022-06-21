@@ -1,12 +1,7 @@
-import 'package:apollo/models/company_account.dart';
 import 'package:apollo/models/product.dart';
-import 'package:apollo/shared/constants/colors.dart';
 import 'package:apollo/shared/utils/route_utils.dart';
-import 'package:apollo/widgets/containers/company_card.dart';
 import 'package:apollo/widgets/containers/no_results_found.dart';
 import 'package:apollo/widgets/containers/product_card.dart';
-import 'package:apollo/widgets/containers/tag.dart';
-import 'package:apollo/widgets/elements/rounded_text_field.dart';
 import 'package:apollo/widgets/elements/tad_button.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +17,7 @@ class MyProducts extends StatefulWidget {
 }
 
 class _MyProductsState extends State<MyProducts> {
-  Widget _renderCompanies() {
+  Widget _renderProducts() {
     return widget.products.isNotEmpty
         ? ListView.builder(
             shrinkWrap: true,
@@ -71,7 +66,7 @@ class _MyProductsState extends State<MyProducts> {
             ),
           ),
         ),
-        Flexible(child: _renderCompanies()),
+        Flexible(child: _renderProducts()),
       ],
     );
   }

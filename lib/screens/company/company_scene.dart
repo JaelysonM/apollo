@@ -26,7 +26,7 @@ class _CompanySceneState extends State<CompanyScene> {
       NavigationBarItem(
         icon: Icons.star_outline,
         title: 'Assinaturas',
-        route: 'subscriptions_logged_out',
+        route: 'plans_company',
       ),
       NavigationBarItem(
           icon: Icons.storefront,

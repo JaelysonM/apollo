@@ -17,7 +17,7 @@ class DefaultInfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         constraints: BoxConstraints(maxWidth: maxWidth),
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: backgroundColor,
           borderRadius: BorderRadius.circular(15),
