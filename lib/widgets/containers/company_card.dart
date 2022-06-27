@@ -2,6 +2,7 @@ import 'package:apollo/models/company_account.dart';
 import 'package:apollo/shared/constants/colors.dart';
 import 'package:apollo/widgets/containers/company_info.dart';
 import 'package:apollo/widgets/elements/circle_icon_button.dart';
+import 'package:apollo/widgets/elements/company_avatar.dart';
 import 'package:apollo/widgets/elements/mixed_text.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -19,10 +20,7 @@ class CompanyCard extends StatelessWidget {
       children: [
         Row(
           children: [
-            CircleAvatar(
-              radius: 16,
-              backgroundImage: NetworkImage(company.imageURL!),
-            ),
+            CompanyAvatar(company: company),
             const SizedBox(
               width: 8,
             ),

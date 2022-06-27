@@ -1,4 +1,5 @@
 import 'package:apollo/models/account.dart';
+import 'package:apollo/shared/utils/image_utils.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CompanyAccount extends Account {
@@ -18,9 +19,9 @@ class CompanyAccount extends Account {
   CompanyAccount.create(String uid, Map<String, dynamic> map)
       : super.create(uid, map) {
     name = map['name'] as String;
-    availableSchedules = null;
-    meanTime = null;
-    imageURL = null;
+    imageURL = map['image_url'];
+    availableSchedules = map['available_schedules'] ?? 0;
+    meanTime = map['mean_time'] ?? 60;
 
     setIdentifier(name);
   }

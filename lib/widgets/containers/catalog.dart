@@ -1,6 +1,8 @@
 import 'package:apollo/models/company_account.dart';
+import 'package:apollo/screens/shared/company_detail.dart';
 import 'package:apollo/shared/constants/colors.dart';
 import 'package:apollo/widgets/containers/company_card.dart';
+import 'package:apollo/widgets/containers/custom_page_route.dart';
 import 'package:apollo/widgets/containers/no_results_found.dart';
 import 'package:apollo/widgets/containers/tag.dart';
 import 'package:apollo/widgets/elements/rounded_text_field.dart';
@@ -97,7 +99,15 @@ class _CatalogState extends State<Catalog> {
             itemCount: _searchCompanies.length,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
-              return CompanyCard(company: _searchCompanies[index]);
+              return CompanyCard(
+                  company: _searchCompanies[index],
+                  onTap: () {
+                    Navigator.of(context).push(CustomPageRoute(
+                        child: CompanyDetail(
+                          company: _searchCompanies[index],
+                        ),
+                        direction: AxisDirection.up));
+                  });
             })
         : Container(
             margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),

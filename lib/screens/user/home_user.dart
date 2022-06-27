@@ -1,4 +1,5 @@
 import 'package:apollo/models/account.dart';
+import 'package:apollo/models/company_account.dart';
 import 'package:apollo/services/auth_service.dart';
 import 'package:apollo/shared/constants/globals.dart';
 import 'package:apollo/widgets/containers/catalog.dart';
@@ -34,6 +35,14 @@ class HomeUser extends StatelessWidget {
   Widget build(BuildContext context) {
     AuthService authService = Provider.of<AuthService>(context);
     Account? account = authService.account;
+
+    List<CompanyAccount> companies = [
+      CompanyAccount.create('234234234234234', {
+        'name': 'Barberia Felype',
+        'email': 'jaelysonmartins@gmail.com',
+      })
+    ];
+
     return Column(
       children: [
         ScreenHeader(
@@ -48,7 +57,7 @@ class HomeUser extends StatelessWidget {
         ),
         Catalog(
           tags: COMPANY_TAGS,
-          companies: [],
+          companies: companies,
         ),
       ],
     );
