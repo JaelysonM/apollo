@@ -40,6 +40,7 @@ class HomeUser extends StatelessWidget {
       CompanyAccount.create('234234234234234', {
         'name': 'Barberia Felype',
         'email': 'jaelysonmartins@gmail.com',
+        'image_url': 'https://i.imgur.com/GhY98W6.jpg'
       })
     ];
 
@@ -55,10 +56,7 @@ class HomeUser extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        Catalog(
-          tags: COMPANY_TAGS,
-          companies: companies,
-        ),
+        Catalog(tags: COMPANY_TAGS),
       ],
     );
   }

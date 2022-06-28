@@ -1,32 +1,98 @@
+import 'package:apollo/modals/products/create_product.dart';
+import 'package:apollo/modals/products/delete_product.dart';
+import 'package:apollo/modals/products/edit_product.dart';
 import 'package:apollo/models/product.dart';
+import 'package:apollo/repositories/products_repository.dart';
+import 'package:apollo/services/auth_service.dart';
+import 'package:apollo/shared/utils/debounce.dart';
 import 'package:apollo/shared/utils/route_utils.dart';
 import 'package:apollo/widgets/containers/no_results_found.dart';
 import 'package:apollo/widgets/containers/product_card.dart';
+import 'package:apollo/widgets/elements/fetch_loading.dart';
 import 'package:apollo/widgets/elements/tad_button.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MyProducts extends StatefulWidget {
-  final TextEditingController _controller = TextEditingController();
+  final ProductRepository productRepository = ProductRepository();
 
-  final List<Product> products;
-
-  MyProducts({Key? key, required this.products}) : super(key: key);
+  MyProducts({Key? key}) : super(key: key);
 
   @override
-  State<MyProducts> createState() => _MyProductsState();
+  State<MyProducts> createState() => MyProductsState();
+
+  static MyProductsState? useMyProducts(BuildContext? context,
+          {bool root = false}) =>
+      root
+          ? context?.findRootAncestorStateOfType<MyProductsState>()
+          : context?.findAncestorStateOfType<MyProductsState>();
 }
 
-class _MyProductsState extends State<MyProducts> {
+class MyProductsState extends State<MyProducts> {
+  late AuthService authService;
+
+  List<Product> _products = [];
+  bool loading = false;
+
+  final Debounce _debounce = Debounce(const Duration(milliseconds: 400));
+
+  void setProducts(List<Product> _products) {
+    setState(() {
+      this._products = _products;
+    });
+    toggleLoading();
+  }
+
+  void toggleLoading() {
+    setState(() {
+      loading = !loading;
+    });
+  }
+
+  void fetchProducts() async {
+    toggleLoading();
+    List<Product> products = await widget.productRepository
+        .getAllFromCompany(authService.account!.documentId());
+    setProducts(products);
+  }
+
+  @override
+  initState() {
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    authService = Provider.of<AuthService>(context);
+    fetchProducts();
+    super.didChangeDependencies();
+  }
+
   Widget _renderProducts() {
-    return widget.products.isNotEmpty
+    return _products.isNotEmpty
         ? ListView.builder(
             shrinkWrap: true,
-            itemCount: widget.products.length,
+            itemCount: _products.length,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               return ProductCard(
-                product: widget.products[index],
-                onTap: () => {},
+                product: _products[index],
+                onTapDelete: () {
+                  RouteUtils.showOrPushModal(
+                    context,
+                    modalContent: DeleteProduct(
+                      myProductsState: this,
+                      product: _products[index],
+                    ),
+                  );
+                },
+                onTapEdit: () {
+                  RouteUtils.showOrPushModal(context,
+                      modalContent: EditProduct(
+                        myProductsState: this,
+                        product: _products[index],
+                      ));
+                },
               );
             })
         : Container(
@@ -59,14 +125,19 @@ class _MyProductsState extends State<MyProducts> {
                 const SizedBox(width: 10),
                 TADButton(
                   onPressed: () {
-                    RouteUtils.showModal(context, route: 'create_product');
+                    RouteUtils.showOrPushModal(
+                      context,
+                      modalContent: CreateProduct(
+                        myProductsState: this,
+                      ),
+                    );
                   },
                 )
               ],
             ),
           ),
         ),
-        Flexible(child: _renderProducts()),
+        Flexible(child: loading ? const FetchLoading() : _renderProducts()),
       ],
     );
   }

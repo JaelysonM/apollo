@@ -1,14 +1,26 @@
-import 'package:apollo/models/schedule.dart';
+import 'package:apollo/models/product.dart';
 import 'package:apollo/widgets/containers/mean_time.dart';
-import 'package:apollo/widgets/containers/schedule_status_pill.dart';
+import 'package:apollo/widgets/elements/mixed_text.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 
-class ScheduleCard extends StatelessWidget {
-  final Schedule schedule;
+class TrendingProductCard extends StatelessWidget {
+  final Product product;
   final Function? onTap;
-  const ScheduleCard({Key? key, required this.schedule, this.onTap})
+  const TrendingProductCard({Key? key, required this.product, this.onTap})
       : super(key: key);
+
+  Widget _renderCardBottom() {
+    return ConstrainedBox(
+      constraints: const BoxConstraints(maxWidth: 160),
+      child: const MixedText([
+        TextSpan(text: '6 agendamentos'),
+        TextSpan(
+            text: ' feitos ', style: TextStyle(fontWeight: FontWeight.bold)),
+        TextSpan(text: 'para esse produto'),
+      ], size: 14, color: Colors.white),
+    );
+  }
 
   Widget _renderCardHeader() {
     return Row(
@@ -18,53 +30,27 @@ class ScheduleCard extends StatelessWidget {
         Row(
           children: [
             Text(
-              schedule.product.name,
+              product.name,
               style: const TextStyle(
-                  fontSize: 13,
+                  fontSize: 16,
                   fontWeight: FontWeight.w700,
                   fontFamily: 'Roboto Condensed',
                   color: Colors.white),
             ),
             const SizedBox(
-              width: 8,
+              width: 20,
             ),
             MeanTime(
-              meanTime: schedule.product.meanTime,
-              fontSize: 10,
+              meanTime: product.meanTime,
+              fontSize: 13,
             ),
           ],
         ),
         const SizedBox(
           width: 8,
         ),
-        ScheduleStatusPill(
-          status: schedule.status,
-        ),
       ],
     );
-  }
-
-  Widget _renderCardBody() {
-    return Container(
-        margin: const EdgeInsets.only(top: 10),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Text(
-              schedule.product.company().name,
-              style: const TextStyle(fontSize: 13, color: Colors.white),
-            ),
-            const SizedBox(
-              width: 8,
-            ),
-            CircleAvatar(
-              radius: 16,
-              backgroundImage:
-                  NetworkImage(schedule.product.company().imageURL!),
-            ),
-          ],
-        ));
   }
 
   @override
@@ -75,16 +61,21 @@ class ScheduleCard extends StatelessWidget {
             onTap: () => onTap?.call(),
             child: Container(
                 child: DottedBorder(
-              strokeWidth: 0.5,
+              strokeWidth: 1,
               dashPattern: const [2],
               borderType: BorderType.RRect,
               color: Colors.white,
               radius: const Radius.circular(25),
               child: Container(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                   child: Column(
-                    children: [_renderCardHeader(), _renderCardBody()],
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _renderCardHeader(),
+                      const SizedBox(height: 8),
+                      _renderCardBottom()
+                    ],
                   )),
             ))));
   }

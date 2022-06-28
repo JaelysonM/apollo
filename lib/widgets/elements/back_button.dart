@@ -9,6 +9,7 @@ class DefaultBackButton extends StatelessWidget {
       splashRadius: 20,
       iconSize: 20,
       alignment: Alignment.center,
+      color: Colors.white,
       icon: const Icon(Icons.arrow_back_ios_rounded),
       onPressed: () => Navigator.pop(context),
     );

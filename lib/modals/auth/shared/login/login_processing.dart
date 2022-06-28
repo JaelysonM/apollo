@@ -5,6 +5,7 @@ import 'package:apollo/models/account.dart';
 import 'package:apollo/services/auth_service.dart';
 import 'package:apollo/shared/constants/colors.dart';
 import 'package:apollo/widgets/containers/default_modal_container.dart';
+import 'package:apollo/widgets/elements/fetch_loading.dart';
 import 'package:apollo/widgets/form/form_with_step.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -40,14 +41,7 @@ class _LoginProcessingState extends State<LoginProcessing> {
 
   Widget _renderResult() {
     if (loading) {
-      return Padding(
-          padding: const EdgeInsets.all(25),
-          child: Center(
-            child: LoadingAnimationWidget.fourRotatingDots(
-              color: kSystemLightPurple,
-              size: 50,
-            ),
-          ));
+      return const Padding(padding: EdgeInsets.all(25), child: FetchLoading());
     } else {
       if (error == null && account != null) {
         return LoginSuccess(account: account!);

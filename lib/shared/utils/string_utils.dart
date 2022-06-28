@@ -9,6 +9,15 @@ class StringUtils {
     return string.substring(0, 1).toUpperCase() + string.substring(1);
   }
 
+  static String interpolate(String string, List<String> params) {
+    String result = string;
+    for (int i = 1; i < params.length + 1; i++) {
+      result = result.replaceAll('%${i}\$', params[i - 1]);
+    }
+
+    return result;
+  }
+
   static String capitalizeAllWords(String string) {
     return string.split(' ').map((word) => capitalize(word)).join(' ');
   }

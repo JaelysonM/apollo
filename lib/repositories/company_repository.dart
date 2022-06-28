@@ -59,6 +59,16 @@ class CompanyRepository extends BaseRepository<CompanyAccount> {
     });
   }
 
+  // Search companies by name
+  Future<List<CompanyAccount>> search(String query) {
+    return reference
+        .where('name', isGreaterThanOrEqualTo: query, isLessThan: query + 'z')
+        .get()
+        .then((query) => query.docs.map((document) {
+              return CompanyAccount.fromMap(document);
+            }).toList());
+  }
+
   @override
   Future<CompanyAccount> update(CompanyAccount model) {
     return reference.doc(model.documentId()).update(model.toMap()).then((_) {

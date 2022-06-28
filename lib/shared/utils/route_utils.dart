@@ -84,7 +84,7 @@ class RouteUtils {
 
       case 'create_product':
         showOrPushModal(context,
-            modalContent: CreateProduct(), cleanHistory: cleanHistory);
+            modalContent: const CreateProduct(), cleanHistory: cleanHistory);
         break;
     }
   }

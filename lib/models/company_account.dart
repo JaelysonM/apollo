@@ -9,8 +9,8 @@ class CompanyAccount extends Account {
   late String? imageURL;
   CompanyAccount.fromMap(DocumentSnapshot document) : super.fromMap(document) {
     name = document.get('name') as String;
-    availableSchedules = document.get('available_schedules');
-    meanTime = document.get('mean_time');
+    availableSchedules = document.get('available_schedules') ?? 0;
+    meanTime = document.get('mean_time') ?? 60;
     imageURL = document.get('image_url');
 
     setIdentifier(name);

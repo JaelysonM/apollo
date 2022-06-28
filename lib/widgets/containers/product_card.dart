@@ -12,8 +12,17 @@ import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;
+  final bool creatorVision;
   final Function? onTap;
-  const ProductCard({Key? key, required this.product, this.onTap})
+  final Function? onTapEdit;
+  final Function? onTapDelete;
+  const ProductCard(
+      {Key? key,
+      required this.product,
+      this.onTap,
+      this.creatorVision = true,
+      this.onTapEdit,
+      this.onTapDelete})
       : super(key: key);
 
   Widget _renderCardHeader(BuildContext context) {
@@ -32,40 +41,38 @@ class ProductCard extends StatelessWidget {
           ),
           const SizedBox(width: 5),
           MeanTime(
-            meanTime: product.duration,
+            meanTime: product.meanTime,
             fontSize: 12,
           )
         ]),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            TouchableOpacity(
-              onTap: () {
-                RouteUtils.showOrPushModal(context,
-                    modalContent: DeleteProduct(
-                      product: product,
-                    ));
-              },
-              child: const Icon(
-                Icons.horizontal_rule,
-                color: kErrorRed,
-                size: 18,
-              ),
-            ),
-            const SizedBox(width: 5),
-            TouchableOpacity(
-              onTap: () {
-                RouteUtils.showOrPushModal(context,
-                    modalContent: EditProduct());
-              },
-              child: const Icon(
-                Icons.edit,
-                color: Colors.white,
-                size: 18,
-              ),
-            ),
-          ],
-        ),
+        creatorVision
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  TouchableOpacity(
+                    onTap: () {
+                      if (onTapDelete != null) onTapDelete!();
+                    },
+                    child: const Icon(
+                      Icons.horizontal_rule,
+                      color: kErrorRed,
+                      size: 18,
+                    ),
+                  ),
+                  const SizedBox(width: 5),
+                  TouchableOpacity(
+                    onTap: () {
+                      if (onTapEdit != null) onTapEdit!();
+                    },
+                    child: const Icon(
+                      Icons.edit,
+                      color: Colors.white,
+                      size: 18,
+                    ),
+                  ),
+                ],
+              )
+            : Container()
       ],
     );
   }

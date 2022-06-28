@@ -1,79 +1,67 @@
 import 'package:apollo/models/company_account.dart';
-import 'package:apollo/repositories/company_repository.dart';
-import 'package:apollo/screens/shared/company_detail.dart';
+import 'package:apollo/models/product.dart';
+import 'package:apollo/repositories/products_repository.dart';
 import 'package:apollo/shared/constants/colors.dart';
 import 'package:apollo/shared/utils/debounce.dart';
-import 'package:apollo/widgets/containers/company_card.dart';
-import 'package:apollo/widgets/containers/custom_page_route.dart';
+
 import 'package:apollo/widgets/containers/no_results_found.dart';
+import 'package:apollo/widgets/containers/product_card.dart';
 import 'package:apollo/widgets/containers/tag.dart';
+import 'package:apollo/widgets/elements/circle_icon_button.dart';
 import 'package:apollo/widgets/elements/fetch_loading.dart';
 import 'package:apollo/widgets/elements/rounded_text_field.dart';
 import 'package:flutter/material.dart';
 
-class Catalog extends StatefulWidget {
+class ProductsCatalog extends StatefulWidget {
+  final CompanyAccount company;
   final TextEditingController _controller = TextEditingController();
-
-  final CompanyRepository companyRepository = CompanyRepository();
+  final ProductRepository productRepository = ProductRepository();
 
   final List<String> tags;
 
-  Catalog({Key? key, required this.tags}) : super(key: key);
+  ProductsCatalog({Key? key, required this.tags, required this.company})
+      : super(key: key);
 
   @override
-  State<Catalog> createState() => _CatalogState();
+  State<ProductsCatalog> createState() => _ProductsCatalogState();
 }
 
-class _CatalogState extends State<Catalog> {
-  List<CompanyAccount> _companies = [];
+class _ProductsCatalogState extends State<ProductsCatalog> {
+  List<Product> _products = [];
   bool loading = false;
 
   final Debounce _debounce = Debounce(const Duration(milliseconds: 400));
 
-  void fetchCompanies() {
+  void setProducts(List<Product> _products) {
     setState(() {
-      loading = true;
+      this._products = _products;
     });
-    widget.companyRepository.getAll().then((companies) {
-      setState(() {
-        _companies = companies;
-      });
-    }).whenComplete(() => setState(() {
-          loading = false;
-        }));
+    toggleLoading();
   }
 
-  void searchCompanies(String text) {
+  void toggleLoading() {
     setState(() {
-      loading = true;
+      loading = !loading;
     });
-    if (text.isNotEmpty) {
-      widget.companyRepository.search(text).then((companies) {
-        setState(() {
-          _companies = companies;
-        });
-      }).whenComplete(() => {
-            setState(() {
-              loading = false;
-            })
-          });
-    } else {
-      widget.companyRepository.getAll().then((companies) {
-        setState(() {
-          _companies = companies;
-        });
-      }).whenComplete(() => {
-            setState(() {
-              loading = false;
-            })
-          });
-    }
+  }
+
+  void fetchProducts() async {
+    searchProducts('');
+  }
+
+  void searchProducts(String text) async {
+    toggleLoading();
+    List<Product> products = text.isNotEmpty
+        ? await widget.productRepository
+            .searchFromCompany(text, widget.company.documentId())
+        : await widget.productRepository
+            .getAllFromCompany(widget.company.documentId());
+    setProducts(products);
   }
 
   @override
   void initState() {
-    loading = true;
-    fetchCompanies();
+    fetchProducts();
     super.initState();
   }
 
@@ -107,16 +95,16 @@ class _CatalogState extends State<Catalog> {
                 child: RoundedTextField(
                   label: "Do que você precisa?",
                   labelFontSize: 15,
-                  autoFocus: false,
                   labelFontWeight: FontWeight.w400,
                   controller: widget._controller,
                   icon: Icons.search,
                   borderRadius: 25,
                   onChanged: (text) {
                     _debounce(() {
-                      searchCompanies(text);
+                      searchProducts(text);
                     });
                   },
+                  validator: (text) => null,
                 )),
             Expanded(
                 child: Container(
@@ -127,22 +115,32 @@ class _CatalogState extends State<Catalog> {
         ));
   }
 
-  Widget _renderCompanies() {
-    return _companies.isNotEmpty
+  Widget _renderProducts() {
+    return _products.isNotEmpty
         ? ListView.builder(
             shrinkWrap: true,
-            itemCount: _companies.length,
+            itemCount: _products.length,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
-              return CompanyCard(
-                  company: _companies[index],
-                  onTap: () {
-                    Navigator.of(context).push(CustomPageRoute(
-                        child: CompanyDetail(
-                          company: _companies[index],
-                        ),
-                        direction: AxisDirection.up));
-                  });
+              return Stack(
+                clipBehavior: Clip.none,
+                fit: StackFit.passthrough,
+                children: [
+                  ProductCard(
+                      creatorVision: false,
+                      product: _products[index],
+                      onTap: () {}),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: CircleIconButton(
+                        onPressed: () {},
+                        icon: Icons.add_task,
+                        size: 20,
+                        padding: 8,
+                        buttonColor: kFastScheduleColor),
+                  ),
+                ],
+              );
             })
         : Container(
             margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
@@ -150,7 +148,7 @@ class _CatalogState extends State<Catalog> {
                 iconData: Icons.search_off,
                 textSize: 14,
                 text:
-                    "Não foi encontrado nenhum estabelecimento a partir desta busca"));
+                    "Não foi encontrado nenhum produto a partir desta busca"));
   }
 
   @override
@@ -163,7 +161,7 @@ class _CatalogState extends State<Catalog> {
           child: Padding(
             padding: EdgeInsets.only(left: 19),
             child: Text(
-              'Catálogo',
+              'Produtos',
               textAlign: TextAlign.left,
               style: TextStyle(
                   color: Colors.white,
@@ -173,7 +171,7 @@ class _CatalogState extends State<Catalog> {
           ),
         ),
         _renderSearchSection(),
-        Flexible(child: loading ? const FetchLoading() : _renderCompanies()),
+        Flexible(child: loading ? const FetchLoading() : _renderProducts()),
       ],
     );
   }

@@ -1,9 +1,11 @@
 import 'package:apollo/models/company_account.dart';
 import 'package:apollo/shared/constants/colors.dart';
-import 'package:apollo/widgets/containers/company_info.dart';
-import 'package:apollo/widgets/elements/back_button.dart';
-import 'package:apollo/widgets/elements/company_avatar.dart';
-import 'package:apollo/widgets/elements/rounded_text_field.dart';
+import 'package:apollo/widgets/containers/company_detail_app_bar.dart';
+import 'package:apollo/widgets/containers/current_date_container.dart';
+import 'package:apollo/widgets/containers/products_catalog.dart';
+import 'package:apollo/widgets/containers/trending_products.dart';
+import 'package:apollo/widgets/elements/progress_bar.dart';
+import 'package:apollo/widgets/styles/default_bold_text.dart';
 import 'package:flutter/material.dart';
 
 class CompanyDetail extends StatefulWidget {
@@ -15,116 +17,71 @@ class CompanyDetail extends StatefulWidget {
 }
 
 class _CompanyDetailState extends State<CompanyDetail> {
+  Widget _renderHeader() {
+    return SliverToBoxAdapter(
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 24),
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const CurrentDateContainer(layout: FlowLayout.row, fontSize: 20),
+              const SizedBox(height: 8),
+              Row(children: const [
+                Expanded(
+                  child: ProgressBar(value: 0.5),
+                ),
+                SizedBox(width: 14),
+                DefaultBoldText(
+                  content: 'Preenchido',
+                  color: kProgressBarLegendText,
+                  fontSize: 12,
+                )
+              ]),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _renderTrending() {
+    return SliverToBoxAdapter(
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 40),
+        child: TrendingProducts(company: widget.company),
+      ),
+    );
+  }
+
+  Widget _renderProducts() {
+    return SliverToBoxAdapter(
+      child: ProductsCatalog(
+        company: widget.company,
+        tags: ['Estética', 'Testando'],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: null,
       backgroundColor: kThemeBackground,
-      body: CustomScrollView(
+      body: SafeArea(
+          child: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            expandedHeight: 150,
-            leading: Container(
-              margin: const EdgeInsets.only(left: 15),
-              child: const DefaultBackButton(),
-            ),
-            titleSpacing: 5,
-            actions: [
-              Container(
-                  margin: const EdgeInsets.only(top: 18, right: 15),
-                  child: IconButton(
-                    splashRadius: 20,
-                    iconSize: 30,
-                    alignment: Alignment.center,
-                    icon: const Icon(Icons.bookmark),
-                    onPressed: () => {},
-                  ))
-            ],
-            title: Row(
-              children: [
-                CompanyAvatar(company: widget.company, size: 18),
-                const SizedBox(
-                  width: 9,
-                ),
-                Text(
-                  widget.company.name,
-                  style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: kSecondaryLightGray),
-                ),
-              ],
-            ),
-            backgroundColor: kThemeBackground,
+          SliverPersistentHeader(
+            pinned: true,
+            delegate: CompanyDetailAppBar(
+                expandedHeight: 100, company: widget.company),
           ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                return Container(
-                  height: 50,
-                  alignment: Alignment.center,
-                  color: Colors.orange[100 * (index % 9)],
-                  child: Text('orange $index'),
-                );
-              },
-              childCount: 9,
-            ),
-          ),
-          SliverGrid(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                return Container(
-                  alignment: Alignment.center,
-                  color: Colors.teal[100 * (index % 9)],
-                  child: Text('grid item $index'),
-                );
-              },
-              childCount: 30,
-            ),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              mainAxisSpacing: 15,
-              crossAxisSpacing: 15,
-              childAspectRatio: 2.0,
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Container(
-              color: Colors.yellow,
-              padding: const EdgeInsets.all(8.0),
-              child: Text('Grid Header', style: TextStyle(fontSize: 24)),
-            ),
-          ),
-          SliverGrid.count(
-            crossAxisCount: 3,
-            mainAxisSpacing: 10.0,
-            crossAxisSpacing: 10.0,
-            childAspectRatio: 4.0,
-            children: <Widget>[
-              Container(color: Colors.red),
-              Container(color: Colors.green),
-              Container(color: Colors.blue),
-              Container(color: Colors.red),
-              Container(color: Colors.green),
-              Container(color: Colors.blue),
-            ],
-          ),
-          SliverGrid.extent(
-            maxCrossAxisExtent: 200,
-            mainAxisSpacing: 10.0,
-            crossAxisSpacing: 10.0,
-            childAspectRatio: 4.0,
-            children: <Widget>[
-              Container(color: Colors.pink),
-              Container(color: Colors.indigo),
-              Container(color: Colors.orange),
-              Container(color: Colors.pink),
-              Container(color: Colors.indigo),
-              Container(color: Colors.orange),
-            ],
-          )
+          _renderHeader(),
+          _renderTrending(),
+          _renderProducts()
         ],
-      ),
+      )),
     );
   }
 }

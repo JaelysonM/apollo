@@ -1,102 +1,77 @@
-import 'package:apollo/shared/constants/colors.dart';
+import 'package:apollo/dtos/product_dto.dart';
+import 'package:apollo/models/product.dart';
+import 'package:apollo/shared/utils/route_utils.dart';
 import 'package:apollo/widgets/containers/default_approach_header.dart';
-import 'package:apollo/widgets/elements/default_button.dart';
-import 'package:apollo/widgets/elements/rounded_text_field.dart';
+import 'package:apollo/widgets/containers/my_products.dart';
+import 'package:apollo/widgets/form/form.dart';
+import 'package:apollo/widgets/form/range_slider_input.dart';
+import 'package:apollo/widgets/form/slider_input.dart';
+import 'package:apollo/widgets/form/submit_botton.dart';
+import 'package:apollo/widgets/form/text_input.dart';
 import 'package:apollo/widgets/styles/large_text_header.dart';
 import 'package:flutter/material.dart';
 
-class EditProduct extends StatefulWidget {
-  final TextEditingController textEditingController = TextEditingController();
+import 'product_processing.dart';
 
-  EditProduct({Key? key}) : super(key: key);
+class EditProduct extends StatelessWidget {
+  final MyProductsState? myProductsState;
+  final Product product;
 
-  @override
-  State<EditProduct> createState() => _EditProduct();
-}
-
-class _EditProduct extends State<EditProduct> {
-  String _value = '';
-  late double _price;
-  late double _minTime;
-  late double _maxTime;
-  @override
-  initState() {
-    super.initState();
-    _price = 0.0;
-    _minTime = 0.0;
-    _maxTime = 12.0;
-    _value = widget.textEditingController.text;
-  }
+  const EditProduct({Key? key, this.myProductsState, required this.product})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 21, vertical: 30),
-      child: _renderSection(),
+      child: CustomForm(
+          initialValues: {
+            'name': product.name,
+            'price': product.price,
+            'duration': product.duration.map((e) => e.toDouble()).toList(),
+          },
+          onSubmit: (form) {
+            RouteUtils.showOrPushModal(context,
+                cleanAll: true,
+                modalContent: ProductProcessing(
+                  myProductsState: myProductsState,
+                  action: ProductAction.edit,
+                  productDto: ProductDto.fromJson({
+                    ...form,
+                    'id': product.documentId(),
+                  }),
+                ));
+          },
+          name: 'create_product',
+          children: [
+            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              const DefaultApproachHeader(
+                title: "Touch-And-Deploy",
+                titleFontSize: 30,
+                description:
+                    "É rápido e fácil! Coloque um nome para um produto, o tempo de demanda e o seu preço.",
+              ),
+              const SizedBox(height: 20),
+              TextInput(
+                name: 'name',
+                labelFontSize: 16,
+                label: 'Nome do produto',
+                theme: TextInputTheme.rounded,
+              ),
+              const SizedBox(height: 10),
+              const SliderInput(
+                  label: "Preço: R\$%1\$", name: 'price', max: 200, min: 0),
+              const RangeSliderInput(
+                  label: "De %1\$h à %2\$h",
+                  name: 'duration',
+                  divisions: 120,
+                  max: 24,
+                  min: 0),
+              const SizedBox(height: 9),
+              const SubmitButton(
+                  child: LargeTextHeader(content: "Deploy!", fontSize: 18))
+            ]),
+          ]),
     );
-  }
-
-  Widget _renderSection() {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      const DefaultApproachHeader(
-        title: "Editar produto",
-        titleFontSize: 30,
-        description:
-            "É rápido e fácil! Coloque um nome para um produto, o tempo de demanda e o seu preço.",
-      ),
-      const SizedBox(height: 20),
-      ConstrainedBox(
-          constraints: const BoxConstraints(maxHeight: 60),
-          child: RoundedTextField(
-            labelFontSize: 16,
-            label: 'Nome do produto',
-            controller: widget.textEditingController,
-            onChanged: (String text) {
-              setState(() {
-                _value = text;
-              });
-            },
-          )),
-      const SizedBox(height: 10),
-      Slider(
-        min: 0.0,
-        max: 200.0,
-        value: _price,
-        divisions: 200,
-        onChanged: (value) {
-          setState(() {
-            _price = value;
-          });
-        },
-      ),
-      Text(
-        'Preço: R\$${_price.toStringAsFixed(2).toString()}                                                               R\$',
-        style: const TextStyle(
-            color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15),
-      ),
-      RangeSlider(
-        min: 0.0,
-        max: 24.0,
-        divisions: 24,
-        values: RangeValues(_minTime, _maxTime),
-        onChanged: (values) {
-          setState(() {
-            _minTime = values.start;
-            _maxTime = values.end;
-          });
-        },
-      ),
-      Text(
-        'De ${_minTime.toStringAsFixed(0).toString()}h à ${_maxTime.toStringAsFixed(0).toString()}h',
-        style: const TextStyle(
-            color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15),
-      ),
-      const SizedBox(height: 9),
-      DefaultButton(
-        child: const LargeTextHeader(content: "Deploy!", fontSize: 18),
-        backgroundColor: kSystemPurple,
-        onPressed: () {},
-      )
-    ]);
   }
 }

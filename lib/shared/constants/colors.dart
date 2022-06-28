@@ -34,3 +34,7 @@ const Color kInterDarkBlue = Color(0xFF003B80);
 
 const Color kSystemPurple = Color(0xFF3B39AB);
 const Color kSystemLightPurple = Color(0xFF4365DF);
+
+const Color kProgressBarColor = Color(0xFF8C91FF);
+const Color kProgressBarBackground = Color(0xFF454545);
+const Color kProgressBarLegendText = Color(0xFF737070);

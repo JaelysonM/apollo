@@ -4,11 +4,13 @@ class CustomForm extends StatefulWidget {
   final String name;
   final Function? onSubmit;
   final List<Widget> children;
+  final Map<String, dynamic>? initialValues;
   final bool editable;
   const CustomForm(
       {Key? key,
       required this.name,
       required this.children,
+      this.initialValues,
       this.editable = true,
       this.onSubmit})
       : super(key: key);
@@ -28,7 +30,11 @@ class CustomFormState extends State<CustomForm> {
 
   @override
   void initState() {
-    formValues = <String, dynamic>{};
+    if (widget.initialValues != null) {
+      formValues = widget.initialValues!;
+    } else {
+      formValues = <String, dynamic>{};
+    }
     super.initState();
   }
 

@@ -9,7 +9,7 @@ class RoundedTextField extends StatelessWidget {
   final TextInputType type;
   final TextEditingController controller;
   final Function? validator;
-  final Function onChanged;
+  final Function? onChanged;
   final double borderRadius;
   final bool autoFocus;
   final bool autoCorrect;
@@ -19,12 +19,12 @@ class RoundedTextField extends StatelessWidget {
       {Key? key,
       required this.label,
       required this.controller,
-      required this.onChanged,
+      this.onChanged,
       this.autoFocus = false,
       this.autoCorrect = false,
       this.type = TextInputType.text,
       this.borderRadius = 15,
-      this.labelFontSize = 18,
+      this.labelFontSize = 15,
       this.labelFontWeight = FontWeight.w800,
       this.validator,
       this.icon,
@@ -38,11 +38,6 @@ class RoundedTextField extends StatelessWidget {
 
   Widget _buildTextField() {
     return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(borderRadius),
-        ),
         margin: margin,
         child: TextFormField(
           obscureText: type == TextInputType.visiblePassword,
@@ -56,21 +51,39 @@ class RoundedTextField extends StatelessWidget {
             fontWeight: FontWeight.w700,
           ),
           decoration: InputDecoration(
-            icon: icon != null
-                ? Icon(
-                    icon,
-                    color: kLightGray,
-                  )
-                : null,
-            hintText: label,
-            hintStyle: TextStyle(
-                color: kLightGray,
-                fontSize: labelFontSize,
-                fontWeight: labelFontWeight),
-            border: InputBorder.none,
-          ),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+              filled: true,
+              floatingLabelBehavior: FloatingLabelBehavior.never,
+              fillColor: Colors.white,
+              labelText: label,
+              labelStyle: TextStyle(
+                  color: kLightGray,
+                  fontSize: labelFontSize,
+                  fontWeight: labelFontWeight),
+              focusedBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.circular(borderRadius),
+              ),
+              enabledBorder: UnderlineInputBorder(
+                borderSide: const BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.circular(borderRadius),
+              ),
+              errorBorder: UnderlineInputBorder(
+                borderRadius: BorderRadius.circular(borderRadius),
+              ),
+              focusedErrorBorder: UnderlineInputBorder(
+                borderRadius: BorderRadius.circular(borderRadius),
+              ),
+              prefixIcon: icon != null
+                  ? Icon(
+                      icon,
+                      color: kLightGray,
+                    )
+                  : null),
           onChanged: (text) {
-            onChanged(text);
+            if (onChanged != null) {
+              onChanged!(text);
+            }
           },
           validator: (text) => validator!(text),
         ));

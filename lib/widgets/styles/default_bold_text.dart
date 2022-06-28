@@ -4,9 +4,14 @@ class DefaultBoldText extends StatelessWidget {
   final String content;
   final String? fontFamily;
   final double? fontSize;
+  final Color? color;
 
   const DefaultBoldText(
-      {Key? key, required this.content, this.fontSize = 18, this.fontFamily})
+      {Key? key,
+      required this.content,
+      this.fontSize = 18,
+      this.fontFamily,
+      this.color = Colors.white})
       : super(key: key);
 
   @override
@@ -16,6 +21,6 @@ class DefaultBoldText extends StatelessWidget {
             fontSize: fontSize,
             fontFamily: fontFamily,
             fontWeight: FontWeight.bold,
-            color: Colors.white));
+            color: color));
   }
 }

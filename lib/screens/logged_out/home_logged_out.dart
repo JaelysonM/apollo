@@ -25,7 +25,6 @@ class HomeLoggedOut extends StatelessWidget {
         ),
         Catalog(
           tags: COMPANY_TAGS,
-          companies: const [],
         ),
       ],
     );
