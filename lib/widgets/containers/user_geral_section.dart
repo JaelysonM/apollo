@@ -1,6 +1,8 @@
+import 'package:apollo/screens/shared/personal_data.dart';
 import 'package:apollo/services/auth_service.dart';
 import 'package:apollo/shared/constants/colors.dart';
 import 'package:apollo/shared/utils/route_utils.dart';
+import 'package:apollo/widgets/containers/custom_page_route.dart';
 import 'package:apollo/widgets/containers/left_icon_text.dart';
 import 'package:apollo/widgets/elements/separator.dart';
 import 'package:apollo/widgets/styles/clickable_text.dart';
@@ -60,7 +62,11 @@ class _UserGeralSectionState extends State<UserGeralSection> {
               icon: Icons.article,
             )),
             _renderSection(
-              const LeftIconText(
+              LeftIconText(
+                onTap: () {
+                  Navigator.of(context).push(CustomPageRoute(
+                      child: PersonalData(), direction: AxisDirection.up));
+                },
                 text: 'Meus dados',
                 icon: Icons.person,
               ),
