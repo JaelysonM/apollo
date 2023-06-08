@@ -1,26 +1,59 @@
 import 'package:apollo/models/subscription_plan.dart';
+import 'package:apollo/repositories/subscription_plans_repository%20.dart';
 import 'package:apollo/shared/constants/colors.dart';
 import 'package:apollo/shared/utils/route_utils.dart';
 import 'package:apollo/widgets/containers/no_results_found.dart';
 import 'package:apollo/widgets/containers/subscription_plan_card.dart';
+import 'package:apollo/widgets/elements/fetch_loading.dart';
 import 'package:apollo/widgets/styles/clickable_text.dart';
 import 'package:apollo/widgets/styles/tiny_text.dart';
 import 'package:flutter/material.dart';
 
-class AllSubscriptions extends StatelessWidget {
-  final List<SubscriptionPlan> subscriptionPlans;
-  const AllSubscriptions({Key? key, required this.subscriptionPlans})
-      : super(key: key);
+class AllSubscriptions extends StatefulWidget {
+  final SubscriptionPlansRepository subscriptionPlansRepository =
+      SubscriptionPlansRepository();
+
+  AllSubscriptions({Key? key}) : super(key: key);
+
+  @override
+  State<AllSubscriptions> createState() => _AllSubscriptionsState();
+}
+
+class _AllSubscriptionsState extends State<AllSubscriptions> {
+  List<SubscriptionPlan> _subscriptionPlans = [];
+  bool loading = false;
+
+  void fetchPlans() {
+    setState(() {
+      loading = true;
+    });
+    widget.subscriptionPlansRepository
+        .getAll(populate: true)
+        .then((subscriptionPlans) {
+      setState(() {
+        _subscriptionPlans = subscriptionPlans;
+      });
+    }).whenComplete(() => setState(() {
+              loading = false;
+            }));
+  }
+
+  @override
+  void initState() {
+    loading = true;
+    fetchPlans();
+    super.initState();
+  }
 
   Widget _renderSubscriptionPlans() {
-    return subscriptionPlans.isNotEmpty
+    return _subscriptionPlans.isNotEmpty
         ? ListView.builder(
             shrinkWrap: true,
-            itemCount: subscriptionPlans.length,
+            itemCount: _subscriptionPlans.length,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               return SubscriptionPlanCard(
-                  subscriptionPlan: subscriptionPlans[index]);
+                  subscriptionPlan: _subscriptionPlans[index]);
             })
         : Container(
             margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
@@ -78,7 +111,7 @@ class AllSubscriptions extends StatelessWidget {
         const SizedBox(
           height: 16,
         ),
-        _renderSubscriptionPlans()
+        loading ? const FetchLoading() : _renderSubscriptionPlans(),
       ],
     );
   }

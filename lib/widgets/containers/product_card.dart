@@ -1,8 +1,6 @@
 import 'package:apollo/modals/products/delete_product.dart';
-import 'package:apollo/modals/products/edit_product.dart';
 import 'package:apollo/models/product.dart';
 import 'package:apollo/shared/constants/colors.dart';
-import 'package:apollo/shared/utils/route_utils.dart';
 import 'package:apollo/widgets/containers/mean_time.dart';
 import 'package:apollo/widgets/elements/mixed_text.dart';
 import 'package:apollo/widgets/elements/touchable_opacity.dart';

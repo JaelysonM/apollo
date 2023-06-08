@@ -12,7 +12,15 @@ import 'package:flutter/material.dart';
 class PlanCard extends StatelessWidget {
   final SubscriptionPlan plan;
   final Function? onTap;
-  const PlanCard({Key? key, required this.plan, this.onTap}) : super(key: key);
+  final Function? onTapEdit;
+  final Function? onTapDelete;
+  const PlanCard(
+      {Key? key,
+      required this.plan,
+      this.onTap,
+      this.onTapEdit,
+      this.onTapDelete})
+      : super(key: key);
 
   Widget _renderCardHeader(BuildContext context) {
     return Row(
@@ -34,10 +42,7 @@ class PlanCard extends StatelessWidget {
           children: [
             TouchableOpacity(
               onTap: () {
-                RouteUtils.showOrPushModal(context,
-                    modalContent: DeletePlan(
-                      plan: plan,
-                    ));
+                if (onTapDelete != null) onTapDelete!();
               },
               child: const Icon(
                 Icons.horizontal_rule,
@@ -48,7 +53,7 @@ class PlanCard extends StatelessWidget {
             const SizedBox(width: 5),
             TouchableOpacity(
               onTap: () {
-                RouteUtils.showOrPushModal(context, modalContent: EditPlan());
+                if (onTapEdit != null) onTapEdit!();
               },
               child: const Icon(
                 Icons.edit,
@@ -74,7 +79,7 @@ class PlanCard extends StatelessWidget {
               const TextSpan(text: 'Pode ser utilizada'),
               TextSpan(
                   text:
-                      ' ${plan.interval.toString()} ${plan.interval > 1 ? 'vezes' : 'vez'} por ${plan.getRecurrenceRuleLabel()}',
+                      ' ${plan.interval.toStringAsFixed(0)} ${plan.interval > 1 ? 'vezes' : 'vez'} por ${plan.getRecurrenceRuleLabel()}',
                   style: const TextStyle(fontWeight: FontWeight.bold))
             ], size: 14, color: Color(0xFF9F9F9F)),
           ),

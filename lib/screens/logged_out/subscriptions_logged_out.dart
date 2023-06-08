@@ -22,9 +22,7 @@ class SubscriptionsLoggedOut extends StatelessWidget {
                 TextSpan(text: 'assinatura'),
               ], size: 16, weight: FontWeight.w300),
             )),
-        AllSubscriptions(
-          subscriptionPlans: [],
-        )
+        AllSubscriptions()
       ],
     );
   }

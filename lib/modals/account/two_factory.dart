@@ -2,7 +2,6 @@ import 'package:apollo/shared/constants/colors.dart';
 
 import 'package:apollo/widgets/elements/back_button.dart';
 import 'package:apollo/widgets/elements/default_button.dart';
-import 'package:apollo/widgets/elements/touchable_opacity.dart';
 
 import 'package:flutter/material.dart';
 
@@ -34,9 +33,6 @@ class _TwoFactory extends State<TwoFactory> {
               )
             ]),
           ),
-          SizedBox(
-            height: 20,
-          ),
           Column(children: [
             Container(
                 alignment: Alignment.center,
@@ -61,7 +57,7 @@ class _TwoFactory extends State<TwoFactory> {
                   ],
                 )),
             Container(
-              padding: EdgeInsets.fromLTRB(20, 20, 20, 338),
+              padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
               child: Text(
                 "Para mais segurança, ative a confirmação em duas etapas que solicitará um PIN quando você registrar seu número de telefone no Apollo novamente.",
                 textAlign: TextAlign.center,

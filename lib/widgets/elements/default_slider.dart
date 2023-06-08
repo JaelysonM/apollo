@@ -37,6 +37,13 @@ class _DefaultSliderState extends State<DefaultSlider> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        if (widget.label != null)
+          Text(
+            StringUtils.interpolate(widget.label!,
+                [_value.toStringAsFixed(2).toString().replaceAll('.00', '')]),
+            style: const TextStyle(
+                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15),
+          ),
         Slider(
           min: widget.min,
           max: widget.max,
@@ -49,13 +56,6 @@ class _DefaultSliderState extends State<DefaultSlider> {
             });
           },
         ),
-        if (widget.label != null)
-          Text(
-            StringUtils.interpolate(
-                widget.label!, [_value.toStringAsFixed(2).toString()]),
-            style: const TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15),
-          )
       ],
     );
   }

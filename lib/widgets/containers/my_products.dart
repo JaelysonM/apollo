@@ -20,12 +20,6 @@ class MyProducts extends StatefulWidget {
 
   @override
   State<MyProducts> createState() => MyProductsState();
-
-  static MyProductsState? useMyProducts(BuildContext? context,
-          {bool root = false}) =>
-      root
-          ? context?.findRootAncestorStateOfType<MyProductsState>()
-          : context?.findAncestorStateOfType<MyProductsState>();
 }
 
 class MyProductsState extends State<MyProducts> {
@@ -33,8 +27,6 @@ class MyProductsState extends State<MyProducts> {
 
   List<Product> _products = [];
   bool loading = false;
-
-  final Debounce _debounce = Debounce(const Duration(milliseconds: 400));
 
   void setProducts(List<Product> _products) {
     setState(() {
@@ -51,9 +43,12 @@ class MyProductsState extends State<MyProducts> {
 
   void fetchProducts() async {
     toggleLoading();
-    List<Product> products = await widget.productRepository
-        .getAllFromCompany(authService.account!.documentId());
-    setProducts(products);
+    try {
+      List<Product> products = await widget.productRepository
+          .getAllFromCompany(authService.account!.documentId());
+      setProducts(products);
+      // ignore: empty_catches
+    } catch (e) {}
   }
 
   @override
@@ -63,9 +58,9 @@ class MyProductsState extends State<MyProducts> {
 
   @override
   void didChangeDependencies() {
+    super.didChangeDependencies();
     authService = Provider.of<AuthService>(context);
     fetchProducts();
-    super.didChangeDependencies();
   }
 
   Widget _renderProducts() {

@@ -32,7 +32,7 @@ class ConfirmDeletion extends StatelessWidget {
               height: 60,
             ),
             Text(
-              "Você têm certeza disso?",
+              "Você tem certeza disso?",
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -45,7 +45,9 @@ class ConfirmDeletion extends StatelessWidget {
                       child: const LargeTextHeader(
                           content: "Excluir", fontSize: 18),
                       backgroundColor: Colors.red.shade700,
-                      onPressed: () {}),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      }),
                   SizedBox(
                     width: 6,
                   ),
@@ -53,7 +55,9 @@ class ConfirmDeletion extends StatelessWidget {
                       child: const LargeTextHeader(
                           content: "Cancelar", fontSize: 18),
                       backgroundColor: Color(0xFF6171FF),
-                      onPressed: () {})
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      })
                 ]))
           ]),
         ),

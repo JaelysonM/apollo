@@ -1,3 +1,4 @@
+import 'package:apollo/modals/auth/shared/login/login_error.dart';
 import 'package:apollo/modals/auth/shared/login/login_success.dart';
 import 'package:apollo/models/account.dart';
 import 'package:apollo/services/auth_service.dart';
@@ -48,13 +49,10 @@ class _LoginProcessingState extends State<OAuthProcessing> {
     if (loading) {
       return const Padding(padding: EdgeInsets.all(25), child: FetchLoading());
     } else {
-      if (error == null) {
+      if (error == null && account != null) {
         return LoginSuccess(account: account!);
       } else {
-        return Align(
-          alignment: Alignment.center,
-          child: Text(error!),
-        );
+        return LoginError(error: error ?? 'Erro inesperado');
       }
     }
   }
@@ -64,15 +62,13 @@ class _LoginProcessingState extends State<OAuthProcessing> {
     try {
       await auth.loginWithProvider(widget.authProvider, widget.company);
       setState(() {
-        loaded = true;
         loading = false;
         account = auth.account;
       });
-    } catch (e) {
+    } on AuthException catch (ex) {
       setState(() {
-        loaded = true;
         loading = false;
-        error = e.toString();
+        error = ex.message;
       });
     }
   }

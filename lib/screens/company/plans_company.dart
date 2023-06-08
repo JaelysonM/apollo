@@ -64,15 +64,7 @@ class PlansCompany extends StatelessWidget {
         const SizedBox(
           height: 40,
         ),
-        MyPlans(plans: [
-          SubscriptionPlan(
-              company: account! as CompanyAccount,
-              name: 'Plano completo',
-              description: "Plano balbala",
-              interval: 1,
-              recurrenceRule: RecurrenceRule.monthly,
-              price: 49.99)
-        ])
+        MyPlans()
       ],
     );
   }

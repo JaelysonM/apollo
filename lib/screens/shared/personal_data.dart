@@ -7,6 +7,7 @@ import 'package:apollo/widgets/containers/custom_page_route.dart';
 import 'package:apollo/widgets/containers/screen_header_container.dart';
 import 'package:apollo/widgets/containers/top_header.dart';
 import 'package:apollo/widgets/elements/back_button.dart';
+import 'package:apollo/widgets/elements/separator.dart';
 import 'package:apollo/widgets/elements/touchable_opacity.dart';
 import 'package:apollo/widgets/styles/clickable_text.dart';
 import 'package:flutter/material.dart';
@@ -39,12 +40,12 @@ class PersonalData extends StatelessWidget {
         _renderTouchableOpacityData("Editar perfil", () {}),
         _renderTouchableOpacityData("Alterar senha", () {}),
         _renderTouchableOpacityData("Segurança", () {
-          Navigator.of(context).push(
-              CustomPageRoute(child: Security(), direction: AxisDirection.up));
+          Navigator.of(context).push(CustomPageRoute(
+              child: Security(), direction: AxisDirection.left));
         }),
         _renderTouchableOpacityData("Confirmação de duas etapas", () {
           Navigator.of(context).push(CustomPageRoute(
-              child: TwoFactory(), direction: AxisDirection.up));
+              child: TwoFactory(), direction: AxisDirection.left));
         }),
         _renderTouchableOpacityData("Excluir minha conta", () {
           RouteUtils.showOrPushModal(context, modalContent: DelectAccount());
@@ -59,13 +60,22 @@ class PersonalData extends StatelessWidget {
         onTap?.call();
       },
       child: Container(
-          padding: EdgeInsets.fromLTRB(30, 20, 0, 10),
+          padding: EdgeInsets.fromLTRB(20, 10, 0, 10),
           alignment: Alignment.topLeft,
-          child: Text(
-            text,
-            style: TextStyle(
-                color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
-          )),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text(
+              text,
+              style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            const Separator(color: Colors.white),
+          ])),
     );
   }
 }

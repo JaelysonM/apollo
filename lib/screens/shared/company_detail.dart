@@ -49,7 +49,7 @@ class _CompanyDetailState extends State<CompanyDetail> {
   Widget _renderTrending() {
     return SliverToBoxAdapter(
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 40),
+        margin: const EdgeInsets.symmetric(vertical: 20),
         child: TrendingProducts(company: widget.company),
       ),
     );

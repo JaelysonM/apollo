@@ -1,4 +1,5 @@
 import 'package:apollo/models/subscription_plan.dart';
+import 'package:apollo/widgets/elements/company_avatar.dart';
 import 'package:apollo/widgets/elements/mixed_text.dart';
 import 'package:apollo/widgets/styles/clickable_text.dart';
 import 'package:apollo/widgets/styles/tiny_text.dart';
@@ -19,15 +20,12 @@ class SubscriptionPlanCard extends StatelessWidget {
       children: [
         Row(
           children: [
-            CircleAvatar(
-              radius: 16,
-              backgroundImage: NetworkImage(subscriptionPlan.company.imageURL!),
-            ),
+            CompanyAvatar(company: subscriptionPlan.company()),
             const SizedBox(
               width: 8,
             ),
             Text(
-              subscriptionPlan.company.name,
+              subscriptionPlan.company().name,
               style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,

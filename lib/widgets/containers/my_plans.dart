@@ -1,36 +1,98 @@
+import 'package:apollo/modals/plans/create_plan.dart';
+import 'package:apollo/modals/plans/delete_plan.dart';
+import 'package:apollo/modals/plans/edit_plan.dart';
 import 'package:apollo/models/subscription_plan.dart';
+import 'package:apollo/repositories/subscription_plans_repository%20.dart';
+import 'package:apollo/services/auth_service.dart';
 import 'package:apollo/shared/constants/colors.dart';
 import 'package:apollo/shared/utils/route_utils.dart';
 import 'package:apollo/widgets/containers/no_results_found.dart';
 import 'package:apollo/widgets/containers/plan_card.dart';
+import 'package:apollo/widgets/elements/fetch_loading.dart';
 import 'package:apollo/widgets/elements/tad_button.dart';
 import 'package:apollo/widgets/styles/clickable_text.dart';
 import 'package:apollo/widgets/styles/tiny_text.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MyPlans extends StatefulWidget {
-  final TextEditingController _controller = TextEditingController();
-
-  final List<SubscriptionPlan> plans;
-
-  MyPlans({Key? key, required this.plans}) : super(key: key);
+  final SubscriptionPlansRepository subscriptionPlansRepository =
+      SubscriptionPlansRepository();
+  MyPlans({
+    Key? key,
+  }) : super(key: key);
 
   @override
-  State<MyPlans> createState() => _MyPlansState();
+  State<MyPlans> createState() => MyPlansState();
 }
 
-class _MyPlansState extends State<MyPlans> {
+class MyPlansState extends State<MyPlans> {
+  late AuthService authService;
+
+  List<SubscriptionPlan> _subscriptionPlans = [];
+  bool loading = false;
+
+  void setProducts(List<SubscriptionPlan> _subscriptionPlans) {
+    setState(() {
+      this._subscriptionPlans = _subscriptionPlans;
+    });
+    toggleLoading();
+  }
+
+  void toggleLoading() {
+    setState(() {
+      loading = !loading;
+    });
+  }
+
+  void fetchSubscriptionPlans() async {
+    toggleLoading();
+    try {
+      List<SubscriptionPlan> subscriptionPlans = await widget
+          .subscriptionPlansRepository
+          .getAllFromCompany(authService.account!.documentId());
+      setProducts(subscriptionPlans);
+      // ignore: empty_catches
+    } catch (e) {}
+  }
+
+  @override
+  initState() {
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    authService = Provider.of<AuthService>(context);
+    fetchSubscriptionPlans();
+    super.didChangeDependencies();
+  }
+
   Widget _renderPlans() {
-    return widget.plans.isNotEmpty
+    return _subscriptionPlans.isNotEmpty
         ? ListView.builder(
             shrinkWrap: true,
-            itemCount: widget.plans.length,
+            itemCount: _subscriptionPlans.length,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               return PlanCard(
-                plan: widget.plans[index],
-                onTap: () => {},
-              );
+                  plan: _subscriptionPlans[index],
+                  onTapDelete: () {
+                    RouteUtils.showOrPushModal(
+                      context,
+                      modalContent: DeletePlan(
+                        myPlansState: this,
+                        plan: _subscriptionPlans[index],
+                      ),
+                    );
+                  },
+                  onTapEdit: () {
+                    RouteUtils.showOrPushModal(context,
+                        modalContent: EditPlan(
+                          myPlansState: this,
+                          plan: _subscriptionPlans[index],
+                        ));
+                  });
             })
         : Container(
             margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
@@ -63,7 +125,12 @@ class _MyPlansState extends State<MyPlans> {
                   const SizedBox(width: 10),
                   TADButton(
                     onPressed: () {
-                      RouteUtils.showModal(context, route: 'create_plan');
+                      RouteUtils.showOrPushModal(
+                        context,
+                        modalContent: CreatePlan(
+                          myPlansState: this,
+                        ),
+                      );
                     },
                   )
                 ],
@@ -75,7 +142,7 @@ class _MyPlansState extends State<MyPlans> {
         const SizedBox(
           height: 15,
         ),
-        Flexible(child: _renderPlans()),
+        Flexible(child: loading ? const FetchLoading() : _renderPlans()),
       ],
     );
   }
